@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabela de Preços — ARK</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#1a1a1a;line-height:1.7;max-width:860px;margin:0 auto;padding:48px 24px 80px}
+
+header{text-align:center;padding-bottom:40px;margin-bottom:48px;border-bottom:1px solid #eee}
+header h1{font-size:2.2rem;font-weight:800;letter-spacing:-.03em;color:#111}
+header p{color:#666;margin-top:8px;font-size:.95rem}
+
+.section{margin-bottom:48px}
+.section h2{font-size:1.3rem;font-weight:700;color:#111;padding-bottom:12px;border-bottom:2px solid #111;margin-bottom:24px;letter-spacing:-.01em}
+
+.packages{display:grid;gap:16px}
+@media(min-width:640px){.packages-2{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:860px){.packages-3{grid-template-columns:repeat(3,1fr)}}
+
+.pkg{border:1px solid #e5e5e5;border-radius:12px;padding:24px;transition:border-color .2s}
+.pkg:hover{border-color:#ccc}
+.pkg.highlight{border-width:2px;border-color:#111;background:#fafafa}
+.pkg.premium{border-width:2px;border-color:#c9a84c;background:#fefdf8}
+
+.pkg-number{font-size:.7rem;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.pkg.highlight .pkg-number,.pkg.premium .pkg-number{color:#111}
+.pkg.premium .pkg-number{color:#c9a84c}
+
+.pkg-name{font-size:1.1rem;font-weight:700;color:#111;margin-bottom:2px}
+.pkg-price{font-size:1.6rem;font-weight:800;color:#111;margin:10px 0 6px;letter-spacing:-.02em}
+.pkg.premium .pkg-price{color:#a8893a}
+
+.pkg-desc{font-size:.85rem;color:#555;margin-bottom:14px;line-height:1.5}
+
+.pkg-features{list-style:none;padding:0}
+.pkg-features li{font-size:.82rem;color:#444;padding:4px 0;padding-left:16px;position:relative;border-bottom:1px solid #f2f2f2;line-height:1.5}
+.pkg-features li:last-child{border-bottom:none}
+.pkg-features li::before{content:'';position:absolute;left:0;top:11px;width:6px;height:6px;border-radius:50%;background:#ddd}
+.pkg.highlight .pkg-features li::before,.pkg.premium .pkg-features li::before{background:#c9a84c}
+
+.pkg-duration{display:inline-block;font-size:.7rem;font-weight:600;color:#fff;background:#111;border-radius:4px;padding:2px 8px;margin-bottom:8px}
+.pkg.premium .pkg-duration{background:#c9a84c;color:#111}
+
+.pkg-note{font-size:.75rem;color:#888;margin-top:12px;font-style:italic}
+
+.service-table{width:100%;border-collapse:collapse}
+.service-table tr{border-bottom:1px solid #f0f0f0}
+.service-table tr:last-child{border-bottom:none}
+
+.st-name{padding:16px 0 4px;font-size:.92rem;font-weight:600;color:#111;width:40%}
+.st-detail{font-size:.8rem;color:#777;line-height:1.5;padding-bottom:8px}
+.st-duration-tag{display:inline-block;font-size:.7rem;font-weight:600;color:#fff;background:#ddd;border-radius:4px;padding:2px 8px;margin-left:6px;vertical-align:middle}
+
+.st-price{text-align:right;font-size:1.05rem;font-weight:700;color:#111;white-space:nowrap;padding:16px 0}
+.st-includes-title{font-size:.78rem;font-weight:600;color:#555;margin-top:6px;text-transform:uppercase;letter-spacing:.04em}
+.st-includes ul{list-style:none;padding:0;margin:0}
+.st-includes li{font-size:.78rem;color:#666;padding:2px 0 2px 14px;position:relative}
+.st-includes li::before{content:'✓';position:absolute;left:0;color:#c9a84c;font-weight:700}
+
+.notes{margin-top:48px;padding-top:32px;border-top:1px solid #eee}
+.notes h2{font-size:1.3rem;font-weight:700;color:#111;padding-bottom:12px;border-bottom:2px solid #111;margin-bottom:16px;letter-spacing:-.01em}
+
+.note-block{margin-bottom:20px}
+.note-block h4{font-size:.85rem;font-weight:700;color:#333;margin-bottom:6px}
+.note-item{display:flex;align-items:flex-start;gap:10px;padding:5px 0;font-size:.84rem;color:#555;line-height:1.6}
+.note-bullet{color:#c9a84c;font-weight:700;flex-shrink:0;margin-top:2px}
+
+footer{text-align:center;margin-top:64px;padding-top:32px;border-top:1px solid #eee;color:#aaa;font-size:.8rem}
+
+@media(max-width:599px){
+  body{padding:32px 16px 60px}
+  .pkg{padding:18px 16px}
+  .pkg-price{font-size:1.4rem}
+  .section h2{font-size:1.15rem}
+  .st-name,.st-detail,.st-price{display:block;width:100%;padding-right:0}
+  .st-price{text-align:left;padding-top:6px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Tabela de Preços</h1>
+<p>Filmagem, fotografia e edição para eventos, podcasts e conteúdo digital — pela equipe ARK.</p>
+</header>
+
+<div class="section">
+<h2>Pacotes de Evento</h2>
+<div class="packages packages-3">
+
+  <div class="pkg">
+    <span class="pkg-duration">Até 4 horas de captação</span>
+    <div class="pkg-number">Pacote 1</div>
+    <div class="pkg-name">Simples</div>
+    <div class="pkg-price">R$ 460</div>
+    <div class="pkg-desc">Para quem quer só um resumo rápido do evento.</div>
+    <ul class="pkg-features">
+      <li>Até 4 horas de captação nos momentos importantes</li>
+      <li>1 teaser de 1 minuto editado com narrativa</li>
+      <li>Entrega no formato vertical e horizontal</li>
+    </ul>
+    <div class="pkg-note">Não inclui fotos nem material bruto completo.</div>
+  </div>
+
+  <div class="pkg highlight">
+    <span class="pkg-duration">Até 4 horas de captação</span>
+    <div class="pkg-number">Pacote 2 — Mais Popular</div>
+    <div class="pkg-name">Essencial</div>
+    <div class="pkg-price">R$ 560</div>
+    <div class="pkg-desc">Para quem quer o teaser e conteúdo pronto para postar.</div>
+    <ul class="pkg-features">
+      <li>Tudo do Pacote 1 (captação até 4h + teaser de 1 min)</li>
+      <li>1 corte para Reels vertical (9:16) com legendas</li>
+      <li>Corte dinâmico pensado para redes sociais</li>
+    </ul>
+  </div>
+
+  <div class="pkg">
+    <span class="pkg-duration">Até 4 horas de captação</span>
+    <div class="pkg-number">Pacote 3 — Sugestão</div>
+    <div class="pkg-name">Médio</div>
+    <div class="pkg-price">R$ 790</div>
+    <div class="pkg-desc">Para quem quer vídeo e fotos nos formatos das redes.</div>
+    <ul class="pkg-features">
+      <li>Até 4 horas de captação nos momentos importantes</li>
+      <li>1 trailer de até 2 minutos editado</li>
+      <li>20 fotos editadas entregues</li>
+      <li>Formatos vertical (9:16) e horizontal (16:9)</li>
+      <li>Todas as mídias bruttas na nuvem por 6 meses</li>
+    </ul>
+    <div class="pkg-note">Valor sugerido — confirme o preço real do trailer com 20 fotos.</div>
+  </div>
+
+  <div class="pkg highlight">
+    <span class="pkg-duration">Dia completo de cobertura</span>
+    <div class="pkg-number">Pacote 4</div>
+    <div class="pkg-name">Intermediário</div>
+    <div class="pkg-price">R$ 1.120</div>
+    <div class="pkg-desc">Para quem quer o evento documentado por inteiro.</div>
+    <ul class="pkg-features">
+      <li>Cobertura completa do evento, sem cortes</li>
+      <li>1 trailer de até 2 minutos editado</li>
+      <li>15 fotos editadas entregues</li>
+      <li>Todas as mídias bruttas na nuvem por 6 meses</li>
+    </ul>
+  </div>
+
+  <div class="pkg premium">
+    <span class="pkg-duration">Diária de 8 horas + 1h almoço</span>
+    <div class="pkg-number">Pacote 5</div>
+    <div class="pkg-name">Avançado</div>
+    <div class="pkg-price">R$ 2.160</div>
+    <div class="pkg-desc">Dia inteiro de gravação, vídeo de encerramento trabalhado e conteúdo pronto.</div>
+    <ul class="pkg-features">
+      <li>Diária externa de 8h (com 1h de almoço) — captação ilimitada</li>
+      <li>Aftermovie com melhores momentos, montagem musical e colorização</li>
+      <li>3 cortes para Reels com legendas e dinâmica</li>
+      <li>Todas as mídias bruttas na nuvem por 6 meses</li>
+    </ul>
+  </div>
+
+  <div class="pkg premium">
+    <span class="pkg-duration">Cobertura total do evento</span>
+    <div class="pkg-number">Pacote 6 — Cobertura Total</div>
+    <div class="pkg-name">Completo</div>
+    <div class="pkg-price">R$ 3.500</div>
+    <div class="pkg-desc">Cobertura total do evento com entrega rápida.</div>
+    <ul class="pkg-features">
+      <li>Fotografia em estúdio durante o evento</li>
+      <li>Íntegra do evento filmada em 4K, sem cortes</li>
+      <li>1 trailer de até 2 minutos editado</li>
+      <li>Teaser entregue no mesmo dia (1h após o fim)</li>
+      <li>10 cortes do evento / palestras, se houver</li>
+      <li>Todas as mídias bruttas na nuvem por 6 meses</li>
+    </ul>
+    <div class="pkg-note">Trailer no mesmo dia · demais itens em até 7 dias após o evento.</div>
+  </div>
+
+</div>
+</div>
+
+<div class="section">
+<h2>Filmagem &amp; Captação — Serviços Avulsos</h2>
+<table class="service-table">
+  <tr>
+    <td>
+      <div class="st-name">Vídeo Somente Teaser<span class="st-duration-tag">Até 4 horas</span></div>
+      <div class="st-detail">Teaser de 1 minuto editado do evento.</div>
+      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Vídeo trailer de até 2 min</li><li>20 fotos editadas (vertical e horizontal)</li><li>Mídias bruttas na nuvem por 6 meses</li></ul></div>
+    </td>
+    <td><div class="st-price">R$ 460</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Pacote Completo — Vídeo + Trailer + Fotos<span class="st-duration-tag">Cobertura total</span></div>
+      <div class="st-detail">Evento documentado por inteiro com fotos.</div>
+      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Vídeo íntegra do evento</li><li>1 trailer de até 2 min editado</li><li>15 fotos editadas entregues</li><li>Todas as mídias bruttas na nuvem</li></ul></div>
+    </td>
+    <td><div class="st-price">R$ 1.120</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Fotografia Studio + Integra do Evento<span class="st-duration-tag">Cobertura total</span></div>
+      <div class="st-detail">Serviço completo de cobertura profissional.</div>
+      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Fotografia em estúdio durante o evento</li><li>Íntegra do evento filmada em 4K</li><li>1 trailer editado + teaser no mesmo dia (1h pós)</li><li>10 cortes do evento / palestras, se houver</li><li>Todas as mídias bruttas na nuvem por 6 meses</li></ul></div>
+    </td>
+    <td><div class="st-price">R$ 3.500</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Diária de Filmagem Externa<span class="st-duration-tag">8h + 1h almoço</span></div>
+      <div class="st-detail">Somente gravação — captação ilimitada durante o dia.</div>
+      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Até 8h de captação (1h para almoço)</li><li>Todas as mídias bruttas entregues</li></ul></div>
+      <div class="st-detail" style="margin-top:4px;color:#999">Edição cobrada à parte.</div>
+    </td>
+    <td><div class="st-price">R$ 1.360</div></td>
+  </tr>
+</table>
+</div>
+
+<div class="section">
+<h2>Dias de Captação — Filmagem Avulsa</h2>
+<table class="service-table">
+  <tr>
+    <td>
+      <div class="st-name">Meia Diária Externa<span class="st-duration-tag">4 horas</span></div>
+      <div class="st-detail">Captação externa por 4 horas.</div>
+      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Até 4h de captação</li><li>Todas as mídias bruttas entregues</li></ul></div>
+      <div class="st-detail" style="margin-top:4px;color:#999">Edição cobrada à parte.</div>
+    </td>
+    <td><div class="st-price">R$ 680</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Meia Diária na Casa ARK<span class="st-duration-tag">4 horas</span></div>
+      <div class="st-detail">Captação no local da ARK por 4 horas.</div>
+      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Até 4h de captação</li><li>Todas as mídias bruttas entregues</li></ul></div>
+      <div class="st-detail" style="margin-top:4px;color:#999">Sujeito a horários e autorização conforme agenda.</div>
+    </td>
+    <td><div class="st-price">R$ 530</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Diária Interna na Casa ARK<span class="st-duration-tag">8h + 1h almoço</span></div>
+      <div class="st-detail">Captação interna por dia completo.</div>
+      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Até 8h de captação (1h para almoço)</li><li>Todas as mídias bruttas na nuvem por 6 meses</li></ul></div>
+      <div class="st-detail" style="margin-top:4px;color:#999">Sujeito a horários e autorização. Edição cobrada à parte.</div>
+    </td>
+    <td><div class="st-price">R$ 1.060</div></td>
+  </tr>
+</table>
+</div>
+
+<div class="section">
+<h2>Edição de Vídeo — Serviços Avulsos</h2>
+<table class="service-table">
+  <tr>
+    <td>
+      <div class="st-name">Reels Básica</div>
+      <div class="st-detail">Edição simples para redes sociais.</div>
+      <div class="st-includes"><ul><li>Corte de erros e pausas nos vídeos originais</li><li>Organização dos melhores trechos</li><li>Formato vertical 9:16 para Reels / Stories</li><li>Música de fundo simples incluída</li><li>Ajuste básico de áudio</li><li>Correção básica de cor</li><li>Texto simples na tela (títulos / legendas curtas)</li><li>Vídeo final de até 60 segundos</li><li>1 rodada de alteração incluída</li></ul></div>
+    </td>
+    <td><div class="st-price">a partir de R$ 55</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Edição para Reels</div>
+      <div class="st-detail">Edição dinâmica para redes sociais com acabamento profissional.</div>
+      <div class="st-includes"><ul><li>Cortes dinâmicos e ritmados</li><li>Legendas automáticas inseridas no vídeo</li><li>Zooms e transições para manter o engajamento</li><li>Música de fundo selecionada pelo editor</li><li>Efeitos visuais simples (glitch, shake, etc.)</li><li>Formato vertical 9:16</li></ul></div>
+    </td>
+    <td><div class="st-price">a partir de R$ 100</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Edição Dinâmica</div>
+      <div class="st-detail">Edição mais trabalhada com ritmo e produção profissional.</div>
+      <div class="st-includes"><ul><li>Ritmo acelerado e bem planejado</li><li>Efeitos visuais avançados e motion graphics</li><li>B-roll (imagens de cobertura) integrados</li><li>SFX (efeitos sonoros) sincronizados</li><li>Textos animados no vídeo</li></ul></div>
+    </td>
+    <td><div class="st-price">a partir de R$ 180</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Edição Cinematic<span class="st-duration-tag" style="background:#111;color:#fff">Até 4 horas</span></div>
+      <div class="st-detail">Trabalho cinematográfico avançado para conteúdo premium.</div>
+      <div class="st-includes"><ul><li>Narrativa cinematográfica com roteiro de edição</li><li>Color grading avançado (estilo cinematográfico)</li><li>Sound design profissional com múltiplas camadas</li><li>VFX (efeitos visuais) integrados</li><li>Pós-produção completa</li></ul></div>
+    </td>
+    <td><div class="st-price">a partir de R$ 600</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Edição de Podcast</div>
+      <div class="st-detail">Episódio completo com tratamento profissional.</div>
+      <div class="st-includes"><ul><li>Edição do episódio completo (cortes de silêncio, erros)</li><li>Tratamento de áudio (equalização, compressão, normalização)</li><li>Montagem multicâmera sincronizada</li><li>Inserção da identidade visual da marca (logo, intro, endcard)</li></ul></div>
+    </td>
+    <td><div class="st-price">a partir de R$ 300</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Corte Podcast / Reels</div>
+      <div class="st-detail">Um trecho selecionado do conteúdo original para redes sociais.</div>
+      <div class="st-includes"><ul><li>Seleção e edição de um único trecho relevante</li><li>Legendas inseridas no vídeo</li><li>Formato vertical com dinâmica para engajamento</li></ul></div>
+    </td>
+    <td><div class="st-price">a partir de R$ 100</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name">Aftermovie / Evento</div>
+      <div class="st-detail">Resumo cinematográfico dos melhores momentos do evento.</div>
+      <div class="st-includes"><ul><li>Seleção dos melhores momentos da cobertura</li><li>Montagem com trilha musical sincronizada</li><li>Colorização profissional</li><li>Acabamento de alto nível cinematográfico</li></ul></div>
+    </td>
+    <td><div class="st-price">a partir de R$ 500</div></td>
+  </tr>
+  <tr>
+    <td>
+      <div class="st-name" style="color:#888">Motion Designer</div>
+      <div class="st-detail">Animações, textos animados, logos em movimento e gráficos explicativos.</div>
+    </td>
+    <td><div class="st-price" style="color:#888;font-weight:500">Sob orçamento</div></td>
+  </tr>
+  <tr style="border-bottom:none;padding-top:4px">
+    <td>
+      <div class="st-name" style="color:#888">VFX / Efeitos Especiais</div>
+      <div class="st-detail">Efeitos visuais complexos e personalizados para o seu projeto.</div>
+    </td>
+    <td><div class="st-price" style="color:#888;font-weight:500">Sob orçamento</div></td>
+  </tr>
+</table>
+</div>
+
+<div class="notes">
+<h2>Observações Importantes</h2>
+<div class="note-block">
+  <h4>Sobre as captações</h4>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Meia diária:</strong> corresponde a até 4 horas de captação.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Diária completa:</strong> corresponde a 8 horas de captação + 1 hora de almoço (9h no total).</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Dentro do tempo contratado, a captação é ilimitada — gravamos o quanto for necessário.</div>
+</div>
+<div class="note-block">
+  <h4>Sobre as mídias bruttas</h4>
+  <div class="note-item"><span class="note-bullet">◆</span> As mídias bruttas (vídeos e fotos sem edição) ficam salvas na nuvem por <strong>6 meses</strong> após o evento.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Após esse período, os arquivos serão deletados. <strong>Sugira ao cliente baixar ou salvar em sua nuvem própria antes do vencimento.</strong></div>
+</div>
+<div class="note-block">
+  <h4>Sobre edições e prazos</h4>
+  <div class="note-item"><span class="note-bullet">◆</span> Edição é cobrada à parte quando não está inclusa no pacote contratado.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Prazo de entrega dos materiais editados: até <strong>7 dias úteis</strong> após o evento (exceto teaser do Pacote 6, que é entregue no mesmo dia).</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Horários de captação interna na Casa ARK estão sujeitos a autorização conforme a agenda.</div>
+</div>
+<div class="note-block">
+  <h4>Sobre os pacotes — notas adicionais</h4>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Pacote 3:</strong> valor sugerido de R$ 790. Confirme o preço real do trailer com 20 fotos para ajustar.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Pacote 2 alternativo:</strong> troque o corte de Reels (R$ 100) pela Edição Reels Básica (R$ 55) — o total cai para R$ 515.</div>
+</div>
+</div>
+
+<footer>
+Tabela de preços ARK · Valores referenciais · Orçamentos personalizados sob consulta
+</footer>
+
+</body>
+</html>
