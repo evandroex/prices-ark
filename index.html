@@ -2,15 +2,16 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
 <title>Tabela de Preços — ARK</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;-webkit-font-smoothing:antialiased}
-body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:#1a1a1a;line-height:1.7;max-width:860px;margin:0 auto;padding:48px 24px 80px}
+html{font-size:14px;-webkit-font-smoothing:antialiased}
+body{font-family:'Poppins',system-ui,sans-serif;background:#fff;color:#1a1a1a;line-height:1.7;max-width:860px;margin:0 auto;padding:48px 24px 80px}
 
 header{text-align:center;padding-bottom:40px;margin-bottom:48px;border-bottom:1px solid #eee}
 header h1{font-size:2.2rem;font-weight:800;letter-spacing:-.03em;color:#111}
@@ -82,73 +83,149 @@ footer{text-align:center;margin-top:64px;padding-top:32px;border-top:1px solid #
   .st-price{text-align:left;padding-top:6px}
 }
 
-/* ===== Assistente de Orçamento com IA ===== */
-#orc-fab{position:fixed;right:20px;bottom:20px;z-index:9998;background:#111;color:#fff;border:none;border-radius:999px;padding:14px 20px;font:600 .9rem 'Inter',system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.18);display:flex;align-items:center;gap:8px}
-#orc-fab:hover{background:#333}
-#orc-fab .dot{width:8px;height:8px;border-radius:50%;background:#c9a84c}
-#orc-panel{position:fixed;right:20px;bottom:84px;z-index:9999;width:390px;max-width:calc(100vw - 24px);height:min(700px,calc(100vh - 110px));background:#fff;border:1px solid #e5e5e5;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.18);display:none;flex-direction:column;overflow:hidden;font-family:'Inter',system-ui,sans-serif;color:#1a1a1a;font-size:.88rem;line-height:1.5}
-#orc-panel.open{display:flex}
-.orc-head{padding:14px 16px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.orc-head b{font-size:.95rem;color:#111}
-.orc-head small{display:block;color:#888;font-size:.72rem}
-.orc-x{background:none;border:none;font-size:1.4rem;cursor:pointer;color:#666;line-height:1}
-.orc-ai{margin:10px 16px 0;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.74rem;color:#666}
-.orc-btn-sm{background:#fff;border:1px solid #111;color:#111;border-radius:8px;padding:5px 10px;font:600 .72rem 'Inter',system-ui,sans-serif;cursor:pointer;white-space:nowrap}
-.orc-btn-sm:disabled{opacity:.5;cursor:default}
-.orc-msgs{flex:1;min-height:120px;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:10px}
-.orc-m{max-width:88%;padding:9px 12px;border-radius:12px;white-space:pre-wrap;word-wrap:break-word;font-size:.84rem}
-.orc-m.bot{background:#f4f4f4;align-self:flex-start;border-bottom-left-radius:4px}
-.orc-m.me{background:#111;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
-.orc-typing{color:#888;font-style:italic}
-.orc-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 8px}
-.orc-chip{background:#fff;border:1px solid #ddd;border-radius:999px;padding:4px 10px;font:500 .72rem 'Inter',system-ui,sans-serif;cursor:pointer;color:#333}
-.orc-chip:hover{border-color:#c9a84c}
-.orc-input{display:flex;gap:8px;padding:10px 16px;border-top:1px solid #eee}
-.orc-input input{flex:1;min-width:0;border:1px solid #ddd;border-radius:10px;padding:9px 12px;font:inherit;outline:none}
-.orc-input input:focus{border-color:#111}
-.orc-input button{background:#111;color:#fff;border:none;border-radius:10px;padding:0 16px;font:600 .85rem 'Inter',system-ui,sans-serif;cursor:pointer}
-.orc-budget{border-top:2px solid #111;max-height:300px;overflow-y:auto;padding:12px 16px;background:#fafafa}
-.orc-budget h3{font-size:.85rem;margin-bottom:8px;color:#111;display:flex;justify-content:space-between;align-items:center}
-.orc-budget h3 span+span{font-weight:500;color:#888;font-size:.75rem}
-.orc-fields{display:grid;grid-template-columns:1fr 90px;gap:8px;margin-bottom:8px}
-.orc-fields input,.orc-add select{border:1px solid #ddd;border-radius:8px;padding:6px 8px;font:inherit;font-size:.78rem;width:100%;background:#fff}
-.orc-row{display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid #eee;font-size:.78rem}
-.orc-row .nm{flex:1;color:#333;min-width:0}
-.orc-row .pr{font-weight:700;color:#111;white-space:nowrap;min-width:72px;text-align:right}
-.orc-row .qt{min-width:16px;text-align:center}
-.orc-row button{background:#fff;border:1px solid #ddd;border-radius:6px;width:22px;height:22px;cursor:pointer;line-height:1;font-size:.85rem;padding:0}
-.orc-empty{color:#999;font-size:.78rem;padding:6px 0}
+/* ===== Ajustes gerais: fonte menor e Poppins ===== */
+html{font-size:14px}
+body{font-family:'Poppins',system-ui,sans-serif;line-height:1.6;max-width:880px;padding:36px 20px 64px}
+header h1{font-size:1.9rem;font-weight:700}
+header p{font-size:.82rem}
+.section h2,.notes h2{font-size:1.05rem;font-weight:600}
+.pkg-name{font-size:.98rem;font-weight:600}
+.pkg-price{font-size:1.35rem;font-weight:700}
+.pkg-desc,.pkg-features li,.st-detail,.note-item{font-size:.76rem}
+.pkg-note,.st-includes li{font-size:.7rem}
+.pkg-duration,.st-duration-tag{font-size:.62rem}
+.st-name{font-size:.82rem;font-weight:500}
+.st-price{font-size:.92rem;font-weight:600}
+.note-block h4{font-size:.78rem;font-weight:600}
+footer{font-size:.7rem}
+.section{margin-bottom:36px}
+.pkg{padding:18px}
+
+/* ===== Assistente ARK ===== */
+.ai{margin:0 0 44px}
+.ai-card{border:1px solid #e6e6e6;border-radius:18px;background:#fff;box-shadow:0 12px 40px rgba(0,0,0,.06);overflow:hidden}
+.ai-top{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#111;color:#fff}
+.ai-av{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#e6c977,#c9a84c);display:grid;place-items:center;color:#111;font-weight:700;font-size:.9rem;flex-shrink:0}
+.ai-top b{display:block;font-size:.86rem;font-weight:600;line-height:1.3}
+.ai-top small{display:block;font-size:.66rem;color:#bdbdbd;line-height:1.3}
+.ai-pill{margin-left:auto;font-size:.62rem;font-weight:500;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#eee;white-space:nowrap}
+.ai-pill.on{background:#c9a84c;color:#111;font-weight:600}
+.ai-pill.load{background:#3a3a3a;color:#f3e3b0}
+.ai-bar{height:3px;background:#222}
+.ai-bar i{display:block;height:100%;width:0;background:#c9a84c;transition:width .3s}
+
+.ai-body{display:grid;grid-template-columns:1.15fr 1fr;min-height:500px}
+.ai-chat{display:flex;flex-direction:column;border-right:1px solid #ececec;min-width:0}
+.ai-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;max-height:460px;min-height:300px}
+.ai-m{max-width:86%;padding:9px 12px;border-radius:14px;font-size:.76rem;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;animation:aiIn .25s ease}
+.ai-m.bot{background:#f5f5f3;align-self:flex-start;border-bottom-left-radius:4px}
+.ai-m.me{background:#111;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.ai-m.sys{background:none;color:#8a8a8a;font-size:.68rem;align-self:center;text-align:center;padding:2px 6px}
+.ai-m.typing{color:#8a8a8a;font-style:italic}
+.ai-m img{display:block;max-width:170px;max-height:200px;border-radius:10px;margin-bottom:6px;object-fit:cover}
+@keyframes aiIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.ai-load{white-space:normal;align-self:stretch;max-width:100%;background:#fffdf6;border:1px solid #eedfb2;border-radius:14px;padding:14px}
+.ai-load h4{font-size:.82rem;font-weight:600;margin-bottom:3px;color:#111}
+.ai-load p{font-size:.7rem;color:#666;margin-bottom:10px;line-height:1.5}
+.ai-load .row{display:flex;gap:8px;flex-wrap:wrap}
+.ai-sel{border:1px solid #ddd;border-radius:10px;padding:8px 10px;font:inherit;font-size:.72rem;background:#fff;color:#111;flex:1;min-width:150px;height:38px}
+.ai-btn{background:#111;color:#fff;border:none;border-radius:10px;padding:0 16px;height:38px;font:600 .74rem 'Poppins',system-ui,sans-serif;cursor:pointer}
+.ai-btn:disabled{opacity:.5;cursor:default}
+.ai-prog{height:5px;background:#eee;border-radius:99px;overflow:hidden;margin-top:10px}
+.ai-prog i{display:block;height:100%;width:0;background:#c9a84c;transition:width .2s}
+.ai-load .skip{font-size:.68rem;color:#888;margin-top:8px}
+
+.ai-chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 10px}
+.ai-chip{background:#fff;border:1px solid #e0e0e0;border-radius:999px;padding:5px 11px;font:500 .66rem 'Poppins',system-ui,sans-serif;cursor:pointer;color:#333}
+.ai-chip:hover{border-color:#c9a84c}
+
+.ai-comp{display:flex;gap:6px;align-items:center;padding:10px 12px;border-top:1px solid #ececec}
+.ai-ic{width:38px;height:38px;border-radius:11px;border:1px solid #e0e0e0;background:#fff;cursor:pointer;display:grid;place-items:center;flex-shrink:0;font-size:.95rem;padding:0}
+.ai-ic.rec{background:#c0392b;border-color:#c0392b;color:#fff;animation:pulse 1.1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(192,57,43,.45)}70%{box-shadow:0 0 0 9px rgba(192,57,43,0)}100%{box-shadow:0 0 0 0 rgba(192,57,43,0)}}
+.ai-comp input[type=text],.ai-comp input:not([type]){flex:1;min-width:0;border:1px solid #ddd;border-radius:11px;padding:0 12px;font:inherit;font-size:.76rem;outline:none;height:38px}
+.ai-comp input:focus{border-color:#111}
+.ai-send{background:#111;color:#fff;border-color:#111}
+
+.ai-quote{padding:16px 16px 18px;background:#fafaf8;display:flex;flex-direction:column;min-width:0}
+.ai-quote-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.ai-quote-title b{font-size:.9rem;font-weight:600;color:#111}
+.ai-quote-title span{font-size:.68rem;color:#888}
+.orc-fields{display:grid;grid-template-columns:1fr 84px;gap:6px;margin-bottom:6px}
+.orc-fields input,.orc-add select{border:1px solid #ddd;border-radius:9px;padding:0 9px;height:34px;font:inherit;font-size:.72rem;width:100%;background:#fff;min-width:0}
+.orc-rows{flex:1}
+.orc-row{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid #ebebeb;font-size:.72rem}
+.orc-row .nm{flex:1;color:#333;min-width:0;line-height:1.35}
+.orc-row .pr{font-weight:600;color:#111;white-space:nowrap;min-width:64px;text-align:right}
+.orc-row .qt{min-width:14px;text-align:center}
+.orc-row button{background:#fff;border:1px solid #ddd;border-radius:7px;width:24px;height:24px;cursor:pointer;line-height:1;font-size:.8rem;padding:0;flex-shrink:0}
+.orc-empty{color:#999;font-size:.72rem;padding:8px 0;line-height:1.5}
 .orc-add{margin-top:8px}
-.orc-tot{display:flex;justify-content:space-between;font-size:.8rem;padding:3px 0;color:#444}
-.orc-tot.big{font-size:1rem;font-weight:800;color:#111;border-top:1px solid #111;margin-top:4px;padding-top:6px}
-.orc-actions{display:flex;gap:8px;margin-top:10px}
-.orc-actions button{flex:1;padding:9px;border-radius:10px;font:600 .8rem 'Inter',system-ui,sans-serif;cursor:pointer}
+.orc-tot{display:flex;justify-content:space-between;font-size:.74rem;padding:2px 0;color:#444}
+.orc-tot.big{font-size:.95rem;font-weight:700;color:#111;border-top:1px solid #111;margin-top:4px;padding-top:6px}
+.orc-actions{display:flex;gap:8px;margin-top:12px}
+.orc-actions button{flex:1;height:40px;border-radius:11px;font:600 .74rem 'Poppins',system-ui,sans-serif;cursor:pointer}
 .orc-pdf{background:#c9a84c;color:#111;border:none}
 .orc-clear{background:#fff;color:#666;border:1px solid #ddd}
-@media(max-width:599px){#orc-panel{right:8px;left:8px;width:auto;bottom:76px}#orc-fab{right:12px;bottom:12px}}
 
-/* Área usada somente para gerar o PDF (aparece só na impressão) */
-#orc-print{display:none;font-family:'Inter',system-ui,sans-serif;color:#1a1a1a}
-#orc-print .pq-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #111;padding-bottom:16px;margin-bottom:24px}
-#orc-print .pq-brand{font-size:1.9rem;font-weight:800;letter-spacing:-.03em;color:#111}
-#orc-print .pq-sub{color:#666;font-size:.85rem}
-#orc-print .pq-meta{text-align:right;font-size:.85rem;color:#444;line-height:1.6}
-#orc-print .pq-title{font-size:1.2rem;font-weight:700;margin-bottom:4px;color:#111}
-#orc-print .pq-client{font-size:.9rem;color:#444;margin-bottom:20px}
-#orc-print table{width:100%;border-collapse:collapse;font-size:.88rem}
-#orc-print th{text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#777;border-bottom:2px solid #111;padding:8px 6px}
-#orc-print td{padding:10px 6px;border-bottom:1px solid #eee;color:#222}
-#orc-print .pq-tot{margin-left:auto;width:300px;margin-top:16px;font-size:.92rem}
+/* Área usada somente para o PDF (aparece só na impressão) */
+#orc-print{display:none;font-family:'Poppins',system-ui,sans-serif;color:#1a1a1a}
+#orc-print .pq-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #111;padding-bottom:14px;margin-bottom:22px}
+#orc-print .pq-brand{font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:#111}
+#orc-print .pq-sub{color:#666;font-size:.78rem}
+#orc-print .pq-meta{text-align:right;font-size:.78rem;color:#444;line-height:1.6}
+#orc-print .pq-title{font-size:1.05rem;font-weight:600;margin-bottom:4px;color:#111}
+#orc-print .pq-client{font-size:.82rem;color:#444;margin-bottom:18px}
+#orc-print table{width:100%;border-collapse:collapse;font-size:.8rem}
+#orc-print th{text-align:left;font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:#777;border-bottom:2px solid #111;padding:8px 6px}
+#orc-print td{padding:9px 6px;border-bottom:1px solid #eee;color:#222}
+#orc-print .pq-tot{margin-left:auto;width:290px;margin-top:14px;font-size:.84rem}
 #orc-print .pq-tot div{display:flex;justify-content:space-between;padding:4px 0;color:#444}
-#orc-print .pq-tot .big{border-top:2px solid #111;margin-top:6px;padding-top:8px;font-size:1.15rem;font-weight:800;color:#111}
-#orc-print .pq-notes{margin-top:32px;border-top:1px solid #eee;padding-top:16px;font-size:.8rem;color:#555}
-#orc-print .pq-notes h4{font-size:.88rem;color:#111;margin-bottom:6px}
+#orc-print .pq-tot .big{border-top:2px solid #111;margin-top:6px;padding-top:8px;font-size:1.02rem;font-weight:700;color:#111}
+#orc-print .pq-notes{margin-top:30px;border-top:1px solid #eee;padding-top:14px;font-size:.72rem;color:#555}
+#orc-print .pq-notes h4{font-size:.8rem;color:#111;margin-bottom:6px;font-weight:600}
 #orc-print .pq-notes li{margin:3px 0 3px 16px}
-#orc-print .pq-foot{margin-top:28px;text-align:center;color:#aaa;font-size:.75rem}
+#orc-print .pq-foot{margin-top:26px;text-align:center;color:#aaa;font-size:.68rem}
 @media print{
   body > *:not(#orc-print){display:none !important}
   #orc-print{display:block !important}
   @page{margin:14mm}
+}
+
+/* ===== Responsivo ===== */
+@media(max-width:860px){
+  .ai-body{grid-template-columns:1fr}
+  .ai-chat{border-right:none;border-bottom:1px solid #ececec}
+  .ai-msgs{max-height:58vh;min-height:280px}
+}
+@media(max-width:599px){
+  html{font-size:13px}
+  body{padding:22px 12px 48px}
+  header{padding-bottom:24px;margin-bottom:28px}
+  header h1{font-size:1.6rem}
+  .section{margin-bottom:28px}
+  .section h2{font-size:.98rem;margin-bottom:16px}
+  .pkg{padding:16px 14px}
+  .pkg-price{font-size:1.2rem}
+  .st-name,.st-detail,.st-price{display:block;width:100%;padding-right:0}
+  .st-price{text-align:left;padding-top:4px;padding-bottom:14px}
+  .st-name{padding-top:14px}
+  .ai{margin-bottom:32px}
+  .ai-top{padding:12px 14px}
+  .ai-msgs{padding:12px;min-height:260px;max-height:52vh}
+  .ai-m{max-width:92%}
+  .ai-chips{padding:0 12px 8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+  .ai-chips::-webkit-scrollbar{display:none}
+  .ai-chip{white-space:nowrap}
+  .ai-comp{padding:8px 10px;gap:5px}
+  .ai-ic{width:40px;height:40px}
+  .ai-quote{padding:14px 14px 16px}
+  .orc-fields{grid-template-columns:1fr 74px}
+  .orc-actions button{height:44px}
+  .ai-load .row{flex-direction:column}
+  .ai-sel,.ai-btn{width:100%}
+  .ai-btn{height:42px}
 }
 </style>
 </head>
@@ -158,6 +235,50 @@ footer{text-align:center;margin-top:64px;padding-top:32px;border-top:1px solid #
 <h1>Tabela de Preços</h1>
 <p>Filmagem, fotografia e edição para eventos, podcasts e conteúdo digital — pela equipe ARK.</p>
 </header>
+
+<section class="ai" id="assistente" aria-label="Assistente de orçamento">
+  <div class="ai-card">
+    <div class="ai-top">
+      <div class="ai-av">A</div>
+      <div><b>Assistente ARK</b><small>Orçamento por texto, áudio ou foto</small></div>
+      <span class="ai-pill" id="ai-pill">Modo básico</span>
+    </div>
+    <div class="ai-bar"><i id="ai-bar"></i></div>
+    <div class="ai-body">
+      <div class="ai-chat">
+        <div class="ai-msgs" id="ai-msgs" aria-live="polite"></div>
+        <div class="ai-chips" id="ai-chips"></div>
+        <form class="ai-comp" id="ai-form" autocomplete="off">
+          <button type="button" class="ai-ic" id="ai-photo" title="Enviar foto" aria-label="Enviar foto">📷</button>
+          <button type="button" class="ai-ic" id="ai-mic" title="Gravar áudio" aria-label="Gravar áudio">🎙️</button>
+          <input type="text" id="ai-in" placeholder="Descreva o pedido do cliente…" aria-label="Mensagem">
+          <button type="submit" class="ai-ic ai-send" title="Enviar" aria-label="Enviar">➤</button>
+          <input type="file" id="ai-file" accept="image/*" hidden>
+        </form>
+      </div>
+
+      <div class="ai-quote">
+        <div class="ai-quote-title"><b>Orçamento</b><span id="orc-count"></span></div>
+        <div class="orc-fields">
+          <input id="orc-client" placeholder="Nome do cliente" aria-label="Nome do cliente">
+          <input id="orc-disc" type="number" min="0" max="100" placeholder="Desc. %" aria-label="Desconto em %">
+        </div>
+        <div class="orc-rows" id="orc-rows"></div>
+        <div class="orc-add"><select id="orc-select" aria-label="Adicionar item"></select></div>
+        <div style="margin-top:10px">
+          <div class="orc-tot"><span>Subtotal</span><span id="orc-sub">R$ 0,00</span></div>
+          <div class="orc-tot"><span>Desconto</span><span id="orc-desc">R$ 0,00</span></div>
+          <div class="orc-tot big"><span>Total</span><span id="orc-total">R$ 0,00</span></div>
+        </div>
+        <div class="orc-actions">
+          <button class="orc-clear" id="orc-clear" type="button">Limpar</button>
+          <button class="orc-pdf" id="orc-pdf" type="button">Baixar PDF</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="orc-print"></div>
 
 <div class="section">
 <h2>Pacotes de Evento</h2>
@@ -432,48 +553,10 @@ footer{text-align:center;margin-top:64px;padding-top:32px;border-top:1px solid #
 Tabela de preços ARK · Valores referenciais · Orçamentos personalizados sob consulta
 </footer>
 
-
-<!-- ===== Assistente de Orçamento com IA ===== -->
-<button id="orc-fab" type="button" aria-label="Abrir assistente de orçamento"><span class="dot"></span>Orçamento com IA</button>
-
-<div id="orc-panel" role="dialog" aria-label="Assistente de orçamento">
-  <div class="orc-head">
-    <div><b>Assistente de Orçamento ARK</b><small id="orc-status">Modo básico · funciona offline</small></div>
-    <button class="orc-x" id="orc-close" type="button" aria-label="Fechar">×</button>
-  </div>
-  <div class="orc-ai">
-    <span id="orc-ai-txt">IA local: desligada</span>
-    <button class="orc-btn-sm" id="orc-ai-btn" type="button">Ativar IA local</button>
-  </div>
-  <div class="orc-msgs" id="orc-msgs"></div>
-  <div class="orc-chips" id="orc-chips"></div>
-  <form class="orc-input" id="orc-form" autocomplete="off">
-    <input id="orc-in" placeholder="Ex.: evento de 4h com 3 reels e teaser" aria-label="Mensagem">
-    <button type="submit">Enviar</button>
-  </form>
-  <div class="orc-budget">
-    <h3><span>Orçamento</span><span id="orc-count"></span></h3>
-    <div class="orc-fields">
-      <input id="orc-client" placeholder="Nome do cliente">
-      <input id="orc-disc" type="number" min="0" max="100" placeholder="Desc. %">
-    </div>
-    <div id="orc-rows"></div>
-    <div class="orc-add"><select id="orc-select" aria-label="Adicionar item"></select></div>
-    <div style="margin-top:10px">
-      <div class="orc-tot"><span>Subtotal</span><span id="orc-sub">R$ 0,00</span></div>
-      <div class="orc-tot"><span>Desconto</span><span id="orc-desc">R$ 0,00</span></div>
-      <div class="orc-tot big"><span>Total</span><span id="orc-total">R$ 0,00</span></div>
-    </div>
-    <div class="orc-actions">
-      <button class="orc-clear" id="orc-clear" type="button">Limpar</button>
-      <button class="orc-pdf" id="orc-pdf" type="button">Baixar PDF</button>
-    </div>
-  </div>
-</div>
-<div id="orc-print"></div>
-
 <script type="module">
-/* ---------- Catálogo (mesmos valores da tabela acima) ---------- */
+const TF = 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3/+esm';
+
+/* ---------- Catálogo (mesmos valores da tabela) ---------- */
 const CAT = [
   {id:'p1',name:'Pacote 1 — Simples',price:460},
   {id:'p2',name:'Pacote 2 — Essencial',price:560},
@@ -504,52 +587,72 @@ const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const $ = id => document.getElementById(id);
 
-let budget = [];          // [{id, qty}]
-let history = [];         // histórico para a IA
-let llm = null;
-let llmState = 'off';    // off | loading | ready | error
+let budget = [];      // [{id, qty}]
+let history = [];
+let llm = null, llmState = 'off';     // off | loading | ready | error
+let asr = null;                        // reconhecimento de voz (Whisper), carregado sob demanda
+let recog = null, mediaRec = null, micStream = null, chunks = [], recording = false;
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 
-/* ---------- Montagem inicial ---------- */
+/* ---------- Montagem ---------- */
 CAT.forEach(c => {
   const o = document.createElement('option');
-  o.value = c.id; o.textContent = c.name + (c.price==null ? ' (sob orçamento)' : ' — ' + BRL(c.price));
+  o.value = c.id; o.textContent = c.name + (c.price == null ? ' (sob orçamento)' : ' — ' + BRL(c.price));
   $('orc-select').appendChild(o);
 });
 const ph = document.createElement('option');
 ph.value = ''; ph.textContent = '+ Adicionar item manualmente…';
 $('orc-select').prepend(ph); $('orc-select').value = '';
 
-const CHIPS = ['Evento de 4h + 3 reels', 'Edição de podcast', 'Diária externa', 'Pacote de casamento', 'Ver resumo'];
-CHIPS.forEach(t => {
+['Evento de 4h + 3 reels', 'Edição de podcast', 'Diária externa', 'Pacote de casamento', 'Ver resumo'].forEach(t => {
   const b = document.createElement('button');
-  b.type = 'button'; b.className = 'orc-chip'; b.textContent = t;
+  b.type = 'button'; b.className = 'ai-chip'; b.textContent = t;
   b.onclick = () => send(t);
-  $('orc-chips').appendChild(b);
+  $('ai-chips').appendChild(b);
 });
 
-function addMsg(who, text){
+const msgs = $('ai-msgs');
+function addMsg(who, text, opts = {}){
   const d = document.createElement('div');
-  d.className = 'orc-m ' + (who === 'me' ? 'me' : 'bot');
-  d.textContent = text;
-  $('orc-msgs').appendChild(d);
-  $('orc-msgs').scrollTop = 1e9;
+  d.className = 'ai-m ' + (who === 'me' ? 'me' : who === 'sys' ? 'sys' : 'bot');
+  if (opts.img){ const im = document.createElement('img'); im.src = opts.img; im.alt = 'Foto enviada'; d.appendChild(im); }
+  if (text){ const s = document.createElement('span'); s.textContent = text; d.appendChild(s); }
+  msgs.appendChild(d);
+  msgs.scrollTop = msgs.scrollHeight;
   return d;
 }
 
-addMsg('bot', 'Olá! Sou o assistente de orçamentos da ARK. Me conte o que o cliente quer (ex.: "evento de 4 horas com 3 reels e teaser", "pacote 3", "edição de podcast") e eu monto o orçamento com os valores da tabela.\n\nQuando terminar, clique em Baixar PDF.');
+function setPill(text, cls = ''){
+  const p = $('ai-pill'); p.textContent = text; p.className = 'ai-pill ' + cls;
+}
+function setBar(pct){
+  $('ai-bar').style.width = pct == null ? '0' : pct + '%';
+}
 
-/* ---------- Abrir / fechar ---------- */
-$('orc-fab').onclick = () => {
-  $('orc-panel').classList.toggle('open');
-  if ($('orc-panel').classList.contains('open')) $('orc-in').focus();
-};
-$('orc-close').onclick = () => $('orc-panel').classList.remove('open');
+/* ---------- Boas-vindas + cartão de carregar IA ---------- */
+addMsg('bot', 'Olá! Sou o assistente de orçamentos da ARK. Me mande o pedido do cliente por texto, 🎙️ áudio ou 📷 foto (print de conversa, bilhete ou anotação). Eu monto o orçamento com os preços da tabela.');
+const loader = document.createElement('div');
+loader.className = 'ai-m bot ai-load';
+loader.innerHTML = `
+  <h4>Ativar IA inteligente</h4>
+  <p>Entende pedidos escritos do jeito que o cliente falar. Roda no seu navegador, baixa uma vez e fica salvo.</p>
+  <div class="row">
+    <select class="ai-sel" id="ai-model" aria-label="Modelo de IA">
+      <option value="onnx-community/Qwen2.5-0.5B-Instruct">Leve · ≈350 MB</option>
+      <option value="onnx-community/Qwen2.5-1.5B-Instruct" selected>Melhor · ≈1 GB (recomendado)</option>
+    </select>
+    <button class="ai-btn" type="button" id="ai-load-btn">Carregar IA</button>
+  </div>
+  <div class="ai-prog" hidden><i></i></div>
+  <div class="skip">Sem carregar, você já pode usar o modo básico abaixo.</div>`;
+msgs.appendChild(loader);
+loader.querySelector('#ai-load-btn').onclick = loadAI;
 
 /* ---------- Motor de regras (funciona sem IA) ---------- */
 function ruleActions(raw){
   const t = norm(raw);
   const has = re => re.test(t);
-  const qn = (re, def=1) => { const m = t.match(re); return m ? parseInt(m[1]) : def; };
+  const qn = (re, def = 1) => { const m = t.match(re); return m ? parseInt(m[1]) : def; };
   const add = [], remove = [];
   const clear = has(/\b(limpar|zerar|comecar de novo|recomecar|novo orcamento)\b/);
   const pdf = has(/\b(pdf|imprimir|exportar|baixar|salvar)\b/);
@@ -628,45 +731,69 @@ function ruleText(act, ch){
     return 'Itens no orçamento:\n' + budget.map(b => `• ${BY[b.id].name} x${b.qty}`).join('\n');
   if (act.pdf && !budget.length) return 'Ainda não há itens no orçamento. Me diga o que o cliente quer.';
   if (act.evento) return 'Para um evento, sugiro começar por um pacote:\n• Pacote 2 (R$ 560): teaser + corte para Reels\n• Pacote 3 (R$ 790): trailer + 20 fotos\n• Pacote 4 (R$ 1.120): cobertura do dia completo\nQual combina? Também posso montar com itens avulsos, como "diária externa" ou "3 reels".';
-  return 'Não identifiquei um item da tabela nessa mensagem. Experimente: "pacote 3", "diária externa", "3 reels", "edição de podcast", "aftermovie".';
+  return 'Não identifiquei um item da tabela nessa mensagem. Experimente: "pacote 3", "diária externa", "3 reels", "edição de podcast", "aftermovie". Ou ative a IA acima para pedidos mais livres.';
 }
 
-/* ---------- IA local (opcional, carrega sob demanda) ---------- */
-function setAI(){
-  const txt = $('orc-ai-txt'), btn = $('orc-ai-btn'), st = $('orc-status');
-  if (llmState === 'off'){ txt.textContent = 'IA local: desligada · modo básico ativo'; btn.textContent = 'Ativar IA local'; btn.disabled = false; st.textContent = 'Modo básico · funciona offline'; }
-  if (llmState === 'loading'){ txt.textContent = 'Carregando IA local…'; btn.textContent = 'Carregando'; btn.disabled = true; }
-  if (llmState === 'ready'){ txt.textContent = 'IA local ativa · roda no seu navegador'; btn.textContent = 'IA ativa'; btn.disabled = true; st.textContent = 'IA local ativa (Qwen 0.5B)'; }
-  if (llmState === 'error'){ txt.textContent = 'IA local indisponível aqui · usando modo básico'; btn.textContent = 'Tentar de novo'; btn.disabled = false; }
+/* ---------- IA local ---------- */
+function finishLoadUI(){
+  if (llmState === 'ready'){
+    setPill('IA ativa', 'on'); setBar(null);
+    loader.outerHTML = '';
+    addMsg('sys', '✔ IA ativa. Agora pode descrever o pedido com suas palavras.');
+  } else {
+    setPill('Modo básico'); setBar(null);
+    const b = loader.querySelector('#ai-load-btn');
+    b.disabled = false; b.textContent = 'Tentar de novo';
+    loader.querySelector('.ai-prog').hidden = true;
+    loader.querySelector('h4').textContent = 'IA indisponível neste aparelho';
+    loader.querySelector('p').textContent = 'Seu aparelho não conseguiu carregar a IA. Você segue no modo básico.';
+  }
 }
 
-async function enableAI(){
+async function loadAI(){
   if (llmState === 'loading' || llmState === 'ready') return;
-  llmState = 'loading'; setAI();
+  llmState = 'loading';
+  const model = loader.querySelector('#ai-model').value;
+  const btn = loader.querySelector('#ai-load-btn');
+  const wrap = loader.querySelector('.ai-prog');
+  btn.disabled = true; btn.textContent = 'Carregando…';
+  wrap.hidden = false;
+  loader.querySelector('h4').textContent = 'Carregando a IA';
+  loader.querySelector('p').textContent = 'Pode levar alguns minutos na primeira vez. Não feche a página.';
+  setPill('Carregando IA…', 'load');
+
+  const setProg = pct => {
+    wrap.querySelector('i').style.width = pct + '%';
+    setBar(pct);
+    $('ai-pill').textContent = `Carregando IA ${pct}%`;
+  };
   try {
-    const { pipeline, env } = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3/+esm');
+    const { pipeline, env } = await import(TF);
     env.allowLocalModels = false;
-    const progress = p => {
-      if (p.status === 'progress' && p.total)
-        $('orc-ai-txt').textContent = `Baixando IA local: ${Math.round(p.loaded / p.total * 100)}%`;
+    const files = {};
+    const prog = p => {
+      if (p.file && p.total){
+        files[p.file] = {l: p.loaded, t: p.total};
+        const L = Object.values(files);
+        const l = L.reduce((a, x) => a + x.l, 0), t = L.reduce((a, x) => a + x.t, 0);
+        setProg(Math.min(99, Math.round(l / t * 100)));
+      }
     };
-    const model = 'onnx-community/Qwen2.5-0.5B-Instruct';
     try {
-      llm = await pipeline('text-generation', model, {dtype:'q4', device: navigator.gpu ? 'webgpu' : 'wasm', progress_callback: progress});
+      llm = await pipeline('text-generation', model, {dtype:'q4', device: navigator.gpu ? 'webgpu' : 'wasm', progress_callback: prog});
     } catch (e) {
-      llm = await pipeline('text-generation', model, {dtype:'q4', device:'wasm', progress_callback: progress});
+      llm = await pipeline('text-generation', model, {dtype:'q4', device:'wasm', progress_callback: prog});
     }
+    setProg(100);
     llmState = 'ready';
-    addMsg('bot', 'IA local carregada. Agora você pode descrever o pedido com suas palavras.');
   } catch (e) {
     console.error(e);
     llmState = 'error';
   }
-  setAI();
+  finishLoadUI();
 }
-$('orc-ai-btn').onclick = enableAI;
 
-const SYS = () => `Você é o assistente de orçamentos da ARK (filmagem, fotografia e edição). Responda em português do Brasil, de forma curta. Use APENAS os itens do catálogo abaixo, com estes preços.
+const SYS = () => `Você é o assistente de orçamentos da ARK (filmagem, fotografia e edição). Responda em português do Brasil, de forma curta. Use APENAS os itens do catálogo abaixo, com estes preços. O pedido pode vir de áudio transcrito ou de foto (texto lido por OCR), então pode ter erros de digitação.
 CATÁLOGO (id | nome | preço):
 ${CAT.map(c => `${c.id} | ${c.name} | ${c.price == null ? 'sob orçamento' : 'R$ ' + c.price}`).join('\n')}
 Ao final da resposta, escreva uma linha exatamente no formato:
@@ -675,8 +802,8 @@ Para remover itens, use "remove":["ID"]. Se faltar informação, pergunte antes 
 ORÇAMENTO ATUAL: ${budget.map(b => b.id + ' x' + b.qty).join(', ') || 'vazio'}`;
 
 async function llmReply(userText){
-  const msgs = [{role:'system', content: SYS()}, ...history.slice(-6), {role:'user', content: userText}];
-  const out = await llm(msgs, {max_new_tokens: 320, do_sample: false, return_full_text: false});
+  const msgs2 = [{role:'system', content: SYS()}, ...history.slice(-6), {role:'user', content: userText}];
+  const out = await llm(msgs2, {max_new_tokens: 320, do_sample: false, return_full_text: false});
   const g = out[0].generated_text;
   return String(Array.isArray(g) ? g[g.length - 1].content : g);
 }
@@ -697,21 +824,21 @@ function parseLLM(raw){
   } catch (e) { return {text, act: null}; }
 }
 
-/* ---------- Fluxo do chat ---------- */
-async function send(text){
+/* ---------- Chat ---------- */
+async function send(text, opts = {}){
   text = (text || '').trim();
   if (!text) return;
-  addMsg('me', text);
-  history.push({role:'user', content:text});
+  addMsg('me', opts.display || text, {img: opts.img});
+  history.push({role:'user', content: text.slice(0, 1200)});
 
   const rule = ruleActions(text);
   let reply = null, act = null;
 
   if (llmState === 'ready' && !rule.clear && !rule.pdf){
     const think = addMsg('bot', 'Pensando…');
-    think.classList.add('orc-typing');
+    think.classList.add('typing');
     try {
-      const p = parseLLM(await llmReply(text));
+      const p = parseLLM(await llmReply(text.slice(0, 1200)));
       reply = p.text || null;
       act = p.act;
     } catch (e) { console.error(e); }
@@ -736,23 +863,150 @@ async function send(text){
   if (act.pdf && budget.length) exportPDF();
 }
 
-$('orc-form').addEventListener('submit', e => {
+$('ai-form').addEventListener('submit', e => {
   e.preventDefault();
-  const v = $('orc-in').value;
-  $('orc-in').value = '';
+  const v = $('ai-in').value;
+  $('ai-in').value = '';
   send(v);
 });
 
-/* ---------- Orçamento (painel) ---------- */
+/* ---------- Áudio ---------- */
+function setRec(on){
+  recording = on;
+  const b = $('ai-mic');
+  b.classList.toggle('rec', on);
+  b.textContent = on ? '■' : '🎙️';
+  b.title = on ? 'Parar gravação' : 'Gravar áudio';
+}
+
+$('ai-mic').onclick = () => {
+  if (recording){ stopMic(); return; }
+  if (SR) startSR(); else startRec();
+};
+
+function startSR(){
+  recog = new SR();
+  recog.lang = 'pt-BR';
+  recog.interimResults = true;
+  recog.continuous = false;
+  const prefix = $('ai-in').value ? $('ai-in').value.trim() + ' ' : '';
+  recog.onresult = e => {
+    let t = '';
+    for (const r of e.results) t += r[0].transcript;
+    $('ai-in').value = prefix + t;
+  };
+  recog.onend = () => {
+    setRec(false);
+    const t = $('ai-in').value.trim();
+    if (t){ $('ai-in').value = ''; send(t, {display: '🎤 ' + t}); }
+  };
+  recog.onerror = e => {
+    setRec(false);
+    if (e.error !== 'aborted') addMsg('sys', 'Não consegui ouvir (' + e.error + '). Tente de novo ou digite.');
+  };
+  try { recog.start(); setRec(true); }
+  catch (e){ setRec(false); addMsg('sys', 'O microfone não está disponível agora.'); }
+}
+
+async function startRec(){
+  try { micStream = await navigator.mediaDevices.getUserMedia({audio: true}); }
+  catch (e){ addMsg('sys', 'Permita o uso do microfone para gravar áudio.'); return; }
+  chunks = [];
+  mediaRec = new MediaRecorder(micStream);
+  mediaRec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+  mediaRec.onstop = async () => {
+    micStream.getTracks().forEach(t => t.stop());
+    setRec(false);
+    await transcribe(new Blob(chunks, {type: mediaRec.mimeType || 'audio/webm'}));
+  };
+  mediaRec.start();
+  setRec(true);
+}
+
+function stopMic(){
+  if (recog) recog.stop();
+  if (mediaRec && mediaRec.state !== 'inactive') mediaRec.stop();
+}
+
+async function loadASR(){
+  if (asr) return asr;
+  const note = addMsg('sys', 'Baixando reconhecimento de voz (≈40 MB, só na primeira vez)…');
+  const { pipeline, env } = await import(TF);
+  env.allowLocalModels = false;
+  asr = await pipeline('automatic-speech-recognition', 'Xenova/whisper-tiny', {dtype: 'q8'});
+  note.remove();
+  return asr;
+}
+
+async function transcribe(blob){
+  const work = addMsg('bot', 'Ouvindo seu áudio…');
+  work.classList.add('typing');
+  try {
+    const model = await loadASR();
+    const ctx = new (window.AudioContext || window.webkitAudioContext)({sampleRate: 16000});
+    const buf = await ctx.decodeAudioData(await blob.arrayBuffer());
+    const pcm = buf.getChannelData(0);
+    ctx.close && ctx.close();
+    const out = await model(pcm, {language: 'portuguese', task: 'transcribe'});
+    work.remove();
+    const t = (out.text || '').trim();
+    if (!t){ addMsg('bot', 'Não entendi o áudio. Pode repetir ou digitar?'); return; }
+    send(t, {display: '🎤 ' + t});
+  } catch (e){
+    console.error(e);
+    work.remove();
+    addMsg('bot', 'Não consegui transcrever o áudio aqui. Digite o pedido, por favor.');
+  }
+}
+
+/* ---------- Foto (OCR para ler prints e bilhetes) ---------- */
+function loadScript(src){
+  return new Promise((res, rej) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = res; s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+async function ocr(file){
+  if (!window.Tesseract) await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js');
+  const w = await Tesseract.createWorker('por');
+  try { const {data} = await w.recognize(file); return data.text || ''; }
+  finally { await w.terminate(); }
+}
+
+$('ai-photo').onclick = () => $('ai-file').click();
+$('ai-file').onchange = async e => {
+  const f = e.target.files[0];
+  e.target.value = '';
+  if (!f) return;
+  const typed = $('ai-in').value.trim();
+  $('ai-in').value = '';
+  const url = URL.createObjectURL(f);
+  const work = addMsg('bot', 'Lendo o texto da foto…');
+  work.classList.add('typing');
+  let text = '';
+  try { text = await ocr(f); } catch (err){ console.error(err); }
+  work.remove();
+  if (!text.trim()){
+    addMsg('me', typed || '📷 Foto enviada', {img: url});
+    addMsg('bot', 'Não encontrei texto legível nessa foto. Tente uma foto mais nítida (print de conversa funciona bem) ou descreva o pedido.');
+    return;
+  }
+  const clean = text.replace(/\n{2,}/g, '\n').trim();
+  const combined = (typed ? typed + '\n' : '') + clean;
+  send(combined.slice(0, 1200), {display: typed || '📷 Pedido na foto', img: url});
+};
+
+/* ---------- Painel de orçamento ---------- */
 function render(){
   const rows = $('orc-rows');
   rows.innerHTML = '';
-  if (!budget.length) rows.innerHTML = '<div class="orc-empty">Nenhum item ainda. Peça no chat ou escolha abaixo.</div>';
+  if (!budget.length) rows.innerHTML = '<div class="orc-empty">Nenhum item ainda. Mande o pedido no chat, por áudio ou foto, ou escolha abaixo.</div>';
   budget.forEach((b, i) => {
     const c = BY[b.id];
     const r = document.createElement('div');
     r.className = 'orc-row';
-    r.innerHTML = `<span class="nm"></span><button type="button" data-a="-" data-i="${i}">−</button><span class="qt">${b.qty}</span><button type="button" data-a="+" data-i="${i}">+</button><span class="pr"></span><button type="button" data-a="x" data-i="${i}" title="Remover">×</button>`;
+    r.innerHTML = `<span class="nm"></span><button type="button" data-a="-" data-i="${i}" aria-label="Diminuir">−</button><span class="qt">${b.qty}</span><button type="button" data-a="+" data-i="${i}" aria-label="Aumentar">+</button><span class="pr"></span><button type="button" data-a="x" data-i="${i}" title="Remover" aria-label="Remover">×</button>`;
     r.querySelector('.nm').textContent = c.name;
     r.querySelector('.pr').textContent = c.price == null ? 'sob orç.' : BRL(c.price * b.qty);
     rows.appendChild(r);
@@ -780,10 +1034,9 @@ $('orc-select').addEventListener('change', e => {
   render();
 });
 $('orc-disc').addEventListener('input', render);
-$('orc-client').addEventListener('input', () => {});
 $('orc-clear').onclick = () => { budget = []; render(); addMsg('bot', 'Orçamento limpo.'); };
 
-/* ---------- PDF (mantém o layout da página) ---------- */
+/* ---------- PDF (mantém o layout) ---------- */
 function buildPDF(){
   const t = totals();
   const today = new Date();
@@ -834,8 +1087,8 @@ function exportPDF(){
 $('orc-pdf').onclick = exportPDF;
 
 render();
-setAI();
+setPill('Modo básico');
 </script>
 
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a509f893eaa377ee',t:'MTc5MzAyMzA1NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
