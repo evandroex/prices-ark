@@ -81,6 +81,75 @@ footer{text-align:center;margin-top:64px;padding-top:32px;border-top:1px solid #
   .st-name,.st-detail,.st-price{display:block;width:100%;padding-right:0}
   .st-price{text-align:left;padding-top:6px}
 }
+
+/* ===== Assistente de Orçamento com IA ===== */
+#orc-fab{position:fixed;right:20px;bottom:20px;z-index:9998;background:#111;color:#fff;border:none;border-radius:999px;padding:14px 20px;font:600 .9rem 'Inter',system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.18);display:flex;align-items:center;gap:8px}
+#orc-fab:hover{background:#333}
+#orc-fab .dot{width:8px;height:8px;border-radius:50%;background:#c9a84c}
+#orc-panel{position:fixed;right:20px;bottom:84px;z-index:9999;width:390px;max-width:calc(100vw - 24px);height:min(700px,calc(100vh - 110px));background:#fff;border:1px solid #e5e5e5;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.18);display:none;flex-direction:column;overflow:hidden;font-family:'Inter',system-ui,sans-serif;color:#1a1a1a;font-size:.88rem;line-height:1.5}
+#orc-panel.open{display:flex}
+.orc-head{padding:14px 16px;border-bottom:1px solid #eee;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.orc-head b{font-size:.95rem;color:#111}
+.orc-head small{display:block;color:#888;font-size:.72rem}
+.orc-x{background:none;border:none;font-size:1.4rem;cursor:pointer;color:#666;line-height:1}
+.orc-ai{margin:10px 16px 0;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:.74rem;color:#666}
+.orc-btn-sm{background:#fff;border:1px solid #111;color:#111;border-radius:8px;padding:5px 10px;font:600 .72rem 'Inter',system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.orc-btn-sm:disabled{opacity:.5;cursor:default}
+.orc-msgs{flex:1;min-height:120px;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:10px}
+.orc-m{max-width:88%;padding:9px 12px;border-radius:12px;white-space:pre-wrap;word-wrap:break-word;font-size:.84rem}
+.orc-m.bot{background:#f4f4f4;align-self:flex-start;border-bottom-left-radius:4px}
+.orc-m.me{background:#111;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.orc-typing{color:#888;font-style:italic}
+.orc-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 8px}
+.orc-chip{background:#fff;border:1px solid #ddd;border-radius:999px;padding:4px 10px;font:500 .72rem 'Inter',system-ui,sans-serif;cursor:pointer;color:#333}
+.orc-chip:hover{border-color:#c9a84c}
+.orc-input{display:flex;gap:8px;padding:10px 16px;border-top:1px solid #eee}
+.orc-input input{flex:1;min-width:0;border:1px solid #ddd;border-radius:10px;padding:9px 12px;font:inherit;outline:none}
+.orc-input input:focus{border-color:#111}
+.orc-input button{background:#111;color:#fff;border:none;border-radius:10px;padding:0 16px;font:600 .85rem 'Inter',system-ui,sans-serif;cursor:pointer}
+.orc-budget{border-top:2px solid #111;max-height:300px;overflow-y:auto;padding:12px 16px;background:#fafafa}
+.orc-budget h3{font-size:.85rem;margin-bottom:8px;color:#111;display:flex;justify-content:space-between;align-items:center}
+.orc-budget h3 span+span{font-weight:500;color:#888;font-size:.75rem}
+.orc-fields{display:grid;grid-template-columns:1fr 90px;gap:8px;margin-bottom:8px}
+.orc-fields input,.orc-add select{border:1px solid #ddd;border-radius:8px;padding:6px 8px;font:inherit;font-size:.78rem;width:100%;background:#fff}
+.orc-row{display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid #eee;font-size:.78rem}
+.orc-row .nm{flex:1;color:#333;min-width:0}
+.orc-row .pr{font-weight:700;color:#111;white-space:nowrap;min-width:72px;text-align:right}
+.orc-row .qt{min-width:16px;text-align:center}
+.orc-row button{background:#fff;border:1px solid #ddd;border-radius:6px;width:22px;height:22px;cursor:pointer;line-height:1;font-size:.85rem;padding:0}
+.orc-empty{color:#999;font-size:.78rem;padding:6px 0}
+.orc-add{margin-top:8px}
+.orc-tot{display:flex;justify-content:space-between;font-size:.8rem;padding:3px 0;color:#444}
+.orc-tot.big{font-size:1rem;font-weight:800;color:#111;border-top:1px solid #111;margin-top:4px;padding-top:6px}
+.orc-actions{display:flex;gap:8px;margin-top:10px}
+.orc-actions button{flex:1;padding:9px;border-radius:10px;font:600 .8rem 'Inter',system-ui,sans-serif;cursor:pointer}
+.orc-pdf{background:#c9a84c;color:#111;border:none}
+.orc-clear{background:#fff;color:#666;border:1px solid #ddd}
+@media(max-width:599px){#orc-panel{right:8px;left:8px;width:auto;bottom:76px}#orc-fab{right:12px;bottom:12px}}
+
+/* Área usada somente para gerar o PDF (aparece só na impressão) */
+#orc-print{display:none;font-family:'Inter',system-ui,sans-serif;color:#1a1a1a}
+#orc-print .pq-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #111;padding-bottom:16px;margin-bottom:24px}
+#orc-print .pq-brand{font-size:1.9rem;font-weight:800;letter-spacing:-.03em;color:#111}
+#orc-print .pq-sub{color:#666;font-size:.85rem}
+#orc-print .pq-meta{text-align:right;font-size:.85rem;color:#444;line-height:1.6}
+#orc-print .pq-title{font-size:1.2rem;font-weight:700;margin-bottom:4px;color:#111}
+#orc-print .pq-client{font-size:.9rem;color:#444;margin-bottom:20px}
+#orc-print table{width:100%;border-collapse:collapse;font-size:.88rem}
+#orc-print th{text-align:left;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#777;border-bottom:2px solid #111;padding:8px 6px}
+#orc-print td{padding:10px 6px;border-bottom:1px solid #eee;color:#222}
+#orc-print .pq-tot{margin-left:auto;width:300px;margin-top:16px;font-size:.92rem}
+#orc-print .pq-tot div{display:flex;justify-content:space-between;padding:4px 0;color:#444}
+#orc-print .pq-tot .big{border-top:2px solid #111;margin-top:6px;padding-top:8px;font-size:1.15rem;font-weight:800;color:#111}
+#orc-print .pq-notes{margin-top:32px;border-top:1px solid #eee;padding-top:16px;font-size:.8rem;color:#555}
+#orc-print .pq-notes h4{font-size:.88rem;color:#111;margin-bottom:6px}
+#orc-print .pq-notes li{margin:3px 0 3px 16px}
+#orc-print .pq-foot{margin-top:28px;text-align:center;color:#aaa;font-size:.75rem}
+@media print{
+  body > *:not(#orc-print){display:none !important}
+  #orc-print{display:block !important}
+  @page{margin:14mm}
+}
 </style>
 </head>
 <body>
@@ -362,6 +431,411 @@ footer{text-align:center;margin-top:64px;padding-top:32px;border-top:1px solid #
 <footer>
 Tabela de preços ARK · Valores referenciais · Orçamentos personalizados sob consulta
 </footer>
+
+
+<!-- ===== Assistente de Orçamento com IA ===== -->
+<button id="orc-fab" type="button" aria-label="Abrir assistente de orçamento"><span class="dot"></span>Orçamento com IA</button>
+
+<div id="orc-panel" role="dialog" aria-label="Assistente de orçamento">
+  <div class="orc-head">
+    <div><b>Assistente de Orçamento ARK</b><small id="orc-status">Modo básico · funciona offline</small></div>
+    <button class="orc-x" id="orc-close" type="button" aria-label="Fechar">×</button>
+  </div>
+  <div class="orc-ai">
+    <span id="orc-ai-txt">IA local: desligada</span>
+    <button class="orc-btn-sm" id="orc-ai-btn" type="button">Ativar IA local</button>
+  </div>
+  <div class="orc-msgs" id="orc-msgs"></div>
+  <div class="orc-chips" id="orc-chips"></div>
+  <form class="orc-input" id="orc-form" autocomplete="off">
+    <input id="orc-in" placeholder="Ex.: evento de 4h com 3 reels e teaser" aria-label="Mensagem">
+    <button type="submit">Enviar</button>
+  </form>
+  <div class="orc-budget">
+    <h3><span>Orçamento</span><span id="orc-count"></span></h3>
+    <div class="orc-fields">
+      <input id="orc-client" placeholder="Nome do cliente">
+      <input id="orc-disc" type="number" min="0" max="100" placeholder="Desc. %">
+    </div>
+    <div id="orc-rows"></div>
+    <div class="orc-add"><select id="orc-select" aria-label="Adicionar item"></select></div>
+    <div style="margin-top:10px">
+      <div class="orc-tot"><span>Subtotal</span><span id="orc-sub">R$ 0,00</span></div>
+      <div class="orc-tot"><span>Desconto</span><span id="orc-desc">R$ 0,00</span></div>
+      <div class="orc-tot big"><span>Total</span><span id="orc-total">R$ 0,00</span></div>
+    </div>
+    <div class="orc-actions">
+      <button class="orc-clear" id="orc-clear" type="button">Limpar</button>
+      <button class="orc-pdf" id="orc-pdf" type="button">Baixar PDF</button>
+    </div>
+  </div>
+</div>
+<div id="orc-print"></div>
+
+<script type="module">
+/* ---------- Catálogo (mesmos valores da tabela acima) ---------- */
+const CAT = [
+  {id:'p1',name:'Pacote 1 — Simples',price:460},
+  {id:'p2',name:'Pacote 2 — Essencial',price:560},
+  {id:'p3',name:'Pacote 3 — Médio',price:790},
+  {id:'p4',name:'Pacote 4 — Intermediário',price:1120},
+  {id:'p5',name:'Pacote 5 — Avançado',price:2160},
+  {id:'p6',name:'Pacote 6 — Cobertura Total',price:3500},
+  {id:'s_teaser',name:'Vídeo somente teaser (até 4h)',price:460},
+  {id:'s_pv_foto',name:'Vídeo + trailer + fotos (cobertura total)',price:1120},
+  {id:'s_studio',name:'Fotografia studio + íntegra do evento',price:3500},
+  {id:'d_ext_8',name:'Diária de filmagem externa (8h + 1h almoço)',price:1360},
+  {id:'d_ext_4',name:'Meia diária externa (4h)',price:680},
+  {id:'d_casa_4',name:'Meia diária na Casa ARK (4h)',price:530},
+  {id:'d_casa_8',name:'Diária interna na Casa ARK (8h + 1h almoço)',price:1060},
+  {id:'e_reels_b',name:'Edição Reels básica',price:55},
+  {id:'e_reels',name:'Edição para Reels',price:100},
+  {id:'e_dinam',name:'Edição dinâmica',price:180},
+  {id:'e_cine',name:'Edição cinematic (até 4h)',price:600},
+  {id:'e_podcast',name:'Edição de podcast (episódio completo)',price:300},
+  {id:'e_corte',name:'Corte podcast / Reels (1 trecho)',price:100},
+  {id:'e_after',name:'Aftermovie / evento',price:500},
+  {id:'e_motion',name:'Motion designer',price:null},
+  {id:'e_vfx',name:'VFX / efeitos especiais',price:null}
+];
+const BY = Object.fromEntries(CAT.map(c => [c.id, c]));
+const BRL = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $ = id => document.getElementById(id);
+
+let budget = [];          // [{id, qty}]
+let history = [];         // histórico para a IA
+let llm = null;
+let llmState = 'off';    // off | loading | ready | error
+
+/* ---------- Montagem inicial ---------- */
+CAT.forEach(c => {
+  const o = document.createElement('option');
+  o.value = c.id; o.textContent = c.name + (c.price==null ? ' (sob orçamento)' : ' — ' + BRL(c.price));
+  $('orc-select').appendChild(o);
+});
+const ph = document.createElement('option');
+ph.value = ''; ph.textContent = '+ Adicionar item manualmente…';
+$('orc-select').prepend(ph); $('orc-select').value = '';
+
+const CHIPS = ['Evento de 4h + 3 reels', 'Edição de podcast', 'Diária externa', 'Pacote de casamento', 'Ver resumo'];
+CHIPS.forEach(t => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'orc-chip'; b.textContent = t;
+  b.onclick = () => send(t);
+  $('orc-chips').appendChild(b);
+});
+
+function addMsg(who, text){
+  const d = document.createElement('div');
+  d.className = 'orc-m ' + (who === 'me' ? 'me' : 'bot');
+  d.textContent = text;
+  $('orc-msgs').appendChild(d);
+  $('orc-msgs').scrollTop = 1e9;
+  return d;
+}
+
+addMsg('bot', 'Olá! Sou o assistente de orçamentos da ARK. Me conte o que o cliente quer (ex.: "evento de 4 horas com 3 reels e teaser", "pacote 3", "edição de podcast") e eu monto o orçamento com os valores da tabela.\n\nQuando terminar, clique em Baixar PDF.');
+
+/* ---------- Abrir / fechar ---------- */
+$('orc-fab').onclick = () => {
+  $('orc-panel').classList.toggle('open');
+  if ($('orc-panel').classList.contains('open')) $('orc-in').focus();
+};
+$('orc-close').onclick = () => $('orc-panel').classList.remove('open');
+
+/* ---------- Motor de regras (funciona sem IA) ---------- */
+function ruleActions(raw){
+  const t = norm(raw);
+  const has = re => re.test(t);
+  const qn = (re, def=1) => { const m = t.match(re); return m ? parseInt(m[1]) : def; };
+  const add = [], remove = [];
+  const clear = has(/\b(limpar|zerar|comecar de novo|recomecar|novo orcamento)\b/);
+  const pdf = has(/\b(pdf|imprimir|exportar|baixar|salvar)\b/);
+  const summary = has(/\b(total|resumo|quanto)\b/);
+  const evento = has(/casamento|evento|palestra|formatura|festa|corporativ|aniversario|congresso|show/);
+
+  const pk = t.match(/pacote\s*(\d)/);
+  if (pk && +pk[1] >= 1 && +pk[1] <= 6) add.push({id:'p'+pk[1], qty:1});
+  else if (has(/pacote\s*simples/)) add.push({id:'p1', qty:1});
+  else if (has(/essencial/)) add.push({id:'p2', qty:1});
+  else if (has(/pacote\s*medio|\bmedio\b/)) add.push({id:'p3', qty:1});
+  else if (has(/intermediario/)) add.push({id:'p4', qty:1});
+  else if (has(/avancado/)) add.push({id:'p5', qty:1});
+  else if (has(/pacote\s*completo/)) add.push({id:'p6', qty:1});
+
+  if (has(/teaser/) && !add.length) add.push({id:'s_teaser', qty:1});
+  if (has(/studio/)) add.push({id:'s_studio', qty:1});
+
+  if (has(/casa ark/) && has(/meia|4 ?h/)) add.push({id:'d_casa_4', qty:1});
+  else if (has(/casa ark/) && has(/diaria|dia inteiro|dia completo|interna/)) add.push({id:'d_casa_8', qty:1});
+  else if (has(/\bmeia\b/)) add.push({id:'d_ext_4', qty:1});
+  else if (has(/diaria/) && has(/interna/)) add.push({id:'d_casa_8', qty:1});
+  else if (has(/diaria/)) add.push({id:'d_ext_8', qty:1});
+
+  const reelsQ = qn(/(\d+)\s*(?:x\s*)?(?:reels?|cortes?|videos?|shorts?)/, 1);
+  if (has(/reels?|stories|tiktok|shorts|vertical/)){
+    if (has(/basica|simples/)) add.push({id:'e_reels_b', qty:reelsQ});
+    else add.push({id:'e_reels', qty:reelsQ});
+  }
+  if (has(/podcast/)) add.push({id: has(/corte/) ? 'e_corte' : 'e_podcast', qty:1});
+  if (has(/aftermovie|after movie|melhores momentos/)) add.push({id:'e_after', qty:1});
+  if (has(/cinematic|cinematografic/)) add.push({id:'e_cine', qty:1});
+  if (has(/dinamic/)) add.push({id:'e_dinam', qty:1});
+  if (has(/motion/)) add.push({id:'e_motion', qty:1});
+  if (has(/\bvfx\b|efeitos? especiais/)) add.push({id:'e_vfx', qty:1});
+
+  if (has(/\b(remov\w*|tir\w*|retir\w*|exclu\w*)\b/)){
+    if (add.length){ add.forEach(a => remove.push(a.id)); add.length = 0; }
+    else remove.push('LAST');
+  }
+  return {add, remove, clear, pdf, summary, evento};
+}
+
+function apply(a){
+  const added = [], removed = [];
+  if (a.clear) budget = [];
+  (a.remove || []).forEach(r => {
+    const idx = r === 'LAST' ? budget.length - 1 : budget.findIndex(b => b.id === r);
+    if (idx >= 0 && budget[idx]){ removed.push(BY[budget[idx].id].name); budget.splice(idx, 1); }
+  });
+  (a.add || []).forEach(x => {
+    if (!BY[x.id]) return;
+    const q = Math.max(1, +x.qty || 1);
+    const ex = budget.find(b => b.id === x.id);
+    if (ex) ex.qty += q; else budget.push({id:x.id, qty:q});
+    added.push(BY[x.id].name + (q > 1 ? ` (x${q})` : ''));
+  });
+  return {added, removed};
+}
+
+function totals(){
+  let sub = 0, pend = false;
+  budget.forEach(b => { const c = BY[b.id]; if (c.price == null) pend = true; else sub += c.price * b.qty; });
+  const d = Math.min(100, Math.max(0, parseFloat($('orc-disc').value) || 0));
+  const dv = sub * d / 100;
+  return {sub, dv, d, total: sub - dv, pend};
+}
+
+function ruleText(act, ch){
+  if (act.clear) return 'Orçamento limpo. Me conte o novo pedido do cliente.';
+  const parts = [];
+  if (ch.added.length) parts.push('Adicionei: ' + ch.added.join(', ') + '.');
+  if (ch.removed.length) parts.push('Removi: ' + ch.removed.join(', ') + '.');
+  if (parts.length) return parts.join('\n');
+  if (act.summary && budget.length)
+    return 'Itens no orçamento:\n' + budget.map(b => `• ${BY[b.id].name} x${b.qty}`).join('\n');
+  if (act.pdf && !budget.length) return 'Ainda não há itens no orçamento. Me diga o que o cliente quer.';
+  if (act.evento) return 'Para um evento, sugiro começar por um pacote:\n• Pacote 2 (R$ 560): teaser + corte para Reels\n• Pacote 3 (R$ 790): trailer + 20 fotos\n• Pacote 4 (R$ 1.120): cobertura do dia completo\nQual combina? Também posso montar com itens avulsos, como "diária externa" ou "3 reels".';
+  return 'Não identifiquei um item da tabela nessa mensagem. Experimente: "pacote 3", "diária externa", "3 reels", "edição de podcast", "aftermovie".';
+}
+
+/* ---------- IA local (opcional, carrega sob demanda) ---------- */
+function setAI(){
+  const txt = $('orc-ai-txt'), btn = $('orc-ai-btn'), st = $('orc-status');
+  if (llmState === 'off'){ txt.textContent = 'IA local: desligada · modo básico ativo'; btn.textContent = 'Ativar IA local'; btn.disabled = false; st.textContent = 'Modo básico · funciona offline'; }
+  if (llmState === 'loading'){ txt.textContent = 'Carregando IA local…'; btn.textContent = 'Carregando'; btn.disabled = true; }
+  if (llmState === 'ready'){ txt.textContent = 'IA local ativa · roda no seu navegador'; btn.textContent = 'IA ativa'; btn.disabled = true; st.textContent = 'IA local ativa (Qwen 0.5B)'; }
+  if (llmState === 'error'){ txt.textContent = 'IA local indisponível aqui · usando modo básico'; btn.textContent = 'Tentar de novo'; btn.disabled = false; }
+}
+
+async function enableAI(){
+  if (llmState === 'loading' || llmState === 'ready') return;
+  llmState = 'loading'; setAI();
+  try {
+    const { pipeline, env } = await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@3/+esm');
+    env.allowLocalModels = false;
+    const progress = p => {
+      if (p.status === 'progress' && p.total)
+        $('orc-ai-txt').textContent = `Baixando IA local: ${Math.round(p.loaded / p.total * 100)}%`;
+    };
+    const model = 'onnx-community/Qwen2.5-0.5B-Instruct';
+    try {
+      llm = await pipeline('text-generation', model, {dtype:'q4', device: navigator.gpu ? 'webgpu' : 'wasm', progress_callback: progress});
+    } catch (e) {
+      llm = await pipeline('text-generation', model, {dtype:'q4', device:'wasm', progress_callback: progress});
+    }
+    llmState = 'ready';
+    addMsg('bot', 'IA local carregada. Agora você pode descrever o pedido com suas palavras.');
+  } catch (e) {
+    console.error(e);
+    llmState = 'error';
+  }
+  setAI();
+}
+$('orc-ai-btn').onclick = enableAI;
+
+const SYS = () => `Você é o assistente de orçamentos da ARK (filmagem, fotografia e edição). Responda em português do Brasil, de forma curta. Use APENAS os itens do catálogo abaixo, com estes preços.
+CATÁLOGO (id | nome | preço):
+${CAT.map(c => `${c.id} | ${c.name} | ${c.price == null ? 'sob orçamento' : 'R$ ' + c.price}`).join('\n')}
+Ao final da resposta, escreva uma linha exatamente no formato:
+JSON:{"add":[{"id":"ID","qty":1}],"remove":[]}
+Para remover itens, use "remove":["ID"]. Se faltar informação, pergunte antes de adicionar.
+ORÇAMENTO ATUAL: ${budget.map(b => b.id + ' x' + b.qty).join(', ') || 'vazio'}`;
+
+async function llmReply(userText){
+  const msgs = [{role:'system', content: SYS()}, ...history.slice(-6), {role:'user', content: userText}];
+  const out = await llm(msgs, {max_new_tokens: 320, do_sample: false, return_full_text: false});
+  const g = out[0].generated_text;
+  return String(Array.isArray(g) ? g[g.length - 1].content : g);
+}
+
+function parseLLM(raw){
+  const i = raw.indexOf('JSON:');
+  if (i < 0) return {text: raw.trim(), act: null};
+  const text = raw.slice(0, i).trim();
+  const m = raw.slice(i).match(/\{[\s\S]*\}/);
+  if (!m) return {text, act: null};
+  try {
+    const j = JSON.parse(m[0]);
+    return {text, act: {
+      add: (j.add || []).filter(x => BY[x.id]).map(x => ({id:x.id, qty: +x.qty || 1})),
+      remove: (j.remove || []).filter(r => r === 'LAST' || BY[r]),
+      clear: false, pdf: false, summary: false, evento: false
+    }};
+  } catch (e) { return {text, act: null}; }
+}
+
+/* ---------- Fluxo do chat ---------- */
+async function send(text){
+  text = (text || '').trim();
+  if (!text) return;
+  addMsg('me', text);
+  history.push({role:'user', content:text});
+
+  const rule = ruleActions(text);
+  let reply = null, act = null;
+
+  if (llmState === 'ready' && !rule.clear && !rule.pdf){
+    const think = addMsg('bot', 'Pensando…');
+    think.classList.add('orc-typing');
+    try {
+      const p = parseLLM(await llmReply(text));
+      reply = p.text || null;
+      act = p.act;
+    } catch (e) { console.error(e); }
+    think.remove();
+  }
+  if (!act) act = rule;
+
+  const ch = apply(act);
+  let msg = reply && reply.length ? reply : ruleText(act, ch);
+  if (reply && (ch.added.length || ch.removed.length))
+    msg += '\n\n✔ ' + [ch.added.length ? 'Adicionado: ' + ch.added.join(', ') : '', ch.removed.length ? 'Removido: ' + ch.removed.join(', ') : ''].filter(Boolean).join(' · ');
+  if (budget.length){
+    const t = totals();
+    msg += `\n\nTotal atual: ${BRL(t.total)}${t.pend ? ' + itens sob orçamento' : ''}`;
+  }
+  if (act.pdf && budget.length) msg += '\n\nGerando o PDF…';
+
+  addMsg('bot', msg);
+  history.push({role:'assistant', content: msg});
+  if (history.length > 12) history = history.slice(-12);
+  render();
+  if (act.pdf && budget.length) exportPDF();
+}
+
+$('orc-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = $('orc-in').value;
+  $('orc-in').value = '';
+  send(v);
+});
+
+/* ---------- Orçamento (painel) ---------- */
+function render(){
+  const rows = $('orc-rows');
+  rows.innerHTML = '';
+  if (!budget.length) rows.innerHTML = '<div class="orc-empty">Nenhum item ainda. Peça no chat ou escolha abaixo.</div>';
+  budget.forEach((b, i) => {
+    const c = BY[b.id];
+    const r = document.createElement('div');
+    r.className = 'orc-row';
+    r.innerHTML = `<span class="nm"></span><button type="button" data-a="-" data-i="${i}">−</button><span class="qt">${b.qty}</span><button type="button" data-a="+" data-i="${i}">+</button><span class="pr"></span><button type="button" data-a="x" data-i="${i}" title="Remover">×</button>`;
+    r.querySelector('.nm').textContent = c.name;
+    r.querySelector('.pr').textContent = c.price == null ? 'sob orç.' : BRL(c.price * b.qty);
+    rows.appendChild(r);
+  });
+  const t = totals();
+  $('orc-count').textContent = budget.length ? `${budget.length} ite${budget.length > 1 ? 'ns' : 'm'}` : '';
+  $('orc-sub').textContent = BRL(t.sub);
+  $('orc-desc').textContent = '− ' + BRL(t.dv);
+  $('orc-total').textContent = BRL(t.total) + (t.pend ? ' + sob orç.' : '');
+}
+
+$('orc-rows').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-a]');
+  if (!btn) return;
+  const i = +btn.dataset.i, a = btn.dataset.a;
+  if (a === '+') budget[i].qty++;
+  if (a === '-') { budget[i].qty--; if (budget[i].qty < 1) budget.splice(i, 1); }
+  if (a === 'x') budget.splice(i, 1);
+  render();
+});
+$('orc-select').addEventListener('change', e => {
+  if (!e.target.value) return;
+  apply({add:[{id:e.target.value, qty:1}]});
+  e.target.value = '';
+  render();
+});
+$('orc-disc').addEventListener('input', render);
+$('orc-client').addEventListener('input', () => {});
+$('orc-clear').onclick = () => { budget = []; render(); addMsg('bot', 'Orçamento limpo.'); };
+
+/* ---------- PDF (mantém o layout da página) ---------- */
+function buildPDF(){
+  const t = totals();
+  const today = new Date();
+  const validade = new Date(Date.now() + 7 * 864e5);
+  const client = $('orc-client').value.trim();
+  const rows = budget.map(b => {
+    const c = BY[b.id];
+    return `<tr><td>${esc(c.name)}</td><td style="text-align:center">${b.qty}</td><td style="text-align:right">${c.price == null ? 'Sob orçamento' : BRL(c.price * b.qty)}</td></tr>`;
+  }).join('');
+  return `
+  <div class="pq-head">
+    <div><div class="pq-brand">ARK</div><div class="pq-sub">Filmagem, fotografia e edição</div></div>
+    <div class="pq-meta"><b>Orçamento</b><br>Data: ${today.toLocaleDateString('pt-BR')}<br>Válido até: ${validade.toLocaleDateString('pt-BR')}</div>
+  </div>
+  <div class="pq-title">Proposta de serviços</div>
+  <div class="pq-client">Cliente: <b>${esc(client || '—')}</b></div>
+  <table>
+    <thead><tr><th>Item</th><th style="text-align:center">Qtd.</th><th style="text-align:right">Valor</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>
+  <div class="pq-tot">
+    <div><span>Subtotal</span><span>${BRL(t.sub)}</span></div>
+    ${t.d ? `<div><span>Desconto (${t.d}%)</span><span>− ${BRL(t.dv)}</span></div>` : ''}
+    <div class="big"><span>Total</span><span>${BRL(t.total)}${t.pend ? ' + sob orçamento' : ''}</span></div>
+  </div>
+  <div class="pq-notes">
+    <h4>Condições</h4>
+    <ul>
+      <li>Meia diária = até 4 horas de captação; diária completa = 8 horas + 1 hora de almoço.</li>
+      <li>Mídias brutas ficam na nuvem por 6 meses após o evento. Sugerimos salvar em nuvem própria.</li>
+      <li>Prazo de entrega dos materiais editados: até 7 dias úteis após o evento.</li>
+      <li>Itens marcados como "sob orçamento" são cotados à parte.</li>
+      <li>Valores referenciais, sujeitos a confirmação na contratação.</li>
+    </ul>
+  </div>
+  <div class="pq-foot">ARK · Orçamento personalizado</div>`;
+}
+
+function exportPDF(){
+  if (!budget.length){ addMsg('bot', 'Adicione pelo menos um item antes de gerar o PDF.'); return; }
+  $('orc-print').innerHTML = buildPDF();
+  const old = document.title;
+  const cli = $('orc-client').value.trim();
+  document.title = 'Orcamento-ARK' + (cli ? '-' + cli.replace(/\s+/g, '-') : '');
+  window.print();
+  setTimeout(() => { document.title = old; }, 800);
+}
+$('orc-pdf').onclick = exportPDF;
+
+render();
+setAI();
+</script>
 
 </body>
 </html>
