@@ -227,15 +227,29 @@ footer{font-size:.7rem}
   .ai-sel,.ai-btn{width:100%}
   .ai-btn{height:42px}
 }
+
+/* ===== Chat em largura total, orçamento abaixo ===== */
+.ai{margin:0 0 40px}
+.ai-body{grid-template-columns:1fr !important}
+.ai-chat{border-right:0 !important;border-bottom:1px solid #ececec}
+.ai-msgs{max-height:none !important;min-height:340px !important}
+.ai-quote{padding:20px 22px 22px}
+.ai-quote-title b{font-size:1rem}
+.orc-fields{grid-template-columns:1fr 110px}
+.orc-rows{max-width:720px}
+.ai-quote > div[style]{width:100%;max-width:420px;align-self:flex-end}
+.orc-tot{width:100%}
+.orc-actions{width:100%;max-width:420px;align-self:flex-end}
+.orc-actions button{white-space:nowrap}
+.orc-add{width:100%}
+@media(max-width:599px){
+  .ai-msgs{min-height:260px !important;max-height:52vh !important}
+  .ai-quote{padding:14px}
+  .orc-fields{grid-template-columns:1fr 74px}
+}
 </style>
 </head>
 <body>
-
-<header>
-<h1>Tabela de Preços</h1>
-<p>Filmagem, fotografia e edição para eventos, podcasts e conteúdo digital — pela equipe ARK.</p>
-</header>
-
 <section class="ai" id="assistente" aria-label="Assistente de orçamento">
   <div class="ai-card">
     <div class="ai-top">
@@ -279,6 +293,12 @@ footer{font-size:.7rem}
   </div>
 </section>
 <div id="orc-print"></div>
+
+<header>
+<h1>Tabela de Preços</h1>
+<p>Filmagem, fotografia e edição para eventos, podcasts e conteúdo digital — pela equipe ARK.</p>
+</header>
+
 
 <div class="section">
 <h2>Pacotes de Evento</h2>
@@ -1090,5 +1110,5 @@ render();
 setPill('Modo básico');
 </script>
 
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a509f893eaa377ee',t:'MTc5MzAyMzA1NQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a509fd46ec1df247',t:'MTc5MzAyMzI0OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
