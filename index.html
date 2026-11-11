@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#111111">
-<title>Tabela de Preços — ARK</title>
+<title>Tabela de Preços ARK</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -247,17 +247,81 @@ footer{font-size:.7rem}
   .ai-quote{padding:14px}
   .orc-fields{grid-template-columns:1fr 74px}
 }
+
+/* ===== Seletor de tabela (assinante x externo) ===== */
+.tier-bar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #eee;margin:-36px -20px 24px;padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tier-bar .lbl{font-size:.68rem;color:#888;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.tier-seg{display:inline-flex;background:#f2f2f0;border-radius:999px;padding:3px;gap:2px}
+.tier-seg button{border:none;background:transparent;border-radius:999px;padding:6px 14px;font:500 .72rem 'Poppins',system-ui,sans-serif;color:#555;cursor:pointer;white-space:nowrap}
+.tier-seg button.on{background:#111;color:#fff;font-weight:600}
+.tier-seg button.on[data-t="assinante"]{background:#c9a84c;color:#111}
+.tier-help{font-size:.66rem;color:#888;line-height:1.4;flex:1;min-width:180px}
+.pkg-alt,.st-alt{font-size:.66rem;color:#a8893a;font-weight:500;margin:-4px 0 10px}
+.st-alt{margin:2px 0 0;text-align:right;white-space:nowrap}
+.tier-badge{display:inline-block;font-size:.6rem;font-weight:600;border-radius:4px;padding:2px 7px;background:#111;color:#fff;margin-left:6px;vertical-align:middle}
+.tier-badge.as{background:#c9a84c;color:#111}
+
+/* ===== Configuração da IA ===== */
+.ai-gear{background:rgba(255,255,255,.12);border:none;color:#eee;width:30px;height:30px;border-radius:9px;cursor:pointer;font-size:.9rem;flex-shrink:0}
+.ai-gear:hover{background:rgba(255,255,255,.22)}
+.ai-cfg{display:none;padding:14px 16px;background:#fffdf6;border-bottom:1px solid #eedfb2;font-size:.72rem;color:#555;line-height:1.55}
+.ai-cfg.open{display:block}
+.ai-cfg b{color:#111}
+.ai-cfg .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.ai-cfg input{flex:1;min-width:180px;border:1px solid #ddd;border-radius:10px;padding:0 10px;height:36px;font:inherit;font-size:.72rem}
+.ai-cfg a{color:#a8893a}
+.ai-m b{font-weight:600}
+@media(max-width:599px){
+  .tier-bar{margin:-22px -12px 18px;padding:8px 12px}
+  .tier-seg button{padding:6px 10px;font-size:.68rem}
+  .tier-help{display:none}
+  .st-alt{text-align:left}
+}
+@media print{.tier-bar{display:none}}
+.how{display:grid;gap:10px;margin:-12px 0 36px;padding:16px;border:1px solid #eedfb2;background:#fffdf6;border-radius:12px}
+.how-q{display:flex;gap:12px;font-size:.76rem;color:#555;line-height:1.55}
+.how-q span{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:#111;color:#fff;display:grid;place-items:center;font-size:.72rem;font-weight:600}
+.how-q b{color:#111;font-weight:600}
+.how-q em{font-style:normal;color:#a8893a;font-weight:600}
+@media(min-width:700px){.how{grid-template-columns:1fr 1fr}}
+.plano{display:grid;gap:18px}
+@media(min-width:700px){.plano{grid-template-columns:1fr 1.1fr;align-items:start}}
+.pkg-price small{font-size:.6em;font-weight:500;color:#888;margin-left:2px}
+.pkg-desc b{color:#111;font-weight:600}
+.orc-fields{grid-template-columns:1fr 90px 110px !important}
+@media(max-width:599px){.orc-fields{grid-template-columns:1fr 1fr !important}.orc-fields #orc-client{grid-column:1/-1}}
 </style>
 </head>
 <body>
+<div class="tier-bar" role="region" aria-label="Escolha da tabela de preços">
+  <span class="lbl">Tabela</span>
+  <div class="tier-seg" id="tier-seg">
+    <button type="button" data-t="externo">Convidado ARK</button>
+    <button type="button" data-t="assinante">Residente ARK</button>
+  </div>
+  <span class="tier-help" id="tier-help"></span>
+</div>
+
 <section class="ai" id="assistente" aria-label="Assistente de orçamento">
   <div class="ai-card">
     <div class="ai-top">
       <div class="ai-av">A</div>
-      <div><b>Assistente ARK</b><small>Orçamento por texto, áudio ou foto</small></div>
-      <span class="ai-pill" id="ai-pill">Modo básico</span>
+      <div><b>Assistente ARK</b><small>Orçamento por texto, áudio ou foto · sem instalar nada</small></div>
+      <span class="ai-pill" id="ai-pill">Conectando…</span>
+      <button type="button" class="ai-gear" id="ai-gear" title="Configurar IA" aria-label="Configurar IA">⚙</button>
     </div>
     <div class="ai-bar"><i id="ai-bar"></i></div>
+    <div class="ai-cfg" id="ai-cfg">
+      A IA já funciona sem configuração (<b>IA online gratuita</b>, só texto).<br>
+      Para ler <b>fotos</b> e <b>áudios</b> com mais precisão, cole uma chave gratuita do Google Gemini
+      (<a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">pegar chave grátis</a>).
+      A chave fica salva só neste aparelho e não vai para o site.
+      <div class="row">
+        <input id="ai-key" type="password" placeholder="Cole a chave do Gemini (opcional)" autocomplete="off" aria-label="Chave Gemini">
+        <button class="ai-btn" type="button" id="ai-key-save">Salvar</button>
+        <button class="ai-btn" type="button" id="ai-key-del" style="background:#fff;color:#666;border:1px solid #ddd">Remover</button>
+      </div>
+    </div>
     <div class="ai-body">
       <div class="ai-chat">
         <div class="ai-msgs" id="ai-msgs" aria-live="polite"></div>
@@ -272,16 +336,18 @@ footer{font-size:.7rem}
       </div>
 
       <div class="ai-quote">
-        <div class="ai-quote-title"><b>Orçamento</b><span id="orc-count"></span></div>
+        <div class="ai-quote-title"><b>Orçamento <span id="orc-tier" class="tier-badge"></span></b><span id="orc-count"></span></div>
         <div class="orc-fields">
           <input id="orc-client" placeholder="Nome do cliente" aria-label="Nome do cliente">
           <input id="orc-disc" type="number" min="0" max="100" placeholder="Desc. %" aria-label="Desconto em %">
+          <input id="orc-tax" type="number" min="0" max="50" step="0.1" placeholder="Imposto/NF %" aria-label="Imposto ou nota fiscal em %">
         </div>
         <div class="orc-rows" id="orc-rows"></div>
         <div class="orc-add"><select id="orc-select" aria-label="Adicionar item"></select></div>
         <div style="margin-top:10px">
           <div class="orc-tot"><span>Subtotal</span><span id="orc-sub">R$ 0,00</span></div>
           <div class="orc-tot"><span>Desconto</span><span id="orc-desc">R$ 0,00</span></div>
+          <div class="orc-tot" id="orc-taxrow" style="display:none"><span>Impostos / nota fiscal</span><span id="orc-taxv">R$ 0,00</span></div>
           <div class="orc-tot big"><span>Total</span><span id="orc-total">R$ 0,00</span></div>
         </div>
         <div class="orc-actions">
@@ -296,342 +362,427 @@ footer{font-size:.7rem}
 
 <header>
 <h1>Tabela de Preços</h1>
-<p>Filmagem, fotografia e edição para eventos, podcasts e conteúdo digital — pela equipe ARK.</p>
+<p>Filmagem, fotografia, som e pós-produção para eventos, podcasts, marcas e conteúdo digital — pela equipe ARK Films, na Casa ARK em Ribeirão Preto.</p>
 </header>
 
+<div class="how">
+  <div class="how-q"><span>1</span><div><b>Quem é o cliente?</b> Define a tabela de preço.<br><em>Residente ARK</em> = inquilino das salas ou condômino da casa: quem já está a bordo. <em>Convidado ARK</em> = todos os outros, que embarcam para um projeto. Troque no topo da página.</div></div>
+  <div class="how-q"><span>2</span><div><b>Onde é a gravação?</b> Define a logística.<br><em>Na Casa ARK</em> = usamos os cenários da casa, sem deslocamento. <em>No local do cliente, em Ribeirão Preto</em> = deslocamento já incluso no preço. <em>Fora de Ribeirão Preto</em> = o tempo de viagem conta como trabalho (por hora ou por diária) e as despesas de viagem ficam por conta do cliente.</div></div>
+</div>
 
 <div class="section">
 <h2>Pacotes de Evento</h2>
-<div class="packages packages-3">
-
-  <div class="pkg">
-    <span class="pkg-duration">Até 4 horas de captação</span>
-    <div class="pkg-number">Pacote 1</div>
-    <div class="pkg-name">Simples</div>
-    <div class="pkg-price">R$ 460</div>
-    <div class="pkg-desc">Para quem quer só um resumo rápido do evento.</div>
-    <ul class="pkg-features">
-      <li>Até 4 horas de captação nos momentos importantes</li>
-      <li>1 teaser de 1 minuto editado com narrativa</li>
-      <li>Entrega no formato vertical e horizontal</li>
-    </ul>
-    <div class="pkg-note">Não inclui fotos nem material bruto completo.</div>
-  </div>
-
-  <div class="pkg highlight">
-    <span class="pkg-duration">Até 4 horas de captação</span>
-    <div class="pkg-number">Pacote 2 — Mais Popular</div>
-    <div class="pkg-name">Essencial</div>
-    <div class="pkg-price">R$ 560</div>
-    <div class="pkg-desc">Para quem quer o teaser e conteúdo pronto para postar.</div>
-    <ul class="pkg-features">
-      <li>Tudo do Pacote 1 (captação até 4h + teaser de 1 min)</li>
-      <li>1 corte para Reels vertical (9:16) com legendas</li>
-      <li>Corte dinâmico pensado para redes sociais</li>
-    </ul>
-  </div>
-
-  <div class="pkg">
-    <span class="pkg-duration">Até 4 horas de captação</span>
-    <div class="pkg-number">Pacote 3 — Sugestão</div>
-    <div class="pkg-name">Médio</div>
-    <div class="pkg-price">R$ 790</div>
-    <div class="pkg-desc">Para quem quer vídeo e fotos nos formatos das redes.</div>
-    <ul class="pkg-features">
-      <li>Até 4 horas de captação nos momentos importantes</li>
-      <li>1 trailer de até 2 minutos editado</li>
-      <li>20 fotos editadas entregues</li>
-      <li>Formatos vertical (9:16) e horizontal (16:9)</li>
-      <li>Todas as mídias bruttas na nuvem por 6 meses</li>
-    </ul>
-    <div class="pkg-note">Valor sugerido — confirme o preço real do trailer com 20 fotos.</div>
-  </div>
-
-  <div class="pkg highlight">
-    <span class="pkg-duration">Dia completo de cobertura</span>
-    <div class="pkg-number">Pacote 4</div>
-    <div class="pkg-name">Intermediário</div>
-    <div class="pkg-price">R$ 1.120</div>
-    <div class="pkg-desc">Para quem quer o evento documentado por inteiro.</div>
-    <ul class="pkg-features">
-      <li>Cobertura completa do evento, sem cortes</li>
-      <li>1 trailer de até 2 minutos editado</li>
-      <li>15 fotos editadas entregues</li>
-      <li>Todas as mídias bruttas na nuvem por 6 meses</li>
-    </ul>
-  </div>
-
-  <div class="pkg premium">
-    <span class="pkg-duration">Diária de 8 horas + 1h almoço</span>
-    <div class="pkg-number">Pacote 5</div>
-    <div class="pkg-name">Avançado</div>
-    <div class="pkg-price">R$ 2.160</div>
-    <div class="pkg-desc">Dia inteiro de gravação, vídeo de encerramento trabalhado e conteúdo pronto.</div>
-    <ul class="pkg-features">
-      <li>Diária externa de 8h (com 1h de almoço) — captação ilimitada</li>
-      <li>Aftermovie com melhores momentos, montagem musical e colorização</li>
-      <li>3 cortes para Reels com legendas e dinâmica</li>
-      <li>Todas as mídias bruttas na nuvem por 6 meses</li>
-    </ul>
-  </div>
-
-  <div class="pkg premium">
-    <span class="pkg-duration">Cobertura total do evento</span>
-    <div class="pkg-number">Pacote 6 — Cobertura Total</div>
-    <div class="pkg-name">Completo</div>
-    <div class="pkg-price">R$ 3.500</div>
-    <div class="pkg-desc">Cobertura total do evento com entrega rápida.</div>
-    <ul class="pkg-features">
-      <li>Fotografia em estúdio durante o evento</li>
-      <li>Íntegra do evento filmada em 4K, sem cortes</li>
-      <li>1 trailer de até 2 minutos editado</li>
-      <li>Teaser entregue no mesmo dia (1h após o fim)</li>
-      <li>10 cortes do evento / palestras, se houver</li>
-      <li>Todas as mídias bruttas na nuvem por 6 meses</li>
-    </ul>
-    <div class="pkg-note">Trailer no mesmo dia · demais itens em até 7 dias após o evento.</div>
-  </div>
-
+<div class="packages packages-3" id="sec-pkg"></div>
 </div>
+
+<div class="section">
+<h2>Banco de Horas — Reels, Cortes, Podcast e Conteúdo Digital</h2>
+<p class="st-detail" style="margin-bottom:16px">Compre um pacote de horas e use como precisar: gravação na Casa ARK, edição, cortes de podcast, Reels e fotos. Quanto maior o pacote, menor o valor da hora. O consumo é descontado por hora trabalhada, com relatório.</p>
+<div class="packages packages-3" id="sec-horas"></div>
+<table class="service-table" style="margin-top:18px">
+  <tr><td><div class="st-name">Quanto cada entrega consome (referência)</div>
+  <div class="st-includes"><ul>
+    <li>1 Reels ou corte de podcast com legenda: cerca de 1 hora</li>
+    <li>1 Reels dinâmico, com motion e efeitos sonoros: cerca de 2 horas</li>
+    <li>1 episódio de podcast (gravação de até 1h na Casa ARK + edição completa): cerca de 4 horas</li>
+    <li>Sessão de 10 fotos corporativas na Casa ARK, editadas: cerca de 2 horas</li>
+    <li>Gravação de conteúdo na Casa ARK: 1 hora por hora gravada</li>
+  </ul></div></td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>Plano Anual ARK — Conteúdo Todo Mês</h2>
+<div id="sec-plano"></div>
+</div>
+
+<div class="section">
+<h2>Clipe Musical — do Primeiro Lançamento ao Cinema</h2>
+<p class="st-detail" style="margin-bottom:16px">Do clipe simples ao lançamento completo. Nos pacotes de Lançamento, gravamos, mixamos e masterizamos a música no nosso estúdio e filmamos o clipe. O artista sai com o master e o vídeo prontos: é só enviar para a distribuidora.<br><b>Locações fora da Casa ARK, banda, músicos, figurantes, figurino e maquiagem ficam por conta do cliente. A ARK indica parceiros de confiança.</b></p>
+<div class="packages packages-3" id="sec-clip"></div>
+</div>
+
+<div class="section">
+<h2>Estúdio de Áudio — Gravação, Mixagem e Masterização</h2>
+<table class="service-table" id="sec-audio"></table>
+</div>
+
+<div class="section">
+<h2>Transmissão ao Vivo</h2>
+<table class="service-table" id="sec-live"></table>
 </div>
 
 <div class="section">
 <h2>Filmagem &amp; Captação — Serviços Avulsos</h2>
-<table class="service-table">
-  <tr>
-    <td>
-      <div class="st-name">Vídeo Somente Teaser<span class="st-duration-tag">Até 4 horas</span></div>
-      <div class="st-detail">Teaser de 1 minuto editado do evento.</div>
-      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Vídeo trailer de até 2 min</li><li>20 fotos editadas (vertical e horizontal)</li><li>Mídias bruttas na nuvem por 6 meses</li></ul></div>
-    </td>
-    <td><div class="st-price">R$ 460</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Pacote Completo — Vídeo + Trailer + Fotos<span class="st-duration-tag">Cobertura total</span></div>
-      <div class="st-detail">Evento documentado por inteiro com fotos.</div>
-      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Vídeo íntegra do evento</li><li>1 trailer de até 2 min editado</li><li>15 fotos editadas entregues</li><li>Todas as mídias bruttas na nuvem</li></ul></div>
-    </td>
-    <td><div class="st-price">R$ 1.120</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Fotografia Studio + Integra do Evento<span class="st-duration-tag">Cobertura total</span></div>
-      <div class="st-detail">Serviço completo de cobertura profissional.</div>
-      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Fotografia em estúdio durante o evento</li><li>Íntegra do evento filmada em 4K</li><li>1 trailer editado + teaser no mesmo dia (1h pós)</li><li>10 cortes do evento / palestras, se houver</li><li>Todas as mídias bruttas na nuvem por 6 meses</li></ul></div>
-    </td>
-    <td><div class="st-price">R$ 3.500</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Diária de Filmagem Externa<span class="st-duration-tag">8h + 1h almoço</span></div>
-      <div class="st-detail">Somente gravação — captação ilimitada durante o dia.</div>
-      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Até 8h de captação (1h para almoço)</li><li>Todas as mídias bruttas entregues</li></ul></div>
-      <div class="st-detail" style="margin-top:4px;color:#999">Edição cobrada à parte.</div>
-    </td>
-    <td><div class="st-price">R$ 1.360</div></td>
-  </tr>
-</table>
+<table class="service-table" id="sec-avul"></table>
 </div>
 
 <div class="section">
-<h2>Dias de Captação — Filmagem Avulsa</h2>
-<table class="service-table">
-  <tr>
-    <td>
-      <div class="st-name">Meia Diária Externa<span class="st-duration-tag">4 horas</span></div>
-      <div class="st-detail">Captação externa por 4 horas.</div>
-      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Até 4h de captação</li><li>Todas as mídias bruttas entregues</li></ul></div>
-      <div class="st-detail" style="margin-top:4px;color:#999">Edição cobrada à parte.</div>
-    </td>
-    <td><div class="st-price">R$ 680</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Meia Diária na Casa ARK<span class="st-duration-tag">4 horas</span></div>
-      <div class="st-detail">Captação no local da ARK por 4 horas.</div>
-      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Até 4h de captação</li><li>Todas as mídias bruttas entregues</li></ul></div>
-      <div class="st-detail" style="margin-top:4px;color:#999">Sujeito a horários e autorização conforme agenda.</div>
-    </td>
-    <td><div class="st-price">R$ 530</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Diária Interna na Casa ARK<span class="st-duration-tag">8h + 1h almoço</span></div>
-      <div class="st-detail">Captação interna por dia completo.</div>
-      <div class="st-includes"><div class="st-includes-title">Incluso:</div><ul><li>Até 8h de captação (1h para almoço)</li><li>Todas as mídias bruttas na nuvem por 6 meses</li></ul></div>
-      <div class="st-detail" style="margin-top:4px;color:#999">Sujeito a horários e autorização. Edição cobrada à parte.</div>
-    </td>
-    <td><div class="st-price">R$ 1.060</div></td>
-  </tr>
-</table>
+<h2>Diárias de Captação — no Local do Cliente ou na Casa ARK</h2>
+<table class="service-table" id="sec-cap"></table>
 </div>
 
 <div class="section">
-<h2>Edição de Vídeo — Serviços Avulsos</h2>
-<table class="service-table">
-  <tr>
-    <td>
-      <div class="st-name">Reels Básica</div>
-      <div class="st-detail">Edição simples para redes sociais.</div>
-      <div class="st-includes"><ul><li>Corte de erros e pausas nos vídeos originais</li><li>Organização dos melhores trechos</li><li>Formato vertical 9:16 para Reels / Stories</li><li>Música de fundo simples incluída</li><li>Ajuste básico de áudio</li><li>Correção básica de cor</li><li>Texto simples na tela (títulos / legendas curtas)</li><li>Vídeo final de até 60 segundos</li><li>1 rodada de alteração incluída</li></ul></div>
-    </td>
-    <td><div class="st-price">a partir de R$ 55</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Edição para Reels</div>
-      <div class="st-detail">Edição dinâmica para redes sociais com acabamento profissional.</div>
-      <div class="st-includes"><ul><li>Cortes dinâmicos e ritmados</li><li>Legendas automáticas inseridas no vídeo</li><li>Zooms e transições para manter o engajamento</li><li>Música de fundo selecionada pelo editor</li><li>Efeitos visuais simples (glitch, shake, etc.)</li><li>Formato vertical 9:16</li></ul></div>
-    </td>
-    <td><div class="st-price">a partir de R$ 100</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Edição Dinâmica</div>
-      <div class="st-detail">Edição mais trabalhada com ritmo e produção profissional.</div>
-      <div class="st-includes"><ul><li>Ritmo acelerado e bem planejado</li><li>Efeitos visuais avançados e motion graphics</li><li>B-roll (imagens de cobertura) integrados</li><li>SFX (efeitos sonoros) sincronizados</li><li>Textos animados no vídeo</li></ul></div>
-    </td>
-    <td><div class="st-price">a partir de R$ 180</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Edição Cinematic<span class="st-duration-tag" style="background:#111;color:#fff">Até 4 horas</span></div>
-      <div class="st-detail">Trabalho cinematográfico avançado para conteúdo premium.</div>
-      <div class="st-includes"><ul><li>Narrativa cinematográfica com roteiro de edição</li><li>Color grading avançado (estilo cinematográfico)</li><li>Sound design profissional com múltiplas camadas</li><li>VFX (efeitos visuais) integrados</li><li>Pós-produção completa</li></ul></div>
-    </td>
-    <td><div class="st-price">a partir de R$ 600</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Edição de Podcast</div>
-      <div class="st-detail">Episódio completo com tratamento profissional.</div>
-      <div class="st-includes"><ul><li>Edição do episódio completo (cortes de silêncio, erros)</li><li>Tratamento de áudio (equalização, compressão, normalização)</li><li>Montagem multicâmera sincronizada</li><li>Inserção da identidade visual da marca (logo, intro, endcard)</li></ul></div>
-    </td>
-    <td><div class="st-price">a partir de R$ 300</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Corte Podcast / Reels</div>
-      <div class="st-detail">Um trecho selecionado do conteúdo original para redes sociais.</div>
-      <div class="st-includes"><ul><li>Seleção e edição de um único trecho relevante</li><li>Legendas inseridas no vídeo</li><li>Formato vertical com dinâmica para engajamento</li></ul></div>
-    </td>
-    <td><div class="st-price">a partir de R$ 100</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name">Aftermovie / Evento</div>
-      <div class="st-detail">Resumo cinematográfico dos melhores momentos do evento.</div>
-      <div class="st-includes"><ul><li>Seleção dos melhores momentos da cobertura</li><li>Montagem com trilha musical sincronizada</li><li>Colorização profissional</li><li>Acabamento de alto nível cinematográfico</li></ul></div>
-    </td>
-    <td><div class="st-price">a partir de R$ 500</div></td>
-  </tr>
-  <tr>
-    <td>
-      <div class="st-name" style="color:#888">Motion Designer</div>
-      <div class="st-detail">Animações, textos animados, logos em movimento e gráficos explicativos.</div>
-    </td>
-    <td><div class="st-price" style="color:#888;font-weight:500">Sob orçamento</div></td>
-  </tr>
-  <tr style="border-bottom:none;padding-top:4px">
-    <td>
-      <div class="st-name" style="color:#888">VFX / Efeitos Especiais</div>
-      <div class="st-detail">Efeitos visuais complexos e personalizados para o seu projeto.</div>
-    </td>
-    <td><div class="st-price" style="color:#888;font-weight:500">Sob orçamento</div></td>
-  </tr>
-</table>
+<h2>Edição, Cor &amp; Som — Serviços Avulsos</h2>
+<table class="service-table" id="sec-edit"></table>
+</div>
+
+<div class="section">
+<h2>Casa ARK como Cenário — Locação sem Equipe ARK</h2>
+<p class="st-detail" style="margin-bottom:6px">Para fotógrafos, produtoras e marcas que trazem a própria equipe e querem gravar nos ambientes da CASACOR Ribeirão Preto 2025. Seguindo as normas da casa.</p>
+<table class="service-table" id="sec-loc"></table>
+</div>
+
+<div class="section">
+<h2>Adicionais</h2>
+<p class="st-detail" style="margin-bottom:6px">Calculados sobre o valor dos serviços do orçamento.</p>
+<table class="service-table" id="sec-add"></table>
+</div>
+
+<div class="section">
+<h2>Logística — Somente Gravações Fora de Ribeirão Preto</h2>
+<p class="st-detail" style="margin-bottom:6px">Em Ribeirão Preto não há cobrança de deslocamento. Fora da cidade, o tempo de estrada conta como tempo de trabalho da equipe: até 4 horas de viagem (ida + volta) são cobradas por hora; acima disso, cada dia de viagem conta como uma diária. Combustível, pedágios, hospedagem e alimentação ficam por conta do cliente, pelo valor das notas.</p>
+<table class="service-table" id="sec-log"></table>
 </div>
 
 <div class="notes">
 <h2>Observações Importantes</h2>
 <div class="note-block">
+  <h4>Sobre as duas tabelas</h4>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Residente ARK:</strong> inquilinos das salas da Casa ARK e condôminos que pagam o condomínio para frequentar a casa.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Convidado ARK:</strong> empresas e pessoas que não são residentes da Casa ARK, onde quer que seja a gravação.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Todo projeto conta com equipe fixa: direção e direção de arte com mais de 18 anos de cinema e color grading, técnico de som com mais de 20 anos de experiência e um profissional de captação e edição.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Usamos câmeras de cinema Blackmagic, Sony FX30 e A7 IV, lentes cine Rokinon T1.2, rig V-mount, microfone Sennheiser MKE 600 com boom, gravadores Tascam e lapelas DJI. A finalização é feita em DaVinci Resolve e Avid Media Composer.</div>
+</div>
+<div class="note-block">
   <h4>Sobre as captações</h4>
   <div class="note-item"><span class="note-bullet">◆</span> <strong>Meia diária:</strong> corresponde a até 4 horas de captação.</div>
   <div class="note-item"><span class="note-bullet">◆</span> <strong>Diária completa:</strong> corresponde a 8 horas de captação + 1 hora de almoço (9h no total).</div>
-  <div class="note-item"><span class="note-bullet">◆</span> Dentro do tempo contratado, a captação é ilimitada — gravamos o quanto for necessário.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Dentro do tempo contratado, a captação é ilimitada: gravamos o quanto for necessário.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Captações na Casa ARK (Av. Anhanguera, 790, Alto da Boa Vista) usam os ambientes decorados da CASACOR Ribeirão Preto 2025 como cenário. Horários sujeitos à agenda da casa.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Terceiros:</strong> locações fora da Casa ARK, banda, músicos, figurantes, figurino, maquiagem e aluguéis são contratados e pagos diretamente pelo cliente. A ARK indica parceiros quando precisar.</div>
 </div>
 <div class="note-block">
-  <h4>Sobre as mídias bruttas</h4>
-  <div class="note-item"><span class="note-bullet">◆</span> As mídias bruttas (vídeos e fotos sem edição) ficam salvas na nuvem por <strong>6 meses</strong> após o evento.</div>
-  <div class="note-item"><span class="note-bullet">◆</span> Após esse período, os arquivos serão deletados. <strong>Sugira ao cliente baixar ou salvar em sua nuvem própria antes do vencimento.</strong></div>
+  <h4>Sobre direitos de uso e música</h4>
+  <div class="note-item"><span class="note-bullet">◆</span> Os preços cobrem o uso orgânico nas redes sociais e no site da marca. Para anúncios pagos, TV, outdoor ou cinema, soma-se a <strong>licença para mídia paga</strong> (+30%, por 12 meses).</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Trilhas de banco licenciadas para redes sociais estão inclusas. Músicas comerciais de outros artistas são responsabilidade do cliente.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Clipes e faixas:</strong> os direitos da música e do clipe são do artista. A ARK pode usar trechos no portfólio.</div>
 </div>
 <div class="note-block">
-  <h4>Sobre edições e prazos</h4>
-  <div class="note-item"><span class="note-bullet">◆</span> Edição é cobrada à parte quando não está inclusa no pacote contratado.</div>
-  <div class="note-item"><span class="note-bullet">◆</span> Prazo de entrega dos materiais editados: até <strong>7 dias úteis</strong> após o evento (exceto teaser do Pacote 6, que é entregue no mesmo dia).</div>
-  <div class="note-item"><span class="note-bullet">◆</span> Horários de captação interna na Casa ARK estão sujeitos a autorização conforme a agenda.</div>
+  <h4>Sobre cancelamento e remarcação</h4>
+  <div class="note-item"><span class="note-bullet">◆</span> Cancelamento com mais de 7 dias de antecedência: o sinal vira crédito para uso em até 90 dias.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Cancelamento com menos de 7 dias: o sinal não é devolvido.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Uma remarcação gratuita, com pelo menos 7 dias de antecedência e conforme a agenda.</div>
 </div>
 <div class="note-block">
-  <h4>Sobre os pacotes — notas adicionais</h4>
-  <div class="note-item"><span class="note-bullet">◆</span> <strong>Pacote 3:</strong> valor sugerido de R$ 790. Confirme o preço real do trailer com 20 fotos para ajustar.</div>
-  <div class="note-item"><span class="note-bullet">◆</span> <strong>Pacote 2 alternativo:</strong> troque o corte de Reels (R$ 100) pela Edição Reels Básica (R$ 55) — o total cai para R$ 515.</div>
+  <h4>Sobre as mídias brutas</h4>
+  <div class="note-item"><span class="note-bullet">◆</span> As mídias brutas (vídeos e fotos sem edição) ficam salvas na nuvem por <strong>6 meses</strong> após a gravação.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Depois desse prazo, os arquivos são apagados. <strong>Baixe ou salve em uma nuvem própria antes do vencimento.</strong></div>
+</div>
+<div class="note-block">
+  <h4>Sobre edições, prazos e pagamento</h4>
+  <div class="note-item"><span class="note-bullet">◆</span> A edição é cobrada à parte quando não está inclusa no pacote contratado.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Prazo de entrega dos materiais editados: até <strong>7 dias úteis</strong> após a gravação (o teaser do Pacote 6 é entregue no mesmo dia).</div>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Convidado ARK:</strong> reserva da data com 50% de sinal e o restante na entrega.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Viagens:</strong> deslocamento incluso em Ribeirão Preto. Fora da cidade, o tempo de estrada é cobrado como hora técnica ou diária, e as despesas de viagem ficam por conta do cliente.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Hora extra:</strong> o que passar da diária ou meia diária contratada é cobrado como hora técnica.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Alterações:</strong> 2 rodadas de ajuste estão inclusas em cada vídeo. Ajustes extras ou mudanças de roteiro consomem horas de edição.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> Os valores "a partir de" variam conforme a duração e a complexidade do material.</div>
+  <div class="note-item"><span class="note-bullet">◆</span> <strong>Nota fiscal:</strong> quando houver emissão, os impostos são somados ao orçamento conforme o regime tributário.</div>
 </div>
 </div>
 
 <footer>
-Tabela de preços ARK · Valores referenciais · Orçamentos personalizados sob consulta
+ARK Films · Casa ARK · Av. Anhanguera, 790 · Alto da Boa Vista · Ribeirão Preto/SP · Valores referenciais · Orçamentos personalizados sob consulta
 </footer>
 
-<script type="module">
-const TF = 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3/+esm';
-
-/* ---------- Catálogo (mesmos valores da tabela) ---------- */
+<script>
+/* =====================================================================
+   CATÁLOGO ÚNICO — edite os preços SOMENTE aqui.
+   m = preço Residente ARK (≈30% abaixo do convidado; diárias na casa 50%) · e = preço Convidado ARK · null = sob orçamento
+   ===================================================================== */
 const CAT = [
-  {id:'p1',name:'Pacote 1 — Simples',price:460},
-  {id:'p2',name:'Pacote 2 — Essencial',price:560},
-  {id:'p3',name:'Pacote 3 — Médio',price:790},
-  {id:'p4',name:'Pacote 4 — Intermediário',price:1120},
-  {id:'p5',name:'Pacote 5 — Avançado',price:2160},
-  {id:'p6',name:'Pacote 6 — Cobertura Total',price:3500},
-  {id:'s_teaser',name:'Vídeo somente teaser (até 4h)',price:460},
-  {id:'s_pv_foto',name:'Vídeo + trailer + fotos (cobertura total)',price:1120},
-  {id:'s_studio',name:'Fotografia studio + íntegra do evento',price:3500},
-  {id:'d_ext_8',name:'Diária de filmagem externa (8h + 1h almoço)',price:1360},
-  {id:'d_ext_4',name:'Meia diária externa (4h)',price:680},
-  {id:'d_casa_4',name:'Meia diária na Casa ARK (4h)',price:530},
-  {id:'d_casa_8',name:'Diária interna na Casa ARK (8h + 1h almoço)',price:1060},
-  {id:'e_reels_b',name:'Edição Reels básica',price:55},
-  {id:'e_reels',name:'Edição para Reels',price:100},
-  {id:'e_dinam',name:'Edição dinâmica',price:180},
-  {id:'e_cine',name:'Edição cinematic (até 4h)',price:600},
-  {id:'e_podcast',name:'Edição de podcast (episódio completo)',price:300},
-  {id:'e_corte',name:'Corte podcast / Reels (1 trecho)',price:100},
-  {id:'e_after',name:'Aftermovie / evento',price:500},
-  {id:'e_motion',name:'Motion designer',price:null},
-  {id:'e_vfx',name:'VFX / efeitos especiais',price:null}
+  // ---- Pacotes de evento
+  {id:'p1', sec:'pkg', num:'Pacote 1', name:'Simples', tag:'Até 4 horas de captação', m:890, e:1290,
+   desc:'Para quem quer só um resumo rápido do evento.',
+   feats:['Até 4 horas de captação nos momentos importantes','1 teaser de 1 minuto editado com narrativa','Entrega nos formatos vertical e horizontal'],
+   note:'Não inclui fotos nem o material bruto completo.'},
+  {id:'p2', sec:'pkg', num:'Pacote 2 — Mais Popular', cls:'highlight', name:'Essencial', tag:'Até 4 horas de captação', m:1090, e:1590,
+   desc:'Para quem quer o teaser e conteúdo pronto para postar.',
+   feats:['Tudo do Pacote 1 (captação até 4h + teaser de 1 min)','1 corte para Reels vertical (9:16) com legendas','Corte dinâmico pensado para redes sociais']},
+  {id:'p3', sec:'pkg', num:'Pacote 3', name:'Médio', tag:'Até 4 horas de captação', m:1590, e:2290,
+   desc:'Para quem quer vídeo e fotos nos formatos das redes.',
+   feats:['Até 4 horas de captação nos momentos importantes','1 trailer de até 2 minutos editado','20 fotos editadas','Formatos vertical (9:16) e horizontal (16:9)','Mídias brutas na nuvem por 6 meses']},
+  {id:'p4', sec:'pkg', num:'Pacote 4', cls:'highlight', name:'Intermediário', tag:'Dia completo de cobertura', m:2290, e:3290,
+   desc:'Para quem quer o evento documentado por inteiro.',
+   feats:['Cobertura completa do evento, sem cortes','1 trailer de até 2 minutos editado','15 fotos editadas','Mídias brutas na nuvem por 6 meses']},
+  {id:'p5', sec:'pkg', num:'Pacote 5', cls:'premium', name:'Avançado', tag:'Diária de 8 horas + 1h almoço', m:3790, e:5490,
+   desc:'Dia inteiro de gravação, filme de encerramento e conteúdo pronto.',
+   feats:['Diária de 8h (com 1h de almoço), captação ilimitada','Aftermovie com melhores momentos, trilha e color grading','3 cortes para Reels com legendas e dinâmica','Som direto captado por técnico de som','Mídias brutas na nuvem por 6 meses']},
+  {id:'p6', sec:'pkg', num:'Pacote 6 — Cobertura Total', cls:'premium', name:'Completo', tag:'Cobertura total do evento', m:6200, e:8900,
+   desc:'Cobertura total do evento com entrega rápida.',
+   feats:['Fotografia em estúdio durante o evento','Íntegra do evento filmada em 4K, sem cortes','1 trailer de até 2 minutos editado','Teaser entregue no mesmo dia (1h após o fim)','10 cortes do evento ou das palestras','Mídias brutas na nuvem por 6 meses'],
+   note:'Teaser no mesmo dia · demais itens em até 7 dias úteis.'},
+
+  // ---- Filmagem & captação avulsa
+  {id:'s_teaser', sec:'avul', name:'Vídeo Somente Teaser', tag:'Até 4 horas', m:890, e:1290,
+   desc:'Teaser de 1 minuto editado do evento.',
+   inc:['Até 4h de captação','1 teaser de 1 minuto editado','Formatos vertical e horizontal']},
+  {id:'s_pv_foto', sec:'avul', name:'Vídeo + Trailer + Fotos', tag:'Cobertura total', m:2290, e:3290,
+   desc:'Evento documentado por inteiro, com fotos.',
+   inc:['Vídeo íntegra do evento','1 trailer de até 2 min editado','15 fotos editadas','Mídias brutas na nuvem por 6 meses']},
+  {id:'s_studio', sec:'avul', name:'Fotografia Studio + Íntegra do Evento', tag:'Cobertura total', m:6200, e:8900,
+   desc:'Serviço completo de cobertura profissional.',
+   inc:['Fotografia em estúdio durante o evento','Íntegra do evento filmada em 4K','1 trailer editado + teaser no mesmo dia (1h após)','10 cortes do evento ou das palestras','Mídias brutas na nuvem por 6 meses']},
+  {id:'d_ext_8', sec:'avul', name:'Diária de Filmagem no Local do Cliente', tag:'8h + 1h almoço', m:2700, e:3900,
+   desc:'Somente gravação, no endereço do cliente, com captação ilimitada durante o dia. Deslocamento em Ribeirão Preto incluso.',
+   inc:['Até 8h de captação (1h de almoço)','Equipe ARK com kit de câmera cinema, lentes e áudio','Mídias brutas entregues'],
+   obs:'Edição cobrada à parte.'},
+
+  // ---- Dias de captação
+  {id:'d_ext_4', sec:'cap', name:'Meia Diária no Local do Cliente', tag:'4 horas', m:1590, e:2290,
+   desc:'Captação no endereço do cliente por 4 horas. Deslocamento em Ribeirão Preto incluso.',
+   inc:['Até 4h de captação','Equipe ARK com kit de câmera cinema, lentes e áudio','Mídias brutas entregues'],
+   obs:'Edição cobrada à parte.'},
+  {id:'d_casa_4', sec:'cap', name:'Meia Diária na Casa ARK', tag:'4 horas', m:990, e:1990,
+   desc:'Captação na Casa ARK por 4 horas, com os ambientes decorados como cenário.',
+   inc:['Até 4h de captação','Uso dos cenários da Casa ARK','Mídias brutas entregues'],
+   obs:'Sujeito à agenda da casa.'},
+  {id:'d_casa_8', sec:'cap', name:'Diária Interna na Casa ARK', tag:'8h + 1h almoço', m:1790, e:3590,
+   desc:'Captação interna por um dia completo, com os ambientes decorados como cenário.',
+   inc:['Até 8h de captação (1h de almoço)','Uso dos cenários da Casa ARK','Mídias brutas na nuvem por 6 meses'],
+   obs:'Sujeito à agenda da casa. Edição cobrada à parte.'},
+
+  // ---- Edição, cor e som
+  {id:'e_reels_b', sec:'edit', from:true, name:'Reels Básica', m:110, e:160,
+   desc:'Edição simples para redes sociais.',
+   inc:['Corte de erros e pausas','Organização dos melhores trechos','Formato vertical 9:16','Música de fundo simples','Ajuste básico de áudio e de cor','Texto simples na tela','Vídeo final de até 60 segundos','1 rodada de alteração']},
+  {id:'e_reels', sec:'edit', from:true, name:'Edição para Reels', m:200, e:290,
+   desc:'Edição dinâmica para redes sociais, com acabamento profissional.',
+   inc:['Cortes dinâmicos e ritmados','Legendas inseridas no vídeo','Zooms e transições para manter o engajamento','Música selecionada pelo editor','Efeitos visuais simples (glitch, shake etc.)','Formato vertical 9:16']},
+  {id:'e_dinam', sec:'edit', from:true, name:'Edição Dinâmica', m:340, e:490,
+   desc:'Edição mais trabalhada, com ritmo e produção profissional.',
+   inc:['Ritmo acelerado e bem planejado','Motion graphics e efeitos avançados','B-roll (imagens de cobertura) integrado','Efeitos sonoros (SFX) sincronizados','Textos animados']},
+  {id:'e_cine', sec:'edit', from:true, name:'Edição Cinematic', tag:'Até 4 horas', m:1290, e:1890,
+   desc:'Trabalho cinematográfico para conteúdo premium.',
+   inc:['Narrativa cinematográfica com roteiro de edição','Color grading em DaVinci Resolve por colorista com mais de 18 anos de experiência','Sound design com várias camadas','Efeitos visuais (VFX) integrados','Pós-produção completa']},
+  {id:'e_podcast', sec:'edit', from:true, name:'Edição de Podcast', m:550, e:790,
+   desc:'Episódio completo com tratamento profissional.',
+   inc:['Edição do episódio completo (silêncios e erros)','Tratamento de áudio (equalização, compressão, normalização)','Montagem multicâmera sincronizada','Identidade visual da marca (logo, intro, endcard)']},
+  {id:'e_corte', sec:'edit', from:true, name:'Corte Podcast / Reels', m:180, e:260,
+   desc:'Um trecho do conteúdo original preparado para redes sociais.',
+   inc:['Seleção e edição de um trecho relevante','Legendas inseridas no vídeo','Formato vertical com dinâmica para engajamento']},
+  {id:'e_after', sec:'edit', from:true, name:'Aftermovie / Evento', m:1050, e:1490,
+   desc:'Resumo cinematográfico dos melhores momentos do evento.',
+   inc:['Seleção dos melhores momentos da cobertura','Montagem com trilha sincronizada','Color grading profissional','Acabamento cinematográfico']},
+  {id:'e_motion', sec:'edit', name:'Motion Designer', m:null, e:null,
+   desc:'Animações, textos animados, logos em movimento e gráficos explicativos.'},
+  {id:'e_vfx', sec:'edit', name:'VFX / Efeitos Especiais', m:null, e:null,
+   desc:'Efeitos visuais complexos e personalizados para o seu projeto.'},
+
+  // ---- Clipe musical (do primeiro lançamento ao cinema)
+  {id:'clip_start', sec:'clip', num:'Clipe 1 — Iniciante', name:'Clipe Start', tag:'Meia diária na Casa ARK', m:2490, e:3600,
+   desc:'Para o primeiro lançamento ou single independente.',
+   feats:['Até 4h de gravação nos cenários da Casa ARK','Performance do artista com playback','Câmera de cinema + iluminação','Técnico de som no set','Edição e color grading','Clipe horizontal (16:9) + 1 teaser vertical'],
+   note:'Entrega em até 10 dias úteis.'},
+  {id:'clip_pro', sec:'clip', num:'Clipe 2 — Profissional', cls:'highlight', name:'Clipe Pro', tag:'Diária de 8h', m:4190, e:5900,
+   desc:'Clipe com roteiro, direção de arte e acabamento profissional.',
+   feats:['Roteiro e decupagem','Casa ARK + 1 locação externa (contratada pelo cliente)','2 câmeras (Blackmagic + FX30) com lentes cine T1.2','Direção de arte','Color grading em DaVinci Resolve','Clipe 16:9 + 3 cortes verticais para Reels/TikTok','10 fotos de making of']},
+  {id:'clip_cine', sec:'clip', num:'Clipe 3 — Cinema', cls:'premium', name:'Clipe Cinema', tag:'2 diárias', m:9200, e:12900,
+   desc:'Linguagem de cinema, com narrativa e direção de arte completa.',
+   feats:['Roteiro com narrativa e storyboard','Direção e direção de arte de cinema','Até 3 locações (Casa ARK + externas contratadas pelo cliente)','2 câmeras Blackmagic, lentes cine e rig V-mount','Color grading de cinema (colorista com mais de 18 anos)','Sound design','Clipe + versão vertical + 5 cortes + teaser','Making of em vídeo']},
+  {id:'clip_ess', sec:'clip', num:'Lançamento 1 — Música + Clipe', cls:'highlight', name:'Lançamento Essencial', tag:'Faixa pronta + Clipe Pro', m:5290, e:7490,
+   desc:'Música gravada, mixada e masterizada, com o Clipe Pro. Sai pronto para a distribuidora.',
+   feats:['Tudo do Clipe Pro','Gravação da faixa no estúdio (até 8h)','Mixagem e masterização da faixa','Master WAV pronto para a distribuidora (Spotify, Deezer, Apple Music, YouTube Music)','Vídeo no padrão do YouTube'],
+   note:'Economia em relação a contratar música e clipe separados.'},
+  {id:'clip_full', sec:'clip', num:'Lançamento 2 — Completo', cls:'premium', name:'Lançamento Completo', tag:'Faixa pronta + Clipe Cinema', m:10290, e:14900,
+   desc:'O lançamento inteiro, da gravação ao clipe de cinema. O artista sai com tudo pronto: é só subir na distribuidora.',
+   feats:['Tudo do Clipe Cinema','Gravação da faixa no estúdio (até 12h)','Mixagem e masterização com técnico de som de mais de 20 anos','Master WAV pronto para a distribuidora','Spotify Canvas (vídeo vertical em loop de 8s)','Sessão de fotos para capa e divulgação (10 fotos)','Vídeo no padrão do YouTube'],
+   note:'Economia em relação a contratar música e clipe separados.'},
+
+  // ---- Estúdio de áudio
+  {id:'a_faixa', sec:'audio', name:'Faixa Pronta para Distribuidora', tag:'Pacote', m:1690, e:2390,
+   desc:'Gravação + mixagem + masterização de uma faixa. O artista leva o master e só envia para a distribuidora.',
+   inc:['Até 8h de gravação no estúdio','Mixagem da faixa','Masterização para streaming (Spotify, Apple Music, YouTube)','Master WAV 24-bit + versão 16-bit/44.1 kHz para distribuidora','2 rodadas de ajuste na mixagem']},
+  {id:'a_hora', sec:'audio', name:'Gravação em Estúdio', unit:'/hora', m:130, e:180,
+   desc:'Voz e instrumentos, com técnico de som de mais de 20 anos.'},
+  {id:'a_mixmaster', sec:'audio', name:'Mixagem + Masterização', unit:' por faixa', m:790, e:1150,
+   desc:'Para quem já gravou e quer a faixa pronta para lançar.'},
+  {id:'a_mix', sec:'audio', name:'Mixagem', unit:' por faixa', m:650, e:950,
+   desc:'Equilíbrio, equalização, dinâmica e efeitos de todas as pistas.'},
+  {id:'a_master', sec:'audio', name:'Masterização', unit:' por faixa', m:250, e:350,
+   desc:'Master no volume e no padrão das plataformas de streaming.'},
+  {id:'a_prod', sec:'audio', name:'Produção Musical / Arranjo', m:null, e:null,
+   desc:'Criação de beat, arranjo e direção musical.'},
+
+  // ---- Transmissão ao vivo
+  {id:'live_4', sec:'live', name:'Transmissão ao Vivo', tag:'Até 4 horas', m:2700, e:3900,
+   desc:'Eventos, palestras, cultos, shows e lançamentos ao vivo.',
+   inc:['2 a 3 câmeras com corte ao vivo','Áudio direto da mesa ou com microfones ARK','Transmissão para YouTube, Instagram ou plataforma do cliente','Gravação da íntegra entregue'],
+   obs:'Internet estável no local por conta do cliente (na Casa ARK já está inclusa).'},
+  {id:'live_8', sec:'live', name:'Transmissão ao Vivo', tag:'Diária de 8h', m:4590, e:6500,
+   desc:'Eventos de dia inteiro com transmissão contínua.',
+   inc:['2 a 3 câmeras com corte ao vivo','Áudio direto da mesa ou com microfones ARK','Transmissão para YouTube, Instagram ou plataforma do cliente','Gravação da íntegra entregue'],
+   obs:'Internet estável no local por conta do cliente (na Casa ARK já está inclusa).'},
+
+  // ---- Casa ARK como cenário (sem equipe ARK)
+  {id:'loc_h', sec:'loc', name:'Casa ARK como Cenário', unit:'/hora', m:250, e:350,
+   desc:'Mínimo de 2 horas. Para fotógrafos, produtoras e marcas com equipe própria.'},
+  {id:'loc_4', sec:'loc', name:'Casa ARK como Cenário', tag:'Meia diária · 4h', m:890, e:1290,
+   desc:'Uso dos ambientes decorados da CASACOR 2025, com acompanhamento de um responsável da casa.'},
+  {id:'loc_8', sec:'loc', name:'Casa ARK como Cenário', tag:'Diária · 8h', m:1590, e:2290,
+   desc:'Uso dos ambientes decorados da CASACOR 2025, com acompanhamento de um responsável da casa.'},
+
+  // ---- Adicionais em % (calculados sobre os demais itens do orçamento)
+  {id:'u_48', sec:'add', name:'Urgência — entrega em até 48h', pct:30, m:0, e:0,
+   desc:'Prioridade na fila de edição. Sujeito à agenda.'},
+  {id:'u_24', sec:'add', name:'Urgência — entrega em até 24h', pct:50, m:0, e:0,
+   desc:'Edição dedicada para entrega no dia seguinte. Sujeito à agenda.'},
+  {id:'lic_paga', sec:'add', name:'Licença para mídia paga', pct:30, m:0, e:0,
+   desc:'Uso em anúncios pagos, TV, outdoor ou cinema por 12 meses. O preço base cobre uso orgânico nas redes e no site.'},
+
+  // ---- Banco de horas (conteúdo digital: reels, cortes, podcast, fotos) — desconto progressivo
+  {id:'h_1',  sec:'horas', name:'Hora avulsa', hours:1, m:200, e:290, valid:'Uso no mês'},
+  {id:'h_10', sec:'horas', name:'Banco de 10 horas', hours:10, m:1890, e:2750, valid:'Validade de 3 meses'},
+  {id:'h_20', sec:'horas', name:'Banco de 20 horas', hours:20, m:3590, e:5190, valid:'Validade de 4 meses', cls:'highlight'},
+  {id:'h_40', sec:'horas', name:'Banco de 40 horas', hours:40, m:6550, e:9490, valid:'Validade de 6 meses'},
+  {id:'h_80', sec:'horas', name:'Banco de 80 horas', hours:80, m:11990, e:17390, valid:'Validade de 12 meses', cls:'premium'},
+
+  // ---- Plano anual (contrato de 12 meses, cobrança mensal)
+  {id:'plano', sec:'plano', name:'Plano Anual ARK', unit:'/mês', hours:25, m:3490, e:4990,
+   desc:'Contrato de 12 meses com cota mensal de horas para manter a marca ativa nas redes todo mês.',
+   feats:['Cota de 25 horas de produção por mês','Até 15 vídeos Reels / conteúdo por mês (captação + edição)','1 podcast por mês, gravado na Casa ARK e editado','10 fotos corporativas editadas por mês, fotografadas na Casa ARK','Acesso à Casa ARK e aos cenários, conforme as normas da casa','Planejamento mensal de pauta com a direção ARK'],
+   note:'Horas além da cota pelo valor do banco de 80h. Horas não usadas não acumulam para o mês seguinte.'},
+
+  // ---- Logística (somente fora de Ribeirão Preto): tempo de viagem = tempo de trabalho
+  {id:'log_hora', sec:'log', name:'Hora técnica da equipe', unit:'/hora', m:340, e:490,
+   desc:'Viagens de até 4 horas no total (ida + volta): cada hora de estrada conta como hora de trabalho. Também vale para hora extra além da diária contratada.'},
+  {id:'log_diaria', sec:'log', name:'Diária de viagem', tag:'Acima de 4h de estrada', m:2700, e:3900,
+   desc:'Quando a viagem passa de 4 horas no total, ou a equipe passa o dia na estrada, cada dia conta como uma diária normal de trabalho.'},
+  {id:'log_desp', sec:'log', name:'Despesas de viagem', txt:'Por conta do cliente', m:0, e:0,
+   desc:'Combustível, pedágios, hospedagem e alimentação da equipe. O cliente paga direto ou reembolsa pelo valor das notas, sem margem.'}
 ];
+</script>
+
+<script>
+(function(){
 const BY = Object.fromEntries(CAT.map(c => [c.id, c]));
 const BRL = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const BRL0 = v => 'R$ ' + v.toLocaleString('pt-BR',{minimumFractionDigits: v % 1 ? 2 : 0, maximumFractionDigits:2});
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const $ = id => document.getElementById(id);
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+  set(k, v){ try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch(e){} }
+};
+const TIERS = {
+  externo:  {label:'Convidado ARK',      short:'Convidado', help:'Empresas e pessoas que embarcam na ARK para um projeto.'},
+  assinante:{label:'Residente ARK',      short:'Residente', help:'Inquilinos das salas e condôminos que pagam para frequentar a Casa ARK.'}
+};
+let tier = store.get('ark_tier') === 'assinante' ? 'assinante' : 'externo';
+const price = (c, t = tier) => t === 'assinante' ? c.m : c.e;
+const label = c => c.sec === 'pkg' ? `${c.num.split(' —')[0]} — ${c.name}` : c.name + (c.tag ? ` (${c.tag.toLowerCase()})` : '') + (c.unit ? ` (${c.unit.replace(/^\/| por /,'por ').trim()})` : '');
+const isTxt = c => !!c.txt;
+const pctTxt = c => `+${c.pct}% sobre o total`;
 
-let budget = [];      // [{id, qty}]
-let history = [];
-let llm = null, llmState = 'off';     // off | loading | ready | error
-let asr = null;                        // reconhecimento de voz (Whisper), carregado sob demanda
-let recog = null, mediaRec = null, micStream = null, chunks = [], recording = false;
-const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+/* ---------------- Tabelas de preço ---------------- */
+function priceTxt(c, t){
+  const p = price(c, t);
+  if (c.txt) return c.txt;
+  if (c.pct) return pctTxt(c);
+  return p == null ? 'Sob orçamento' : (c.from ? 'a partir de ' : '') + BRL0(p) + (c.unit || '');
+}
+function altTxt(c){
+  if (tier !== 'externo' || c.m == null || c.m === c.e || c.txt || c.pct) return '';
+  return `Residente ARK: ${c.from ? 'a partir de ' : ''}${BRL0(c.m)}${c.unit || ''}`;
+}
+function renderTables(){
+  const card = c => `
+    <div class="pkg ${c.cls || ''}">
+      <span class="pkg-duration">${esc(c.tag)}</span>
+      <div class="pkg-number">${esc(c.num)}</div>
+      <div class="pkg-name">${esc(c.name)}</div>
+      <div class="pkg-price">${priceTxt(c)}</div>
+      ${altTxt(c) ? `<div class="pkg-alt">${altTxt(c)}</div>` : ''}
+      <div class="pkg-desc">${esc(c.desc)}</div>
+      <ul class="pkg-features">${c.feats.map(f => `<li>${esc(f)}</li>`).join('')}</ul>
+      ${c.note ? `<div class="pkg-note">${esc(c.note)}</div>` : ''}
+    </div>`;
+  $('sec-pkg').innerHTML = CAT.filter(c => c.sec === 'pkg').map(card).join('');
+  $('sec-clip').innerHTML = CAT.filter(c => c.sec === 'clip').map(card).join('');
+  const base = price(BY.h_1);
+  $('sec-horas').innerHTML = CAT.filter(c => c.sec === 'horas').map(c => {
+    const p = price(c), ph = p / c.hours, off = Math.round((1 - ph / base) * 100);
+    return `<div class="pkg ${c.cls || ''}">
+      <span class="pkg-duration">${esc(c.valid)}</span>
+      <div class="pkg-number">${c.hours === 1 ? 'Sem pacote' : off > 0 ? 'Economia de ' + off + '%' : 'Pacote'}</div>
+      <div class="pkg-name">${esc(c.name)}</div>
+      <div class="pkg-price">${BRL0(p)}</div>
+      ${altTxt(c) ? `<div class="pkg-alt">${altTxt(c)}</div>` : ''}
+      <div class="pkg-desc">${c.hours === 1 ? 'Valor de referência por hora de produção.' : `Sai a <b>${BRL0(Math.round(ph))}/hora</b>.`}</div>
+    </div>`;
+  }).join('');
+  const pl = BY.plano, pp = price(pl);
+  $('sec-plano').innerHTML = `<div class="pkg premium plano">
+    <div>
+      <span class="pkg-duration">Contrato de 12 meses</span>
+      <div class="pkg-number">Plano Anual</div>
+      <div class="pkg-name">${esc(pl.name)}</div>
+      <div class="pkg-price">${BRL0(pp)}<small>/mês</small></div>
+      ${altTxt(pl) ? `<div class="pkg-alt">${altTxt(pl)}</div>` : ''}
+      <div class="pkg-desc">${esc(pl.desc)}<br>Total no ano: <b>${BRL0(pp * 12)}</b> · equivale a <b>${BRL0(Math.round(pp / pl.hours))}/hora</b> (${Math.round((1 - pp / pl.hours / base) * 100)}% abaixo da hora avulsa).</div>
+    </div>
+    <div>
+      <ul class="pkg-features">${pl.feats.map(f => `<li>${esc(f)}</li>`).join('')}</ul>
+      <div class="pkg-note">${esc(pl.note)}</div>
+    </div>
+  </div>`;
+  ['avul','cap','edit','audio','live','loc','add','log'].forEach(sec => {
+    $('sec-' + sec).innerHTML = CAT.filter(c => c.sec === sec).map(c => {
+      const sob = price(c) == null;
+      return `<tr><td>
+        <div class="st-name"${sob ? ' style="color:#888"' : ''}>${esc(c.name)}${c.tag ? `<span class="st-duration-tag"${['edit','audio','live','loc'].includes(c.sec) ? ' style="background:#111;color:#fff"' : ''}>${esc(c.tag)}</span>` : ''}</div>
+        <div class="st-detail">${esc(c.desc)}</div>
+        ${c.inc ? `<div class="st-includes">${c.sec !== 'edit' ? '<div class="st-includes-title">Incluso:</div>' : ''}<ul>${c.inc.map(i => `<li>${esc(i)}</li>`).join('')}</ul></div>` : ''}
+        ${c.obs ? `<div class="st-detail" style="margin-top:4px;color:#999">${esc(c.obs)}</div>` : ''}
+      </td><td><div class="st-price"${sob ? ' style="color:#888;font-weight:500"' : ''}>${priceTxt(c)}</div>${altTxt(c) ? `<div class="st-alt">${altTxt(c)}</div>` : ''}</td></tr>`;
+    }).join('');
+  });
+}
 
-/* ---------- Montagem ---------- */
-CAT.forEach(c => {
-  const o = document.createElement('option');
-  o.value = c.id; o.textContent = c.name + (c.price == null ? ' (sob orçamento)' : ' — ' + BRL(c.price));
-  $('orc-select').appendChild(o);
-});
-const ph = document.createElement('option');
-ph.value = ''; ph.textContent = '+ Adicionar item manualmente…';
-$('orc-select').prepend(ph); $('orc-select').value = '';
+function setTier(t, silent){
+  if (!TIERS[t]) return;
+  tier = t; store.set('ark_tier', t);
+  document.querySelectorAll('#tier-seg button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
+  $('tier-help').textContent = TIERS[t].help;
+  const bd = $('orc-tier'); bd.textContent = TIERS[t].short; bd.className = 'tier-badge' + (t === 'assinante' ? ' as' : '');
+  renderTables(); fillSelect(); render();
+  if (!silent) addMsg('sys', `Tabela alterada para ${TIERS[t].label}.`);
+}
+$('tier-seg').addEventListener('click', e => { const b = e.target.closest('button[data-t]'); if (b && b.dataset.t !== tier) setTier(b.dataset.t); });
 
-['Evento de 4h + 3 reels', 'Edição de podcast', 'Diária externa', 'Pacote de casamento', 'Ver resumo'].forEach(t => {
+/* ---------------- Estado ---------------- */
+let budget = [];   // [{id, qty}]
+let history = [];  // [{role:'user'|'assistant', content}]
+const msgs = $('ai-msgs');
+
+function fillSelect(){
+  const s = $('orc-select');
+  s.innerHTML = '<option value="">+ Adicionar item manualmente…</option>' + CAT.map(c => {
+    const p = price(c);
+    return `<option value="${c.id}">${esc(label(c))} — ${c.txt ? c.txt.toLowerCase() : c.pct ? pctTxt(c) : p == null ? 'sob orçamento' : BRL0(p) + (c.unit || '')}</option>`;
+  }).join('');
+  s.value = '';
+}
+
+['Evento de 4h + 3 reels', 'Clipe + gravar a música', 'Podcast com 4 cortes', 'Plano anual', 'Live de 4h', 'Evento em São Paulo'].forEach(t => {
   const b = document.createElement('button');
   b.type = 'button'; b.className = 'ai-chip'; b.textContent = t;
   b.onclick = () => send(t);
   $('ai-chips').appendChild(b);
 });
 
-const msgs = $('ai-msgs');
 function addMsg(who, text, opts = {}){
   const d = document.createElement('div');
   d.className = 'ai-m ' + (who === 'me' ? 'me' : who === 'sys' ? 'sys' : 'bot');
@@ -641,68 +792,145 @@ function addMsg(who, text, opts = {}){
   msgs.scrollTop = msgs.scrollHeight;
   return d;
 }
+function setPill(text, cls = ''){ const p = $('ai-pill'); p.textContent = text; p.className = 'ai-pill ' + cls; }
+function setBar(pct){ $('ai-bar').style.width = pct == null ? '0' : pct + '%'; }
 
-function setPill(text, cls = ''){
-  const p = $('ai-pill'); p.textContent = text; p.className = 'ai-pill ' + cls;
+/* ---------------- Motor de IA (100% web) ----------------
+   1) Gemini (opcional, chave gratuita colada pelo usuário): texto, foto e áudio
+   2) IA online gratuita (Pollinations, sem chave): texto
+   3) Modo básico por regras: funciona sempre, até sem internet         */
+let geminiKey = store.get('ark_gemini_key') || '';
+const GEMINI_MODELS = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.0-flash'];
+let onlineOK = null;
+
+function engineName(){ return geminiKey ? 'Gemini' : onlineOK === false ? 'Modo básico' : 'IA online'; }
+function refreshPill(){
+  if (geminiKey) setPill('IA ativa · Gemini', 'on');
+  else if (onlineOK === false) setPill('Modo básico');
+  else setPill('IA ativa', 'on');
 }
-function setBar(pct){
-  $('ai-bar').style.width = pct == null ? '0' : pct + '%';
+
+const SYS = () => `Você é o assistente de orçamentos da ARK Films (produtora audiovisual da Casa ARK, Av. Anhanguera 790, Alto da Boa Vista, Ribeirão Preto/SP). A casa foi mostra da CASACOR Ribeirão Preto 2025 e os ambientes decorados viraram cenários de gravação.
+Equipe: diretor sênior e diretor de arte de cinema, colorista com mais de 18 anos de experiência; técnico de som com mais de 20 anos; um profissional intermediário de captação, edição e roteiro.
+Equipamentos: 2 câmeras Blackmagic, Sony FX30, Sony A7 IV, rig V-mount, lentes cine Rokinon T1.2, boom com Sennheiser MKE 600, gravadores Tascam, lapelas DJI. Finalização em DaVinci Resolve e Avid Media Composer.
+São DUAS perguntas independentes. (1) QUEM é o cliente define a tabela: "assinante" (inquilino das salas da Casa ARK ou condômino que paga para frequentar a casa) ou "externo" (qualquer outro cliente). Na conversa, chame "assinante" de Residente ARK e "externo" de Convidado ARK; nunca use as palavras assinante, externo ou cliente de fora com o usuário. Tabela atual: ${tier}. (2) ONDE é a gravação define a logística: na Casa ARK (cenários da casa, sem deslocamento), no local do cliente em Ribeirão Preto (deslocamento incluso) ou fora de Ribeirão Preto. Fora da cidade, o tempo de viagem conta como trabalho: estime as horas de estrada (ida + volta) a partir de Ribeirão Preto e diga a estimativa. Até 4h no total = log_hora com qty = horas (arredonde para cima). Acima de 4h = log_diaria com qty = dias de estrada. Sempre adicione log_desp (despesas de viagem por conta do cliente) quando houver viagem. Se o local não estiver claro, pergunte a cidade.
+BANCO DE HORAS (h_*) é para quem quer produção recorrente de conteúdo (reels, cortes, podcast, fotos): sugira o pacote que cobre a demanda, usando a referência de consumo (1 reels ou corte ≈ 1h; reels dinâmico ≈ 2h; podcast com gravação + edição ≈ 4h; 10 fotos ≈ 2h). Se a demanda for mensal e contínua (ex.: vários reels todo mês + podcast), sugira o PLANO ANUAL (id plano, preço por mês, adicione qty 12 = contrato de 12 meses).
+O pedido pode vir de áudio transcrito ou de foto e pode ter erros. Use SOMENTE itens do catálogo, com os preços da tabela atual. Nunca invente preços. Nunca mostre ids (como p3 ou log_km) para o usuário; use os nomes dos itens. Quando o pedido já der para montar, ADICIONE os itens e só depois pergunte o que faltar. Itens "sob orçamento" podem ser adicionados, mas avise que são cotados à parte. Se faltar informação essencial (duração, quantidade de vídeos), pergunte antes de adicionar. Se o cliente for assinante/inquilino/condômino, use set_tier "assinante"; se for de fora, "externo".
+CLIPE MUSICAL: para artistas, sugira do Clipe Start (iniciante) ao Clipe Cinema. Se o artista quer clipe E música (gravar/mixar/masterizar), use SEMPRE um pacote de Lançamento: clip_full para clipe cinema/top, clip_ess para os demais. Nunca some clipe + a_faixa/a_mix/a_master separados, porque o Lançamento já inclui gravação, mixagem e masterização e sai mais barato. Os pacotes Clipe Start/Pro/Cinema NÃO incluem a música. Locações fora da Casa ARK, banda, músicos, figurino e maquiagem são contratados pelo cliente (a ARK só indica parceiros): nunca cobre por eles. Só a música = a_faixa. TRANSMISSÃO ao vivo = live_4/live_8. Gravar na casa com equipe própria = loc_*. Itens com % (urgência, licença para mídia paga) somam porcentagem sobre o total: adicione só se pedirem urgência ou anúncio pago.\nCATÁLOGO (id | item | assinante | externo) — valores por unidade; itens com /hora, /mês etc. multiplicam pela qty:
+${CAT.map(c => `${c.id} | ${label(c)}${c.hours ? ' [' + c.hours + 'h]' : ''}${c.feats ? ': ' + c.feats.join('; ') : ''} | ${c.txt ? c.txt : c.pct ? '+' + c.pct + '%' : c.m == null ? 'sob orçamento' : 'R$ ' + c.m} | ${c.txt ? c.txt : c.pct ? '+' + c.pct + '%' : c.e == null ? 'sob orçamento' : 'R$ ' + c.e}${c.from ? ' (a partir de)' : ''}`).join('\n')}
+ORÇAMENTO ATUAL: ${budget.map(b => b.id + ' x' + b.qty).join(', ') || 'vazio'}
+Responda SEMPRE e SOMENTE com um JSON válido, neste formato:
+{"reply":"resposta em português do Brasil, sem markdown, em 2 a 5 frases: diga o que foi incluído e por quê, cite os valores da tabela atual e, se fizer sentido, sugira um item complementar ou faça a pergunta que falta","add":[{"id":"ID","qty":1}],"remove":["ID"],"set_tier":null,"clear":false,"pdf":false,"client":null}
+"add" e "remove" ficam vazios quando não houver mudança. "remove" retira o item inteiro. "client" é o nome do cliente se ele for citado. "pdf" true só se pedirem para gerar/baixar o PDF.`;
+
+function parseJSON(raw){
+  if (!raw) return null;
+  let s = String(raw).replace(/```(?:json)?/gi, '').trim();
+  const a = s.indexOf('{'), b = s.lastIndexOf('}');
+  if (a < 0 || b < a) return null;
+  try { return JSON.parse(s.slice(a, b + 1)); } catch(e){ return null; }
 }
 
-/* ---------- Boas-vindas + cartão de carregar IA ---------- */
-addMsg('bot', 'Olá! Sou o assistente de orçamentos da ARK. Me mande o pedido do cliente por texto, 🎙️ áudio ou 📷 foto (print de conversa, bilhete ou anotação). Eu monto o orçamento com os preços da tabela.');
-const loader = document.createElement('div');
-loader.className = 'ai-m bot ai-load';
-loader.innerHTML = `
-  <h4>Ativar IA inteligente</h4>
-  <p>Entende pedidos escritos do jeito que o cliente falar. Roda no seu navegador, baixa uma vez e fica salvo.</p>
-  <div class="row">
-    <select class="ai-sel" id="ai-model" aria-label="Modelo de IA">
-      <option value="onnx-community/Qwen2.5-0.5B-Instruct">Leve · ≈350 MB</option>
-      <option value="onnx-community/Qwen2.5-1.5B-Instruct" selected>Melhor · ≈1 GB (recomendado)</option>
-    </select>
-    <button class="ai-btn" type="button" id="ai-load-btn">Carregar IA</button>
-  </div>
-  <div class="ai-prog" hidden><i></i></div>
-  <div class="skip">Sem carregar, você já pode usar o modo básico abaixo.</div>`;
-msgs.appendChild(loader);
-loader.querySelector('#ai-load-btn').onclick = loadAI;
+function withTimeout(ms){ const c = new AbortController(); const t = setTimeout(() => c.abort(), ms); return {signal: c.signal, done: () => clearTimeout(t)}; }
 
-/* ---------- Motor de regras (funciona sem IA) ---------- */
+async function askPollinations(userText){
+  const body = {
+    model: 'openai', referrer: 'arkfilms', reasoning_effort: 'low', max_tokens: 3000,
+    response_format: {type: 'json_object'},
+    messages: [{role:'system', content: SYS()}, ...history.slice(-8), {role:'user', content: userText}]
+  };
+  for (let attempt = 0; attempt < 2; attempt++){
+    const to = withTimeout(60000);
+    try {
+      const r = await fetch('https://text.pollinations.ai/openai', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body), signal: to.signal});
+      to.done();
+      if (r.status === 429 && attempt === 0){ await new Promise(res => setTimeout(res, 4000)); continue; }
+      if (r.status === 400 && attempt === 0){ body.reasoning_effort = 'minimal'; body.messages = [body.messages[0], ...body.messages.slice(-3)]; continue; }
+      if (!r.ok){ const t = await r.text().catch(() => ''); throw new Error('HTTP ' + r.status + ' ' + t.slice(0, 300)); }
+      const j = await r.json();
+      onlineOK = true;
+      return j.choices?.[0]?.message?.content || '';
+    } catch(e){ to.done(); if (attempt === 1) throw e; }
+  }
+}
+
+async function askGemini(userText, media){
+  const contents = history.slice(-8).map(h => ({role: h.role === 'assistant' ? 'model' : 'user', parts:[{text: h.content}]}));
+  const parts = [];
+  if (media) parts.push({inline_data: {mime_type: media.mime, data: media.b64}});
+  parts.push({text: userText || (media && media.kind === 'audio' ? 'Transcreva este áudio e monte o orçamento do pedido.' : 'Leia esta imagem (print, bilhete ou anotação) e monte o orçamento do pedido.')});
+  contents.push({role:'user', parts});
+  const body = {systemInstruction: {parts:[{text: SYS()}]}, contents, generationConfig: {responseMimeType: 'application/json', temperature: 0.2}};
+  let lastErr;
+  for (const model of GEMINI_MODELS){
+    const to = withTimeout(60000);
+    try {
+      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+        method:'POST', headers:{'Content-Type':'application/json', 'x-goog-api-key': geminiKey}, body: JSON.stringify(body), signal: to.signal});
+      to.done();
+      if (r.status === 400 || r.status === 401 || r.status === 403){
+        const t = await r.text();
+        if (/API key|API_KEY|PERMISSION/i.test(t)) throw Object.assign(new Error('chave'), {key: true});
+      }
+      if (r.status === 404){ lastErr = new Error('modelo'); continue; }
+      if (!r.ok){ lastErr = new Error('HTTP ' + r.status); continue; }
+      const j = await r.json();
+      return (j.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('');
+    } catch(e){ to.done(); if (e.key) throw e; lastErr = e; }
+  }
+  throw lastErr || new Error('Gemini indisponível');
+}
+
+/* ---------------- Modo básico (regras) ---------------- */
 function ruleActions(raw){
   const t = norm(raw);
   const has = re => re.test(t);
   const qn = (re, def = 1) => { const m = t.match(re); return m ? parseInt(m[1]) : def; };
   const add = [], remove = [];
   const clear = has(/\b(limpar|zerar|comecar de novo|recomecar|novo orcamento)\b/);
-  const pdf = has(/\b(pdf|imprimir|exportar|baixar|salvar)\b/);
+  const pdf = has(/\b(pdf|imprimir|exportar|baixar)\b/);
   const summary = has(/\b(total|resumo|quanto)\b/);
   const evento = has(/casamento|evento|palestra|formatura|festa|corporativ|aniversario|congresso|show/);
+  let set_tier = null;
+  if (has(/assinante|residente|inquilino|condomin|morador|da casa ark/) && !has(/nao (e|eh) (assinante|residente|inquilino)/)) set_tier = 'assinante';
+  if (has(/externo|de fora|convidado|nao (e|eh) (assinante|residente|inquilino)/)) set_tier = 'externo';
 
   const pk = t.match(/pacote\s*(\d)/);
   if (pk && +pk[1] >= 1 && +pk[1] <= 6) add.push({id:'p'+pk[1], qty:1});
   else if (has(/pacote\s*simples/)) add.push({id:'p1', qty:1});
   else if (has(/essencial/)) add.push({id:'p2', qty:1});
-  else if (has(/pacote\s*medio|\bmedio\b/)) add.push({id:'p3', qty:1});
+  else if (has(/pacote\s*medio/)) add.push({id:'p3', qty:1});
   else if (has(/intermediario/)) add.push({id:'p4', qty:1});
   else if (has(/avancado/)) add.push({id:'p5', qty:1});
-  else if (has(/pacote\s*completo/)) add.push({id:'p6', qty:1});
+  else if (has(/pacote\s*completo|cobertura total/)) add.push({id:'p6', qty:1});
 
   if (has(/teaser/) && !add.length) add.push({id:'s_teaser', qty:1});
-  if (has(/studio/)) add.push({id:'s_studio', qty:1});
+  if (has(/studio|estudio/) && has(/foto/)) add.push({id:'s_studio', qty:1});
 
-  if (has(/casa ark/) && has(/meia|4 ?h/)) add.push({id:'d_casa_4', qty:1});
-  else if (has(/casa ark/) && has(/diaria|dia inteiro|dia completo|interna/)) add.push({id:'d_casa_8', qty:1});
+  if (has(/casa( da)? ark|na casa|cenario/) && has(/meia|4 ?h/)) add.push({id:'d_casa_4', qty:1});
+  else if (has(/casa( da)? ark|na casa|cenario/) && has(/diaria|dia inteiro|dia completo|interna|8 ?h/)) add.push({id:'d_casa_8', qty:1});
   else if (has(/\bmeia\b/)) add.push({id:'d_ext_4', qty:1});
-  else if (has(/diaria/) && has(/interna/)) add.push({id:'d_casa_8', qty:1});
   else if (has(/diaria/)) add.push({id:'d_ext_8', qty:1});
 
-  const reelsQ = qn(/(\d+)\s*(?:x\s*)?(?:reels?|cortes?|videos?|shorts?)/, 1);
-  if (has(/reels?|stories|tiktok|shorts|vertical/)){
-    if (has(/basica|simples/)) add.push({id:'e_reels_b', qty:reelsQ});
-    else add.push({id:'e_reels', qty:reelsQ});
+  const cortesQ = qn(/(\d+)\s*(?:x\s*)?(?:reels?|cortes?|videos?|shorts?)/, 1);
+  if (has(/podcast/)){
+    if (has(/corte/)) { add.push({id:'e_podcast', qty:1}); add.push({id:'e_corte', qty:cortesQ}); }
+    else add.push({id:'e_podcast', qty:1});
+  } else if (has(/reels?|stories|tiktok|shorts|vertical|cortes?/)){
+    add.push({id: has(/basica|simples/) ? 'e_reels_b' : 'e_reels', qty:cortesQ});
   }
-  if (has(/podcast/)) add.push({id: has(/corte/) ? 'e_corte' : 'e_podcast', qty:1});
+  if (has(/clipe|clip\b|videoclipe/)){
+    if (has(/lancamento|gravar a musica|gravacao da musica|musica e clipe|com a musica|estudio/)) add.push({id: has(/cinema|top|completo|premium/) ? 'clip_full' : 'clip_ess', qty:1});
+    else add.push({id: has(/cinema|top|premium/) ? 'clip_cine' : has(/iniciante|simples|start|barato/) ? 'clip_start' : 'clip_pro', qty:1});
+  } else if (has(/mixagem|masteriza|master\b/)) add.push({id: has(/gravar|gravacao/) ? 'a_faixa' : 'a_mixmaster', qty:1});
+  if (has(/ao vivo|live\b|transmiss/)) add.push({id: has(/dia inteiro|diaria|8 ?h/) ? 'live_8' : 'live_4', qty:1});
+  if (has(/urgen|24 ?h|amanha/)) add.push({id: has(/24 ?h|amanha/) ? 'u_24' : 'u_48', qty:1});
+  if (has(/anuncio|midia paga|trafego pago|outdoor|\btv\b/)) add.push({id:'lic_paga', qty:1});
+  if (has(/plano anual|anual|mensalidade|todo mes/)) add.push({id:'plano', qty:12});
+  else if (has(/banco de horas|pacote de horas|horas de (edicao|producao)/)){
+    const h = qn(/(\d+)\s*h/, 10);
+    add.push({id: h >= 80 ? 'h_80' : h >= 40 ? 'h_40' : h >= 20 ? 'h_20' : 'h_10', qty:1});
+  }
   if (has(/aftermovie|after movie|melhores momentos/)) add.push({id:'e_after', qty:1});
   if (has(/cinematic|cinematografic/)) add.push({id:'e_cine', qty:1});
   if (has(/dinamic/)) add.push({id:'e_dinam', qty:1});
@@ -713,32 +941,7 @@ function ruleActions(raw){
     if (add.length){ add.forEach(a => remove.push(a.id)); add.length = 0; }
     else remove.push('LAST');
   }
-  return {add, remove, clear, pdf, summary, evento};
-}
-
-function apply(a){
-  const added = [], removed = [];
-  if (a.clear) budget = [];
-  (a.remove || []).forEach(r => {
-    const idx = r === 'LAST' ? budget.length - 1 : budget.findIndex(b => b.id === r);
-    if (idx >= 0 && budget[idx]){ removed.push(BY[budget[idx].id].name); budget.splice(idx, 1); }
-  });
-  (a.add || []).forEach(x => {
-    if (!BY[x.id]) return;
-    const q = Math.max(1, +x.qty || 1);
-    const ex = budget.find(b => b.id === x.id);
-    if (ex) ex.qty += q; else budget.push({id:x.id, qty:q});
-    added.push(BY[x.id].name + (q > 1 ? ` (x${q})` : ''));
-  });
-  return {added, removed};
-}
-
-function totals(){
-  let sub = 0, pend = false;
-  budget.forEach(b => { const c = BY[b.id]; if (c.price == null) pend = true; else sub += c.price * b.qty; });
-  const d = Math.min(100, Math.max(0, parseFloat($('orc-disc').value) || 0));
-  const dv = sub * d / 100;
-  return {sub, dv, d, total: sub - dv, pend};
+  return {add, remove, clear, pdf, summary, evento, set_tier, about: has(/quem (e|eh|sao)|sobre a ark|equipe|equipamento/)};
 }
 
 function ruleText(act, ch){
@@ -747,139 +950,123 @@ function ruleText(act, ch){
   if (ch.added.length) parts.push('Adicionei: ' + ch.added.join(', ') + '.');
   if (ch.removed.length) parts.push('Removi: ' + ch.removed.join(', ') + '.');
   if (parts.length) return parts.join('\n');
-  if (act.summary && budget.length)
-    return 'Itens no orçamento:\n' + budget.map(b => `• ${BY[b.id].name} x${b.qty}`).join('\n');
+  if (act.set_tier) return `Certo, usando a tabela ${TIERS[act.set_tier].label}. O que o cliente precisa?`;
+  if (act.about) return 'A ARK Films fica na Casa ARK (Av. Anhanguera, 790, Ribeirão Preto), com ambientes da CASACOR 2025 como cenário. A equipe tem diretor e colorista com mais de 18 anos de cinema, técnico de som com mais de 20 anos e um profissional de captação e edição. Filmamos com Blackmagic, FX30 e A7 IV, com lentes cine e áudio profissional.';
+  if (act.summary && budget.length) return 'Itens no orçamento:\n' + budget.map(b => `• ${label(BY[b.id])} x${b.qty}`).join('\n');
   if (act.pdf && !budget.length) return 'Ainda não há itens no orçamento. Me diga o que o cliente quer.';
-  if (act.evento) return 'Para um evento, sugiro começar por um pacote:\n• Pacote 2 (R$ 560): teaser + corte para Reels\n• Pacote 3 (R$ 790): trailer + 20 fotos\n• Pacote 4 (R$ 1.120): cobertura do dia completo\nQual combina? Também posso montar com itens avulsos, como "diária externa" ou "3 reels".';
-  return 'Não identifiquei um item da tabela nessa mensagem. Experimente: "pacote 3", "diária externa", "3 reels", "edição de podcast", "aftermovie". Ou ative a IA acima para pedidos mais livres.';
+  if (act.evento) return `Para um evento, sugiro começar por um pacote:\n• Pacote 2: teaser + corte para Reels (${BRL0(price(BY.p2))})\n• Pacote 3: trailer + 20 fotos (${BRL0(price(BY.p3))})\n• Pacote 4: cobertura do dia completo (${BRL0(price(BY.p4))})\nQual combina?`;
+  return 'Não identifiquei um item da tabela. Tente: "pacote 3", "diária externa", "3 reels", "edição de podcast", "aftermovie".';
 }
 
-/* ---------- IA local ---------- */
-function finishLoadUI(){
-  if (llmState === 'ready'){
-    setPill('IA ativa', 'on'); setBar(null);
-    loader.outerHTML = '';
-    addMsg('sys', '✔ IA ativa. Agora pode descrever o pedido com suas palavras.');
-  } else {
-    setPill('Modo básico'); setBar(null);
-    const b = loader.querySelector('#ai-load-btn');
-    b.disabled = false; b.textContent = 'Tentar de novo';
-    loader.querySelector('.ai-prog').hidden = true;
-    loader.querySelector('h4').textContent = 'IA indisponível neste aparelho';
-    loader.querySelector('p').textContent = 'Seu aparelho não conseguiu carregar a IA. Você segue no modo básico.';
+/* Pedido de clipe + música: garante o pacote de Lançamento (a IA gratuita às vezes erra) */
+function fixClip(text, act){
+  const t = norm(text || '');
+  if (!/clipe|clip\b|videoclipe/.test(t) || !/(grav\w* (a |da )?(musica|faixa|cancao)|estudio|mixage|masteriz|musica e (o )?clipe|lancamento)/.test(t)) return false;
+  const adds = act.add || [];
+  const pack = adds.find(x => x.id === 'clip_full' || x.id === 'clip_ess');
+  const dup = x => /^a_(faixa|mix|master|mixmaster)$/.test(x.id) || (pack && /^clip_(start|pro|cine)$/.test(x.id));
+  if (pack){
+    if (!adds.some(dup)) return false;
+    act.add = adds.filter(x => !dup(x));
+    act.fixMsg = `Usei o ${BY[pack.id].name} (${BRL0(price(BY[pack.id]))}), que já inclui gravação no estúdio, mixagem, masterização e o clipe. Não somei a faixa separada para não cobrar duas vezes. Locação fora da Casa ARK ou banda, se precisar, ficam por conta do cliente; indicamos parceiros.`;
+    return true;
   }
+  const top = adds.some(x => x.id === 'clip_cine') || /cinema|top|premium|completo/.test(t);
+  act.add = adds.filter(x => !/^clip_|^a_(faixa|mix|master|mixmaster)$/.test(x.id));
+  const id = top ? 'clip_full' : 'clip_ess';
+  act.add.push({id, qty:1});
+  act.fixMsg = `Como o pedido inclui a música e o clipe, usei o ${BY[id].name} (${BRL0(price(BY[id]))}). Ele já tem gravação no estúdio, mixagem e masterização, com o master pronto para a distribuidora, e o ${top ? 'Clipe Cinema' : 'Clipe Pro'}. Locação fora da Casa ARK ou banda, se precisar, ficam por conta do cliente; indicamos parceiros.`;
+  return true;
 }
 
-async function loadAI(){
-  if (llmState === 'loading' || llmState === 'ready') return;
-  llmState = 'loading';
-  const model = loader.querySelector('#ai-model').value;
-  const btn = loader.querySelector('#ai-load-btn');
-  const wrap = loader.querySelector('.ai-prog');
-  btn.disabled = true; btn.textContent = 'Carregando…';
-  wrap.hidden = false;
-  loader.querySelector('h4').textContent = 'Carregando a IA';
-  loader.querySelector('p').textContent = 'Pode levar alguns minutos na primeira vez. Não feche a página.';
-  setPill('Carregando IA…', 'load');
-
-  const setProg = pct => {
-    wrap.querySelector('i').style.width = pct + '%';
-    setBar(pct);
-    $('ai-pill').textContent = `Carregando IA ${pct}%`;
-  };
-  try {
-    const { pipeline, env } = await import(TF);
-    env.allowLocalModels = false;
-    const files = {};
-    const prog = p => {
-      if (p.file && p.total){
-        files[p.file] = {l: p.loaded, t: p.total};
-        const L = Object.values(files);
-        const l = L.reduce((a, x) => a + x.l, 0), t = L.reduce((a, x) => a + x.t, 0);
-        setProg(Math.min(99, Math.round(l / t * 100)));
-      }
-    };
-    try {
-      llm = await pipeline('text-generation', model, {dtype:'q4', device: navigator.gpu ? 'webgpu' : 'wasm', progress_callback: prog});
-    } catch (e) {
-      llm = await pipeline('text-generation', model, {dtype:'q4', device:'wasm', progress_callback: prog});
-    }
-    setProg(100);
-    llmState = 'ready';
-  } catch (e) {
-    console.error(e);
-    llmState = 'error';
-  }
-  finishLoadUI();
+/* ---------------- Aplicar mudanças ---------------- */
+function apply(a){
+  const added = [], removed = [];
+  if (a.set_tier && TIERS[a.set_tier] && a.set_tier !== tier) setTier(a.set_tier, true);
+  if (a.clear) budget = [];
+  if (a.client && !$('orc-client').value.trim()) $('orc-client').value = String(a.client).slice(0, 80);
+  (a.remove || []).forEach(r => {
+    const idx = r === 'LAST' ? budget.length - 1 : budget.findIndex(b => b.id === r);
+    if (idx >= 0 && budget[idx]){ removed.push(label(BY[budget[idx].id])); budget.splice(idx, 1); }
+  });
+  (a.add || []).forEach(x => {
+    if (!x || !BY[x.id]) return;
+    const q = Math.min(BY[x.id].unit === '/km' ? 5000 : 99, Math.max(1, Math.round(+x.qty) || 1));
+    const ex = budget.find(b => b.id === x.id);
+    if (ex) ex.qty += q; else budget.push({id:x.id, qty:q});
+    added.push(label(BY[x.id]) + (q > 1 ? ` (x${q})` : ''));
+  });
+  return {added, removed};
 }
 
-const SYS = () => `Você é o assistente de orçamentos da ARK (filmagem, fotografia e edição). Responda em português do Brasil, de forma curta. Use APENAS os itens do catálogo abaixo, com estes preços. O pedido pode vir de áudio transcrito ou de foto (texto lido por OCR), então pode ter erros de digitação.
-CATÁLOGO (id | nome | preço):
-${CAT.map(c => `${c.id} | ${c.name} | ${c.price == null ? 'sob orçamento' : 'R$ ' + c.price}`).join('\n')}
-Ao final da resposta, escreva uma linha exatamente no formato:
-JSON:{"add":[{"id":"ID","qty":1}],"remove":[]}
-Para remover itens, use "remove":["ID"]. Se faltar informação, pergunte antes de adicionar.
-ORÇAMENTO ATUAL: ${budget.map(b => b.id + ' x' + b.qty).join(', ') || 'vazio'}`;
-
-async function llmReply(userText){
-  const msgs2 = [{role:'system', content: SYS()}, ...history.slice(-6), {role:'user', content: userText}];
-  const out = await llm(msgs2, {max_new_tokens: 320, do_sample: false, return_full_text: false});
-  const g = out[0].generated_text;
-  return String(Array.isArray(g) ? g[g.length - 1].content : g);
+function totals(){
+  let base = 0, pct = 0, pend = false;
+  budget.forEach(b => { const c = BY[b.id], p = price(c); if (c.pct) pct += c.pct * b.qty; else if (p == null) pend = true; else base += p * b.qty; });
+  const sub = base + base * pct / 100;
+  const d = Math.min(100, Math.max(0, parseFloat($('orc-disc').value) || 0));
+  const dv = sub * d / 100;
+  const tx = Math.min(50, Math.max(0, parseFloat($('orc-tax').value) || 0));
+  const tv = (sub - dv) * tx / 100;
+  return {base, sub, dv, d, tx, tv, total: sub - dv + tv, pend};
 }
+const lineVal = (c, qty, t) => c.pct ? t.base * c.pct * qty / 100 : price(c) * qty;
 
-function parseLLM(raw){
-  const i = raw.indexOf('JSON:');
-  if (i < 0) return {text: raw.trim(), act: null};
-  const text = raw.slice(0, i).trim();
-  const m = raw.slice(i).match(/\{[\s\S]*\}/);
-  if (!m) return {text, act: null};
-  try {
-    const j = JSON.parse(m[0]);
-    return {text, act: {
-      add: (j.add || []).filter(x => BY[x.id]).map(x => ({id:x.id, qty: +x.qty || 1})),
-      remove: (j.remove || []).filter(r => r === 'LAST' || BY[r]),
-      clear: false, pdf: false, summary: false, evento: false
-    }};
-  } catch (e) { return {text, act: null}; }
-}
-
-/* ---------- Chat ---------- */
+/* ---------------- Chat ---------------- */
+let busy = false;
 async function send(text, opts = {}){
   text = (text || '').trim();
-  if (!text) return;
+  if ((!text && !opts.media) || busy) return;
+  busy = true;
   addMsg('me', opts.display || text, {img: opts.img});
-  history.push({role:'user', content: text.slice(0, 1200)});
 
   const rule = ruleActions(text);
   let reply = null, act = null;
+  const quick = rule.clear && !rule.add.length;
 
-  if (llmState === 'ready' && !rule.clear && !rule.pdf){
-    const think = addMsg('bot', 'Pensando…');
+  if (!quick && (geminiKey || onlineOK !== false || opts.media)){
+    const think = addMsg('bot', opts.media ? (opts.media.kind === 'audio' ? 'Ouvindo o áudio…' : 'Lendo a foto…') : geminiKey ? 'Pensando…' : 'Pensando… (a IA gratuita pode levar até 1 minuto; com a chave Gemini em ⚙ fica mais rápido)');
     think.classList.add('typing');
+    setBar(35);
     try {
-      const p = parseLLM(await llmReply(text.slice(0, 1200)));
-      reply = p.text || null;
-      act = p.act;
-    } catch (e) { console.error(e); }
-    think.remove();
+      let raw;
+      if (geminiKey) raw = await askGemini(text, opts.media);
+      else raw = await askPollinations(text);
+      const j = parseJSON(raw);
+      if (j){
+        reply = typeof j.reply === 'string' ? j.reply.trim() : null;
+        act = {
+          add: Array.isArray(j.add) ? j.add.filter(x => x && BY[x.id]) : [],
+          remove: Array.isArray(j.remove) ? j.remove.filter(r => BY[r]) : [],
+          set_tier: TIERS[j.set_tier] ? j.set_tier : null,
+          clear: j.clear === true, pdf: j.pdf === true || rule.pdf, client: j.client || null
+        };
+      }
+    } catch(e){
+      console.warn('IA:', e);
+      if (e.key){ addMsg('sys', 'A chave do Gemini foi recusada. Confira em ⚙ ou remova para usar a IA online gratuita.'); }
+      else if (!geminiKey){ onlineOK = false; refreshPill(); addMsg('sys', 'A IA online não respondeu agora. Usei o modo básico.'); setTimeout(() => { onlineOK = null; refreshPill(); }, 60000); }
+      else addMsg('sys', 'O Gemini não respondeu agora. Usei o modo básico.');
+    }
+    think.remove(); setBar(null);
   }
   if (!act) act = rule;
+  if (fixClip(text, act)) reply = act.fixMsg;
+  if (reply) CAT.forEach(c => { reply = reply.split(' (' + c.id + ')').join('').split('"' + c.id + '"').join(c.name).replace(new RegExp('\\b' + c.id + '\\b', 'g'), c.name); });
 
   const ch = apply(act);
-  let msg = reply && reply.length ? reply : ruleText(act, ch);
+  let msg = reply || ruleText(act, ch);
   if (reply && (ch.added.length || ch.removed.length))
     msg += '\n\n✔ ' + [ch.added.length ? 'Adicionado: ' + ch.added.join(', ') : '', ch.removed.length ? 'Removido: ' + ch.removed.join(', ') : ''].filter(Boolean).join(' · ');
-  if (budget.length){
+  if (budget.length && (ch.added.length || ch.removed.length || act.set_tier || rule.summary)){
     const t = totals();
-    msg += `\n\nTotal atual: ${BRL(t.total)}${t.pend ? ' + itens sob orçamento' : ''}`;
+    msg += `\n\nTotal (${TIERS[tier].short.toLowerCase()}): ${BRL(t.total)}${t.pend ? ' + itens sob orçamento' : ''}`;
   }
-  if (act.pdf && budget.length) msg += '\n\nGerando o PDF…';
-
   addMsg('bot', msg);
-  history.push({role:'assistant', content: msg});
-  if (history.length > 12) history = history.slice(-12);
+  history.push({role:'user', content: (text || '[mídia enviada]').slice(0, 1500)});
+  history.push({role:'assistant', content: msg.slice(0, 1500)});
+  if (history.length > 14) history = history.slice(-14);
   render();
+  busy = false;
   if (act.pdf && budget.length) exportPDF();
 }
 
@@ -890,7 +1077,24 @@ $('ai-form').addEventListener('submit', e => {
   send(v);
 });
 
-/* ---------- Áudio ---------- */
+/* ---------------- Configuração da chave ---------------- */
+$('ai-gear').onclick = () => { $('ai-cfg').classList.toggle('open'); $('ai-key').value = geminiKey ? '••••••••' + geminiKey.slice(-4) : ''; };
+$('ai-key-save').onclick = () => {
+  const v = $('ai-key').value.trim();
+  if (!v || v.startsWith('••')) return;
+  geminiKey = v; store.set('ark_gemini_key', v);
+  $('ai-cfg').classList.remove('open'); refreshPill();
+  addMsg('sys', '✔ Gemini ativado neste aparelho. Agora fotos e áudios são lidos pela IA.');
+};
+$('ai-key-del').onclick = () => {
+  geminiKey = ''; store.set('ark_gemini_key', null); $('ai-key').value = '';
+  $('ai-cfg').classList.remove('open'); refreshPill();
+  addMsg('sys', 'Chave removida. Usando a IA online gratuita.');
+};
+
+/* ---------------- Áudio ---------------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recog = null, mediaRec = null, micStream = null, chunks = [], recording = false;
 function setRec(on){
   recording = on;
   const b = $('ai-mic');
@@ -898,23 +1102,18 @@ function setRec(on){
   b.textContent = on ? '■' : '🎙️';
   b.title = on ? 'Parar gravação' : 'Gravar áudio';
 }
-
 $('ai-mic').onclick = () => {
   if (recording){ stopMic(); return; }
-  if (SR) startSR(); else startRec();
+  if (geminiKey && window.MediaRecorder) startRec();   // Gemini ouve o áudio direto
+  else if (SR) startSR();                                // reconhecimento de voz do navegador
+  else if (window.MediaRecorder) addMsg('sys', 'Este navegador não transcreve voz sozinho. Use o Chrome/Safari ou ative o Gemini em ⚙.');
+  else addMsg('sys', 'Gravação de áudio indisponível neste navegador. Digite o pedido.');
 };
-
 function startSR(){
   recog = new SR();
-  recog.lang = 'pt-BR';
-  recog.interimResults = true;
-  recog.continuous = false;
+  recog.lang = 'pt-BR'; recog.interimResults = true; recog.continuous = true;
   const prefix = $('ai-in').value ? $('ai-in').value.trim() + ' ' : '';
-  recog.onresult = e => {
-    let t = '';
-    for (const r of e.results) t += r[0].transcript;
-    $('ai-in').value = prefix + t;
-  };
+  recog.onresult = e => { let t = ''; for (const r of e.results) t += r[0].transcript; $('ai-in').value = prefix + t; };
   recog.onend = () => {
     setRec(false);
     const t = $('ai-in').value.trim();
@@ -922,90 +1121,77 @@ function startSR(){
   };
   recog.onerror = e => {
     setRec(false);
-    if (e.error !== 'aborted') addMsg('sys', 'Não consegui ouvir (' + e.error + '). Tente de novo ou digite.');
+    if (e.error === 'not-allowed') addMsg('sys', 'Permita o uso do microfone para gravar áudio.');
+    else if (e.error !== 'aborted' && e.error !== 'no-speech') addMsg('sys', 'Não consegui ouvir (' + e.error + '). Tente de novo ou digite.');
   };
-  try { recog.start(); setRec(true); }
-  catch (e){ setRec(false); addMsg('sys', 'O microfone não está disponível agora.'); }
+  try { recog.start(); setRec(true); addMsg('sys', 'Ouvindo… toque em ■ para enviar.'); }
+  catch(e){ setRec(false); addMsg('sys', 'O microfone não está disponível agora.'); }
 }
-
 async function startRec(){
   try { micStream = await navigator.mediaDevices.getUserMedia({audio: true}); }
-  catch (e){ addMsg('sys', 'Permita o uso do microfone para gravar áudio.'); return; }
+  catch(e){ addMsg('sys', 'Permita o uso do microfone para gravar áudio.'); return; }
   chunks = [];
   mediaRec = new MediaRecorder(micStream);
   mediaRec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
   mediaRec.onstop = async () => {
     micStream.getTracks().forEach(t => t.stop());
     setRec(false);
-    await transcribe(new Blob(chunks, {type: mediaRec.mimeType || 'audio/webm'}));
+    const mime = (mediaRec.mimeType || 'audio/webm').split(';')[0];
+    const blob = new Blob(chunks, {type: mime});
+    if (blob.size < 2000){ addMsg('sys', 'Áudio muito curto. Tente de novo.'); return; }
+    const typed = $('ai-in').value.trim(); $('ai-in').value = '';
+    send(typed, {display: '🎤 Áudio enviado' + (typed ? ': ' + typed : ''), media: {kind:'audio', mime, b64: await toB64(blob)}});
   };
-  mediaRec.start();
-  setRec(true);
+  mediaRec.start(); setRec(true);
+  addMsg('sys', 'Gravando… toque em ■ para enviar.');
 }
-
 function stopMic(){
-  if (recog) recog.stop();
+  if (recog) try { recog.stop(); } catch(e){}
   if (mediaRec && mediaRec.state !== 'inactive') mediaRec.stop();
 }
-
-async function loadASR(){
-  if (asr) return asr;
-  const note = addMsg('sys', 'Baixando reconhecimento de voz (≈40 MB, só na primeira vez)…');
-  const { pipeline, env } = await import(TF);
-  env.allowLocalModels = false;
-  asr = await pipeline('automatic-speech-recognition', 'Xenova/whisper-tiny', {dtype: 'q8'});
-  note.remove();
-  return asr;
+function toB64(blob){
+  return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result).split(',')[1]); r.onerror = rej; r.readAsDataURL(blob); });
 }
 
-async function transcribe(blob){
-  const work = addMsg('bot', 'Ouvindo seu áudio…');
-  work.classList.add('typing');
-  try {
-    const model = await loadASR();
-    const ctx = new (window.AudioContext || window.webkitAudioContext)({sampleRate: 16000});
-    const buf = await ctx.decodeAudioData(await blob.arrayBuffer());
-    const pcm = buf.getChannelData(0);
-    ctx.close && ctx.close();
-    const out = await model(pcm, {language: 'portuguese', task: 'transcribe'});
-    work.remove();
-    const t = (out.text || '').trim();
-    if (!t){ addMsg('bot', 'Não entendi o áudio. Pode repetir ou digitar?'); return; }
-    send(t, {display: '🎤 ' + t});
-  } catch (e){
-    console.error(e);
-    work.remove();
-    addMsg('bot', 'Não consegui transcrever o áudio aqui. Digite o pedido, por favor.');
-  }
-}
-
-/* ---------- Foto (OCR para ler prints e bilhetes) ---------- */
-function loadScript(src){
-  return new Promise((res, rej) => {
-    const s = document.createElement('script');
-    s.src = src; s.onload = res; s.onerror = rej;
-    document.head.appendChild(s);
+/* ---------------- Foto ---------------- */
+function shrinkImage(file){
+  return new Promise(res => {
+    const img = new Image();
+    img.onload = () => {
+      const s = Math.min(1, 1600 / Math.max(img.width, img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      res(c.toDataURL('image/jpeg', 0.85).split(',')[1]);
+    };
+    img.onerror = () => res(null);
+    img.src = URL.createObjectURL(file);
   });
 }
+function loadScript(src){
+  return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+}
 async function ocr(file){
-  if (!window.Tesseract) await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js');
+  if (!window.Tesseract) await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js');
   const w = await Tesseract.createWorker('por');
   try { const {data} = await w.recognize(file); return data.text || ''; }
   finally { await w.terminate(); }
 }
-
 $('ai-photo').onclick = () => $('ai-file').click();
 $('ai-file').onchange = async e => {
   const f = e.target.files[0];
   e.target.value = '';
-  if (!f) return;
+  if (!f || busy) return;
   const typed = $('ai-in').value.trim();
   $('ai-in').value = '';
   const url = URL.createObjectURL(f);
+  if (geminiKey){
+    const b64 = await shrinkImage(f);
+    if (b64){ send(typed, {display: typed || '📷 Pedido na foto', img: url, media: {kind:'image', mime:'image/jpeg', b64}}); return; }
+  }
   const work = addMsg('bot', 'Lendo o texto da foto…');
   work.classList.add('typing');
   let text = '';
-  try { text = await ocr(f); } catch (err){ console.error(err); }
+  try { text = await ocr(f); } catch(err){ console.warn(err); }
   work.remove();
   if (!text.trim()){
     addMsg('me', typed || '📷 Foto enviada', {img: url});
@@ -1013,31 +1199,32 @@ $('ai-file').onchange = async e => {
     return;
   }
   const clean = text.replace(/\n{2,}/g, '\n').trim();
-  const combined = (typed ? typed + '\n' : '') + clean;
-  send(combined.slice(0, 1200), {display: typed || '📷 Pedido na foto', img: url});
+  send(((typed ? typed + '\n' : '') + 'Texto lido da foto:\n' + clean).slice(0, 1500), {display: typed || '📷 Pedido na foto', img: url});
 };
 
-/* ---------- Painel de orçamento ---------- */
+/* ---------------- Painel de orçamento ---------------- */
 function render(){
   const rows = $('orc-rows');
   rows.innerHTML = '';
-  if (!budget.length) rows.innerHTML = '<div class="orc-empty">Nenhum item ainda. Mande o pedido no chat, por áudio ou foto, ou escolha abaixo.</div>';
+  const T = totals();
+  if (!budget.length) rows.innerHTML = '<div class="orc-empty">Nenhum item ainda. Mande o pedido no chat (texto, áudio ou foto) ou escolha abaixo.</div>';
   budget.forEach((b, i) => {
-    const c = BY[b.id];
+    const c = BY[b.id], p = price(c);
     const r = document.createElement('div');
     r.className = 'orc-row';
     r.innerHTML = `<span class="nm"></span><button type="button" data-a="-" data-i="${i}" aria-label="Diminuir">−</button><span class="qt">${b.qty}</span><button type="button" data-a="+" data-i="${i}" aria-label="Aumentar">+</button><span class="pr"></span><button type="button" data-a="x" data-i="${i}" title="Remover" aria-label="Remover">×</button>`;
-    r.querySelector('.nm').textContent = c.name;
-    r.querySelector('.pr').textContent = c.price == null ? 'sob orç.' : BRL(c.price * b.qty);
+    r.querySelector('.nm').textContent = label(c);
+    r.querySelector('.pr').textContent = c.txt ? 'cliente paga' : c.pct ? BRL(lineVal(c, b.qty, T)) : p == null ? 'sob orç.' : BRL(p * b.qty);
     rows.appendChild(r);
   });
   const t = totals();
   $('orc-count').textContent = budget.length ? `${budget.length} ite${budget.length > 1 ? 'ns' : 'm'}` : '';
   $('orc-sub').textContent = BRL(t.sub);
   $('orc-desc').textContent = '− ' + BRL(t.dv);
+  $('orc-taxv').textContent = '+ ' + BRL(t.tv);
+  $('orc-taxrow').style.display = t.tx ? '' : 'none';
   $('orc-total').textContent = BRL(t.total) + (t.pend ? ' + sob orç.' : '');
 }
-
 $('orc-rows').addEventListener('click', e => {
   const btn = e.target.closest('button[data-a]');
   if (!btn) return;
@@ -1054,47 +1241,54 @@ $('orc-select').addEventListener('change', e => {
   render();
 });
 $('orc-disc').addEventListener('input', render);
+$('orc-tax').addEventListener('input', () => { store.set('ark_tax', $('orc-tax').value || null); render(); });
+$('orc-tax').value = store.get('ark_tax') || '';
 $('orc-clear').onclick = () => { budget = []; render(); addMsg('bot', 'Orçamento limpo.'); };
 
-/* ---------- PDF (mantém o layout) ---------- */
+/* ---------------- PDF ---------------- */
 function buildPDF(){
   const t = totals();
   const today = new Date();
   const validade = new Date(Date.now() + 7 * 864e5);
   const client = $('orc-client').value.trim();
   const rows = budget.map(b => {
-    const c = BY[b.id];
-    return `<tr><td>${esc(c.name)}</td><td style="text-align:center">${b.qty}</td><td style="text-align:right">${c.price == null ? 'Sob orçamento' : BRL(c.price * b.qty)}</td></tr>`;
+    const c = BY[b.id], p = price(c);
+    return `<tr><td>${esc(label(c))}</td><td style="text-align:center">${b.qty}</td><td style="text-align:right">${c.txt ? esc(c.txt) : c.pct ? '+' + c.pct + '%' : p == null ? 'Sob orçamento' : BRL(p) + (c.unit === '/mês' ? '/mês' : '')}</td><td style="text-align:right">${c.txt || (p == null && !c.pct) ? '—' : BRL(lineVal(c, b.qty, t))}</td></tr>`;
   }).join('');
   return `
   <div class="pq-head">
-    <div><div class="pq-brand">ARK</div><div class="pq-sub">Filmagem, fotografia e edição</div></div>
-    <div class="pq-meta"><b>Orçamento</b><br>Data: ${today.toLocaleDateString('pt-BR')}<br>Válido até: ${validade.toLocaleDateString('pt-BR')}</div>
+    <div><div class="pq-brand">ARK Films</div><div class="pq-sub">Filmagem, fotografia, som e pós-produção · Casa ARK</div></div>
+    <div class="pq-meta"><b>Orçamento</b><br>Data: ${today.toLocaleDateString('pt-BR')}<br>Válido até: ${validade.toLocaleDateString('pt-BR')}<br>Tabela: ${TIERS[tier].label}</div>
   </div>
   <div class="pq-title">Proposta de serviços</div>
   <div class="pq-client">Cliente: <b>${esc(client || '—')}</b></div>
   <table>
-    <thead><tr><th>Item</th><th style="text-align:center">Qtd.</th><th style="text-align:right">Valor</th></tr></thead>
+    <thead><tr><th>Item</th><th style="text-align:center">Qtd.</th><th style="text-align:right">Unitário</th><th style="text-align:right">Valor</th></tr></thead>
     <tbody>${rows}</tbody>
   </table>
   <div class="pq-tot">
     <div><span>Subtotal</span><span>${BRL(t.sub)}</span></div>
     ${t.d ? `<div><span>Desconto (${t.d}%)</span><span>− ${BRL(t.dv)}</span></div>` : ''}
+    ${t.tx ? `<div><span>Impostos / NF (${t.tx}%)</span><span>+ ${BRL(t.tv)}</span></div>` : ''}
     <div class="big"><span>Total</span><span>${BRL(t.total)}${t.pend ? ' + sob orçamento' : ''}</span></div>
   </div>
   <div class="pq-notes">
     <h4>Condições</h4>
     <ul>
       <li>Meia diária = até 4 horas de captação; diária completa = 8 horas + 1 hora de almoço.</li>
-      <li>Mídias brutas ficam na nuvem por 6 meses após o evento. Sugerimos salvar em nuvem própria.</li>
-      <li>Prazo de entrega dos materiais editados: até 7 dias úteis após o evento.</li>
-      <li>Itens marcados como "sob orçamento" são cotados à parte.</li>
-      <li>Valores referenciais, sujeitos a confirmação na contratação.</li>
+      <li>Mídias brutas ficam na nuvem por 6 meses. Recomendamos salvar em nuvem própria.</li>
+      <li>Prazo de entrega dos materiais editados: até 7 dias úteis após a gravação.</li>
+      ${tier === 'externo' ? '<li>Reserva da data com 50% de sinal e o restante na entrega.</li>' : '<li>Valores exclusivos para Residentes ARK (inquilinos e condôminos da Casa ARK).</li>'}
+      <li>Deslocamento incluso em Ribeirão Preto. Fora da cidade, o tempo de viagem é cobrado como hora técnica ou diária, e as despesas de viagem (combustível, pedágios, hospedagem e alimentação) ficam por conta do cliente.</li>
+      <li>Hora extra além da diária contratada é cobrada como hora técnica. 2 rodadas de ajuste inclusas por vídeo.</li>
+      <li>Locações fora da Casa ARK, banda, músicos, figurantes, figurino e maquiagem são contratados pelo cliente; a ARK indica parceiros.</li>
+      <li>Cancelamento com mais de 7 dias: o sinal vira crédito por 90 dias. Com menos de 7 dias, o sinal não é devolvido.</li>
+      <li>O preço cobre uso orgânico em redes sociais e site. Mídia paga (anúncios, TV, outdoor) exige licença adicional.</li>
+      <li>Itens "sob orçamento" são cotados à parte. Valores sujeitos a confirmação na contratação.</li>
     </ul>
   </div>
-  <div class="pq-foot">ARK · Orçamento personalizado</div>`;
+  <div class="pq-foot">ARK Films · Av. Anhanguera, 790 · Alto da Boa Vista · Ribeirão Preto/SP</div>`;
 }
-
 function exportPDF(){
   if (!budget.length){ addMsg('bot', 'Adicione pelo menos um item antes de gerar o PDF.'); return; }
   $('orc-print').innerHTML = buildPDF();
@@ -1106,9 +1300,11 @@ function exportPDF(){
 }
 $('orc-pdf').onclick = exportPDF;
 
-render();
-setPill('Modo básico');
+/* ---------------- Início ---------------- */
+setTier(tier, true);
+refreshPill();
+addMsg('bot', 'Olá! Sou o assistente de orçamentos da ARK. Me mande o pedido do cliente por texto, 🎙️ áudio ou 📷 foto (print de conversa, bilhete ou anotação) que eu monto o orçamento.\n\nDiga se o cliente é Residente ARK (inquilino ou condômino da casa) ou Convidado ARK, e onde será a gravação. A tabela também pode ser trocada no topo da página.');
+})();
 </script>
-
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a509fd46ec1df247',t:'MTc5MzAyMzI0OA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
