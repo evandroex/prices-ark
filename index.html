@@ -101,104 +101,7 @@ footer{font-size:.7rem}
 .section{margin-bottom:36px}
 .pkg{padding:18px}
 
-/* ===== Assistente ARK ===== */
-.ai{margin:0 0 44px}
-.ai-card{border:1px solid #e6e6e6;border-radius:18px;background:#fff;box-shadow:0 12px 40px rgba(0,0,0,.06);overflow:hidden}
-.ai-top{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#111;color:#fff}
-.ai-av{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#e6c977,#c9a84c);display:grid;place-items:center;color:#111;font-weight:700;font-size:.9rem;flex-shrink:0}
-.ai-top b{display:block;font-size:.86rem;font-weight:600;line-height:1.3}
-.ai-top small{display:block;font-size:.66rem;color:#bdbdbd;line-height:1.3}
-.ai-pill{margin-left:auto;font-size:.62rem;font-weight:500;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#eee;white-space:nowrap}
-.ai-pill.on{background:#c9a84c;color:#111;font-weight:600}
-.ai-pill.load{background:#3a3a3a;color:#f3e3b0}
-.ai-bar{height:3px;background:#222}
-.ai-bar i{display:block;height:100%;width:0;background:#c9a84c;transition:width .3s}
-
-.ai-body{display:grid;grid-template-columns:1.15fr 1fr;min-height:500px}
-.ai-chat{display:flex;flex-direction:column;border-right:1px solid #ececec;min-width:0}
-.ai-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;max-height:460px;min-height:300px}
-.ai-m{max-width:86%;padding:9px 12px;border-radius:14px;font-size:.76rem;line-height:1.5;white-space:pre-wrap;word-wrap:break-word;animation:aiIn .25s ease}
-.ai-m.bot{background:#f5f5f3;align-self:flex-start;border-bottom-left-radius:4px}
-.ai-m.me{background:#111;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
-.ai-m.sys{background:none;color:#8a8a8a;font-size:.68rem;align-self:center;text-align:center;padding:2px 6px}
-.ai-m.typing{color:#8a8a8a;font-style:italic}
-.ai-m img{display:block;max-width:170px;max-height:200px;border-radius:10px;margin-bottom:6px;object-fit:cover}
-@keyframes aiIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-.ai-load{white-space:normal;align-self:stretch;max-width:100%;background:#fffdf6;border:1px solid #eedfb2;border-radius:14px;padding:14px}
-.ai-load h4{font-size:.82rem;font-weight:600;margin-bottom:3px;color:#111}
-.ai-load p{font-size:.7rem;color:#666;margin-bottom:10px;line-height:1.5}
-.ai-load .row{display:flex;gap:8px;flex-wrap:wrap}
-.ai-sel{border:1px solid #ddd;border-radius:10px;padding:8px 10px;font:inherit;font-size:.72rem;background:#fff;color:#111;flex:1;min-width:150px;height:38px}
-.ai-btn{background:#111;color:#fff;border:none;border-radius:10px;padding:0 16px;height:38px;font:600 .74rem 'Poppins',system-ui,sans-serif;cursor:pointer}
-.ai-btn:disabled{opacity:.5;cursor:default}
-.ai-prog{height:5px;background:#eee;border-radius:99px;overflow:hidden;margin-top:10px}
-.ai-prog i{display:block;height:100%;width:0;background:#c9a84c;transition:width .2s}
-.ai-load .skip{font-size:.68rem;color:#888;margin-top:8px}
-
-.ai-chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 10px}
-.ai-chip{background:#fff;border:1px solid #e0e0e0;border-radius:999px;padding:5px 11px;font:500 .66rem 'Poppins',system-ui,sans-serif;cursor:pointer;color:#333}
-.ai-chip:hover{border-color:#c9a84c}
-
-.ai-comp{display:flex;gap:6px;align-items:center;padding:10px 12px;border-top:1px solid #ececec}
-.ai-ic{width:38px;height:38px;border-radius:11px;border:1px solid #e0e0e0;background:#fff;cursor:pointer;display:grid;place-items:center;flex-shrink:0;font-size:.95rem;padding:0}
-.ai-ic.rec{background:#c0392b;border-color:#c0392b;color:#fff;animation:pulse 1.1s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(192,57,43,.45)}70%{box-shadow:0 0 0 9px rgba(192,57,43,0)}100%{box-shadow:0 0 0 0 rgba(192,57,43,0)}}
-.ai-comp input[type=text],.ai-comp input:not([type]){flex:1;min-width:0;border:1px solid #ddd;border-radius:11px;padding:0 12px;font:inherit;font-size:.76rem;outline:none;height:38px}
-.ai-comp input:focus{border-color:#111}
-.ai-send{background:#111;color:#fff;border-color:#111}
-
-.ai-quote{padding:16px 16px 18px;background:#fafaf8;display:flex;flex-direction:column;min-width:0}
-.ai-quote-title{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
-.ai-quote-title b{font-size:.9rem;font-weight:600;color:#111}
-.ai-quote-title span{font-size:.68rem;color:#888}
-.orc-fields{display:grid;grid-template-columns:1fr 84px;gap:6px;margin-bottom:6px}
-.orc-fields input,.orc-add select{border:1px solid #ddd;border-radius:9px;padding:0 9px;height:34px;font:inherit;font-size:.72rem;width:100%;background:#fff;min-width:0}
-.orc-rows{flex:1}
-.orc-row{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid #ebebeb;font-size:.72rem}
-.orc-row .nm{flex:1;color:#333;min-width:0;line-height:1.35}
-.orc-row .pr{font-weight:600;color:#111;white-space:nowrap;min-width:64px;text-align:right}
-.orc-row .qt{min-width:14px;text-align:center}
-.orc-row button{background:#fff;border:1px solid #ddd;border-radius:7px;width:24px;height:24px;cursor:pointer;line-height:1;font-size:.8rem;padding:0;flex-shrink:0}
-.orc-empty{color:#999;font-size:.72rem;padding:8px 0;line-height:1.5}
-.orc-add{margin-top:8px}
-.orc-tot{display:flex;justify-content:space-between;font-size:.74rem;padding:2px 0;color:#444}
-.orc-tot.big{font-size:.95rem;font-weight:700;color:#111;border-top:1px solid #111;margin-top:4px;padding-top:6px}
-.orc-actions{display:flex;gap:8px;margin-top:12px}
-.orc-actions button{flex:1;height:40px;border-radius:11px;font:600 .74rem 'Poppins',system-ui,sans-serif;cursor:pointer}
-.orc-pdf{background:#c9a84c;color:#111;border:none}
-.orc-clear{background:#fff;color:#666;border:1px solid #ddd}
-
-/* Área usada somente para o PDF (aparece só na impressão) */
-#orc-print{display:none;font-family:'Poppins',system-ui,sans-serif;color:#1a1a1a}
-#orc-print .pq-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #111;padding-bottom:14px;margin-bottom:22px}
-#orc-print .pq-brand{font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:#111}
-#orc-print .pq-sub{color:#666;font-size:.78rem}
-#orc-print .pq-meta{text-align:right;font-size:.78rem;color:#444;line-height:1.6}
-#orc-print .pq-title{font-size:1.05rem;font-weight:600;margin-bottom:4px;color:#111}
-#orc-print .pq-client{font-size:.82rem;color:#444;margin-bottom:18px}
-#orc-print table{width:100%;border-collapse:collapse;font-size:.8rem}
-#orc-print th{text-align:left;font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:#777;border-bottom:2px solid #111;padding:8px 6px}
-#orc-print td{padding:9px 6px;border-bottom:1px solid #eee;color:#222}
-#orc-print .pq-tot{margin-left:auto;width:290px;margin-top:14px;font-size:.84rem}
-#orc-print .pq-tot div{display:flex;justify-content:space-between;padding:4px 0;color:#444}
-#orc-print .pq-tot .big{border-top:2px solid #111;margin-top:6px;padding-top:8px;font-size:1.02rem;font-weight:700;color:#111}
-#orc-print .pq-notes{margin-top:30px;border-top:1px solid #eee;padding-top:14px;font-size:.72rem;color:#555}
-#orc-print .pq-notes h4{font-size:.8rem;color:#111;margin-bottom:6px;font-weight:600}
-#orc-print .pq-notes li{margin:3px 0 3px 16px}
-#orc-print .pq-foot{margin-top:26px;text-align:center;color:#aaa;font-size:.68rem}
-@media print{
-  body > *:not(#orc-print){display:none !important}
-  #orc-print{display:block !important}
-  @page{margin:14mm}
-}
-
 /* ===== Responsivo ===== */
-@media(max-width:860px){
-  .ai-body{grid-template-columns:1fr}
-  .ai-chat{border-right:none;border-bottom:1px solid #ececec}
-  .ai-msgs{max-height:58vh;min-height:280px}
-}
 @media(max-width:599px){
   html{font-size:13px}
   body{padding:22px 12px 48px}
@@ -211,41 +114,6 @@ footer{font-size:.7rem}
   .st-name,.st-detail,.st-price{display:block;width:100%;padding-right:0}
   .st-price{text-align:left;padding-top:4px;padding-bottom:14px}
   .st-name{padding-top:14px}
-  .ai{margin-bottom:32px}
-  .ai-top{padding:12px 14px}
-  .ai-msgs{padding:12px;min-height:260px;max-height:52vh}
-  .ai-m{max-width:92%}
-  .ai-chips{padding:0 12px 8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
-  .ai-chips::-webkit-scrollbar{display:none}
-  .ai-chip{white-space:nowrap}
-  .ai-comp{padding:8px 10px;gap:5px}
-  .ai-ic{width:40px;height:40px}
-  .ai-quote{padding:14px 14px 16px}
-  .orc-fields{grid-template-columns:1fr 74px}
-  .orc-actions button{height:44px}
-  .ai-load .row{flex-direction:column}
-  .ai-sel,.ai-btn{width:100%}
-  .ai-btn{height:42px}
-}
-
-/* ===== Chat em largura total, orçamento abaixo ===== */
-.ai{margin:0 0 40px}
-.ai-body{grid-template-columns:1fr !important}
-.ai-chat{border-right:0 !important;border-bottom:1px solid #ececec}
-.ai-msgs{max-height:none !important;min-height:340px !important}
-.ai-quote{padding:20px 22px 22px}
-.ai-quote-title b{font-size:1rem}
-.orc-fields{grid-template-columns:1fr 110px}
-.orc-rows{max-width:720px}
-.ai-quote > div[style]{width:100%;max-width:420px;align-self:flex-end}
-.orc-tot{width:100%}
-.orc-actions{width:100%;max-width:420px;align-self:flex-end}
-.orc-actions button{white-space:nowrap}
-.orc-add{width:100%}
-@media(max-width:599px){
-  .ai-msgs{min-height:260px !important;max-height:52vh !important}
-  .ai-quote{padding:14px}
-  .orc-fields{grid-template-columns:1fr 74px}
 }
 
 /* ===== Seletor de tabela (assinante x externo) ===== */
@@ -261,16 +129,6 @@ footer{font-size:.7rem}
 .tier-badge{display:inline-block;font-size:.6rem;font-weight:600;border-radius:4px;padding:2px 7px;background:#111;color:#fff;margin-left:6px;vertical-align:middle}
 .tier-badge.as{background:#c9a84c;color:#111}
 
-/* ===== Configuração da IA ===== */
-.ai-gear{background:rgba(255,255,255,.12);border:none;color:#eee;width:30px;height:30px;border-radius:9px;cursor:pointer;font-size:.9rem;flex-shrink:0}
-.ai-gear:hover{background:rgba(255,255,255,.22)}
-.ai-cfg{display:none;padding:14px 16px;background:#fffdf6;border-bottom:1px solid #eedfb2;font-size:.72rem;color:#555;line-height:1.55}
-.ai-cfg.open{display:block}
-.ai-cfg b{color:#111}
-.ai-cfg .row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-.ai-cfg input{flex:1;min-width:180px;border:1px solid #ddd;border-radius:10px;padding:0 10px;height:36px;font:inherit;font-size:.72rem}
-.ai-cfg a{color:#a8893a}
-.ai-m b{font-weight:600}
 @media(max-width:599px){
   .tier-bar{margin:-22px -12px 18px;padding:8px 12px}
   .tier-seg button{padding:6px 10px;font-size:.68rem}
@@ -288,8 +146,15 @@ footer{font-size:.7rem}
 @media(min-width:700px){.plano{grid-template-columns:1fr 1.1fr;align-items:start}}
 .pkg-price small{font-size:.6em;font-weight:500;color:#888;margin-left:2px}
 .pkg-desc b{color:#111;font-weight:600}
-.orc-fields{grid-template-columns:1fr 90px 110px !important}
-@media(max-width:599px){.orc-fields{grid-template-columns:1fr 1fr !important}.orc-fields #orc-client{grid-column:1/-1}}
+.pod-sub{font-size:.9rem;font-weight:600;color:#111;margin:30px 0 6px}
+.pp{width:100%;border-collapse:collapse;margin-top:10px}
+.pp th{text-align:center;font-size:.64rem;text-transform:uppercase;letter-spacing:.05em;color:#777;font-weight:600;padding:8px 6px;border-bottom:2px solid #111}
+.pp td{text-align:center;padding:12px 6px;border-bottom:1px solid #f0f0f0;color:#222;font-size:.74rem;vertical-align:top}
+.pp th:first-child,.pp td:first-child{text-align:left}
+.pp td:first-child{font-weight:600;color:#111}
+.pp td b{display:block;font-size:.92rem;font-weight:700;color:#111}
+.pp td small{display:block;color:#888;font-size:.64rem;margin-top:1px}
+@media(max-width:599px){.pp td,.pp th{padding:10px 3px}.pp td b{font-size:.8rem}}
 </style>
 </head>
 <body>
@@ -302,63 +167,6 @@ footer{font-size:.7rem}
   <span class="tier-help" id="tier-help"></span>
 </div>
 
-<section class="ai" id="assistente" aria-label="Assistente de orçamento">
-  <div class="ai-card">
-    <div class="ai-top">
-      <div class="ai-av">A</div>
-      <div><b>Assistente ARK</b><small>Orçamento por texto, áudio ou foto · sem instalar nada</small></div>
-      <span class="ai-pill" id="ai-pill">Conectando…</span>
-      <button type="button" class="ai-gear" id="ai-gear" title="Configurar IA" aria-label="Configurar IA">⚙</button>
-    </div>
-    <div class="ai-bar"><i id="ai-bar"></i></div>
-    <div class="ai-cfg" id="ai-cfg">
-      A IA já funciona sem configuração (<b>IA online gratuita</b>, só texto).<br>
-      Para ler <b>fotos</b> e <b>áudios</b> com mais precisão, cole uma chave gratuita do Google Gemini
-      (<a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">pegar chave grátis</a>).
-      A chave fica salva só neste aparelho e não vai para o site.
-      <div class="row">
-        <input id="ai-key" type="password" placeholder="Cole a chave do Gemini (opcional)" autocomplete="off" aria-label="Chave Gemini">
-        <button class="ai-btn" type="button" id="ai-key-save">Salvar</button>
-        <button class="ai-btn" type="button" id="ai-key-del" style="background:#fff;color:#666;border:1px solid #ddd">Remover</button>
-      </div>
-    </div>
-    <div class="ai-body">
-      <div class="ai-chat">
-        <div class="ai-msgs" id="ai-msgs" aria-live="polite"></div>
-        <div class="ai-chips" id="ai-chips"></div>
-        <form class="ai-comp" id="ai-form" autocomplete="off">
-          <button type="button" class="ai-ic" id="ai-photo" title="Enviar foto" aria-label="Enviar foto">📷</button>
-          <button type="button" class="ai-ic" id="ai-mic" title="Gravar áudio" aria-label="Gravar áudio">🎙️</button>
-          <input type="text" id="ai-in" placeholder="Descreva o pedido do cliente…" aria-label="Mensagem">
-          <button type="submit" class="ai-ic ai-send" title="Enviar" aria-label="Enviar">➤</button>
-          <input type="file" id="ai-file" accept="image/*" hidden>
-        </form>
-      </div>
-
-      <div class="ai-quote">
-        <div class="ai-quote-title"><b>Orçamento <span id="orc-tier" class="tier-badge"></span></b><span id="orc-count"></span></div>
-        <div class="orc-fields">
-          <input id="orc-client" placeholder="Nome do cliente" aria-label="Nome do cliente">
-          <input id="orc-disc" type="number" min="0" max="100" placeholder="Desc. %" aria-label="Desconto em %">
-          <input id="orc-tax" type="number" min="0" max="50" step="0.1" placeholder="Imposto/NF %" aria-label="Imposto ou nota fiscal em %">
-        </div>
-        <div class="orc-rows" id="orc-rows"></div>
-        <div class="orc-add"><select id="orc-select" aria-label="Adicionar item"></select></div>
-        <div style="margin-top:10px">
-          <div class="orc-tot"><span>Subtotal</span><span id="orc-sub">R$ 0,00</span></div>
-          <div class="orc-tot"><span>Desconto</span><span id="orc-desc">R$ 0,00</span></div>
-          <div class="orc-tot" id="orc-taxrow" style="display:none"><span>Impostos / nota fiscal</span><span id="orc-taxv">R$ 0,00</span></div>
-          <div class="orc-tot big"><span>Total</span><span id="orc-total">R$ 0,00</span></div>
-        </div>
-        <div class="orc-actions">
-          <button class="orc-clear" id="orc-clear" type="button">Limpar</button>
-          <button class="orc-pdf" id="orc-pdf" type="button">Baixar PDF</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<div id="orc-print"></div>
 
 <header>
 <h1>Tabela de Preços</h1>
@@ -394,6 +202,16 @@ footer{font-size:.7rem}
 <div class="section">
 <h2>Plano Anual ARK — Conteúdo Todo Mês</h2>
 <div id="sec-plano"></div>
+</div>
+
+<div class="section">
+<h2>Podcast — Pacotes Avulsos e Planos Recorrentes</h2>
+<p class="st-detail" style="margin-bottom:16px">Gravação de podcast na Casa ARK, com cortes prontos para as redes sociais.</p>
+<div class="packages packages-3" id="sec-pod"></div>
+<h3 class="pod-sub">Planos recorrentes</h3>
+<p class="st-detail" style="margin-bottom:4px">Quanto maior o prazo do contrato, maior o desconto: <b>10% (3 meses), 15% (6 meses) e 20% (12 meses)</b>. Cada plano tem uma cota fixa por mês.</p>
+<table class="pp" id="sec-podplano"></table>
+<p class="pkg-note" style="margin-top:12px"><b>Bônus para quem fecha plano mensal:</b> fotografia profissional durante todas as gravações, inclusa na cota.</p>
 </div>
 
 <div class="section">
@@ -499,7 +317,7 @@ ARK Films · Casa ARK · Av. Anhanguera, 790 · Alto da Boa Vista · Ribeirão P
 <script>
 /* =====================================================================
    CATÁLOGO ÚNICO — edite os preços SOMENTE aqui.
-   m = preço Residente ARK (≈30% abaixo do convidado; diárias na casa 50%) · e = preço Convidado ARK · null = sob orçamento
+   m = preço Residente ARK · e = preço Convidado ARK · null = sob orçamento
    ===================================================================== */
 const CAT = [
   // ---- Pacotes de evento
@@ -599,6 +417,17 @@ const CAT = [
    desc:'O lançamento inteiro, da gravação ao clipe de cinema. O artista sai com tudo pronto: é só subir na distribuidora.',
    feats:['Tudo do Clipe Cinema','Gravação da faixa no estúdio (até 12h)','Mixagem e masterização com técnico de som de mais de 20 anos','Master WAV pronto para a distribuidora','Spotify Canvas (vídeo vertical em loop de 8s)','Sessão de fotos para capa e divulgação (10 fotos)','Vídeo no padrão do YouTube'],
    note:'Economia em relação a contratar música e clipe separados.'},
+
+  // ---- Podcast: pacotes avulsos (mesmo valor nas duas tabelas)
+  {id:'pod1', sec:'pod', num:'Pacote de Podcast 1 — Basic', name:'1 episódio + 5 cortes', tag:'1 hora de gravação', m:600, e:600,
+   desc:'Um episódio gravado e cortes prontos para as redes.',
+   feats:['1 hora de gravação, com 1 episódio único','5 cortes para reels virais, com legenda, música e corte dinâmico','Local: Casa ARK, sala The Boss (cenário fixo)']},
+  {id:'pod2', sec:'pod', num:'Pacote de Podcast 2', name:'Até 4 episódios + 10 cortes', tag:'1 hora de gravação', m:860, e:860,
+   desc:'Uma hora de gravação que rende vários episódios.',
+   feats:['1 hora de gravação, que pode render até 4 episódios de 15 min ou 2 de 30 min (o que couber na hora)','10 cortes no total, divididos entre os episódios','Local: Casa ARK, sala The Boss (cenário fixo)']},
+  {id:'pod3', sec:'pod', num:'Pacote de Podcast 3', cls:'highlight', name:'Até 4 episódios + 12 cortes', tag:'1 hora de gravação', m:980, e:980,
+   desc:'Mais cortes, entrega rápida e horários definidos.',
+   feats:['1 hora de gravação, com a mesma divisão de episódios do Pacote 2 (até 4 de 15 min ou 2 de 30 min)','12 cortes no total, divididos entre os episódios','Material íntegro entregue em até 30 min após a gravação','Cortes entregues em até 3 dias úteis (não contam fins de semana e feriados)','Local: Casa ARK, nos livings em comum, respeitando as regras da casa','Horários: seg a sex, das 18h30 às 21h; sábado, das 9h30 às 16h']},
 
   // ---- Estúdio de áudio
   {id:'a_faixa', sec:'audio', name:'Faixa Pronta para Distribuidora', tag:'Pacote', m:1690, e:2390,
@@ -711,6 +540,14 @@ function renderTables(){
     </div>`;
   $('sec-pkg').innerHTML = CAT.filter(c => c.sec === 'pkg').map(card).join('');
   $('sec-clip').innerHTML = CAT.filter(c => c.sec === 'clip').map(card).join('');
+  $('sec-pod').innerHTML = CAT.filter(c => c.sec === 'pod').map(card).join('');
+  const PLANOS = [
+    ['Pacote 1 · Basic',  [[540, 1620], [510, 3060], [480, 5760]]],
+    ['Pacote 2',          [[774, 2322], [731, 4386], [688, 8256]]],
+    ['Pacote 3',          [[882, 2646], [833, 4998], [784, 9408]]]
+  ];
+  $('sec-podplano').innerHTML = '<thead><tr><th>Pacote</th><th>3 meses<br>10% off</th><th>6 meses<br>15% off</th><th>12 meses<br>20% off</th></tr></thead><tbody>' +
+    PLANOS.map(([n, v]) => '<tr><td>' + n + '</td>' + v.map(([mes, tot]) => '<td><b>' + BRL0(mes) + '/mês</b><small>total ' + BRL0(tot) + '</small></td>').join('') + '</tr>').join('') + '</tbody>';
   const base = price(BY.h_1);
   $('sec-horas').innerHTML = CAT.filter(c => c.sec === 'horas').map(c => {
     const p = price(c), ph = p / c.hours, off = Math.round((1 - ph / base) * 100);
@@ -756,554 +593,12 @@ function setTier(t, silent){
   tier = t; store.set('ark_tier', t);
   document.querySelectorAll('#tier-seg button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
   $('tier-help').textContent = TIERS[t].help;
-  const bd = $('orc-tier'); bd.textContent = TIERS[t].short; bd.className = 'tier-badge' + (t === 'assinante' ? ' as' : '');
-  renderTables(); fillSelect(); render();
-  if (!silent) addMsg('sys', `Tabela alterada para ${TIERS[t].label}.`);
+  renderTables();
 }
 $('tier-seg').addEventListener('click', e => { const b = e.target.closest('button[data-t]'); if (b && b.dataset.t !== tier) setTier(b.dataset.t); });
 
-/* ---------------- Estado ---------------- */
-let budget = [];   // [{id, qty}]
-let history = [];  // [{role:'user'|'assistant', content}]
-const msgs = $('ai-msgs');
 
-function fillSelect(){
-  const s = $('orc-select');
-  s.innerHTML = '<option value="">+ Adicionar item manualmente…</option>' + CAT.map(c => {
-    const p = price(c);
-    return `<option value="${c.id}">${esc(label(c))} — ${c.txt ? c.txt.toLowerCase() : c.pct ? pctTxt(c) : p == null ? 'sob orçamento' : BRL0(p) + (c.unit || '')}</option>`;
-  }).join('');
-  s.value = '';
-}
-
-['Evento de 4h + 3 reels', 'Clipe + gravar a música', 'Podcast com 4 cortes', 'Plano anual', 'Live de 4h', 'Evento em São Paulo'].forEach(t => {
-  const b = document.createElement('button');
-  b.type = 'button'; b.className = 'ai-chip'; b.textContent = t;
-  b.onclick = () => send(t);
-  $('ai-chips').appendChild(b);
-});
-
-function addMsg(who, text, opts = {}){
-  const d = document.createElement('div');
-  d.className = 'ai-m ' + (who === 'me' ? 'me' : who === 'sys' ? 'sys' : 'bot');
-  if (opts.img){ const im = document.createElement('img'); im.src = opts.img; im.alt = 'Foto enviada'; d.appendChild(im); }
-  if (text){ const s = document.createElement('span'); s.textContent = text; d.appendChild(s); }
-  msgs.appendChild(d);
-  msgs.scrollTop = msgs.scrollHeight;
-  return d;
-}
-function setPill(text, cls = ''){ const p = $('ai-pill'); p.textContent = text; p.className = 'ai-pill ' + cls; }
-function setBar(pct){ $('ai-bar').style.width = pct == null ? '0' : pct + '%'; }
-
-/* ---------------- Motor de IA (100% web) ----------------
-   1) Gemini (opcional, chave gratuita colada pelo usuário): texto, foto e áudio
-   2) IA online gratuita (Pollinations, sem chave): texto
-   3) Modo básico por regras: funciona sempre, até sem internet         */
-let geminiKey = store.get('ark_gemini_key') || '';
-const GEMINI_MODELS = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.0-flash'];
-let onlineOK = null;
-
-function engineName(){ return geminiKey ? 'Gemini' : onlineOK === false ? 'Modo básico' : 'IA online'; }
-function refreshPill(){
-  if (geminiKey) setPill('IA ativa · Gemini', 'on');
-  else if (onlineOK === false) setPill('Modo básico');
-  else setPill('IA ativa', 'on');
-}
-
-const SYS = () => `Você é o assistente de orçamentos da ARK Films (produtora audiovisual da Casa ARK, Av. Anhanguera 790, Alto da Boa Vista, Ribeirão Preto/SP). A casa foi mostra da CASACOR Ribeirão Preto 2025 e os ambientes decorados viraram cenários de gravação.
-Equipe: diretor sênior e diretor de arte de cinema, colorista com mais de 18 anos de experiência; técnico de som com mais de 20 anos; um profissional intermediário de captação, edição e roteiro.
-Equipamentos: 2 câmeras Blackmagic, Sony FX30, Sony A7 IV, rig V-mount, lentes cine Rokinon T1.2, boom com Sennheiser MKE 600, gravadores Tascam, lapelas DJI. Finalização em DaVinci Resolve e Avid Media Composer.
-São DUAS perguntas independentes. (1) QUEM é o cliente define a tabela: "assinante" (inquilino das salas da Casa ARK ou condômino que paga para frequentar a casa) ou "externo" (qualquer outro cliente). Na conversa, chame "assinante" de Residente ARK e "externo" de Convidado ARK; nunca use as palavras assinante, externo ou cliente de fora com o usuário. Tabela atual: ${tier}. (2) ONDE é a gravação define a logística: na Casa ARK (cenários da casa, sem deslocamento), no local do cliente em Ribeirão Preto (deslocamento incluso) ou fora de Ribeirão Preto. Fora da cidade, o tempo de viagem conta como trabalho: estime as horas de estrada (ida + volta) a partir de Ribeirão Preto e diga a estimativa. Até 4h no total = log_hora com qty = horas (arredonde para cima). Acima de 4h = log_diaria com qty = dias de estrada. Sempre adicione log_desp (despesas de viagem por conta do cliente) quando houver viagem. Se o local não estiver claro, pergunte a cidade.
-BANCO DE HORAS (h_*) é para quem quer produção recorrente de conteúdo (reels, cortes, podcast, fotos): sugira o pacote que cobre a demanda, usando a referência de consumo (1 reels ou corte ≈ 1h; reels dinâmico ≈ 2h; podcast com gravação + edição ≈ 4h; 10 fotos ≈ 2h). Se a demanda for mensal e contínua (ex.: vários reels todo mês + podcast), sugira o PLANO ANUAL (id plano, preço por mês, adicione qty 12 = contrato de 12 meses).
-O pedido pode vir de áudio transcrito ou de foto e pode ter erros. Use SOMENTE itens do catálogo, com os preços da tabela atual. Nunca invente preços. Nunca mostre ids (como p3 ou log_km) para o usuário; use os nomes dos itens. Quando o pedido já der para montar, ADICIONE os itens e só depois pergunte o que faltar. Itens "sob orçamento" podem ser adicionados, mas avise que são cotados à parte. Se faltar informação essencial (duração, quantidade de vídeos), pergunte antes de adicionar. Se o cliente for assinante/inquilino/condômino, use set_tier "assinante"; se for de fora, "externo".
-CLIPE MUSICAL: para artistas, sugira do Clipe Start (iniciante) ao Clipe Cinema. Se o artista quer clipe E música (gravar/mixar/masterizar), use SEMPRE um pacote de Lançamento: clip_full para clipe cinema/top, clip_ess para os demais. Nunca some clipe + a_faixa/a_mix/a_master separados, porque o Lançamento já inclui gravação, mixagem e masterização e sai mais barato. Os pacotes Clipe Start/Pro/Cinema NÃO incluem a música. Locações fora da Casa ARK, banda, músicos, figurino e maquiagem são contratados pelo cliente (a ARK só indica parceiros): nunca cobre por eles. Só a música = a_faixa. TRANSMISSÃO ao vivo = live_4/live_8. Gravar na casa com equipe própria = loc_*. Itens com % (urgência, licença para mídia paga) somam porcentagem sobre o total: adicione só se pedirem urgência ou anúncio pago.\nCATÁLOGO (id | item | assinante | externo) — valores por unidade; itens com /hora, /mês etc. multiplicam pela qty:
-${CAT.map(c => `${c.id} | ${label(c)}${c.hours ? ' [' + c.hours + 'h]' : ''}${c.feats ? ': ' + c.feats.join('; ') : ''} | ${c.txt ? c.txt : c.pct ? '+' + c.pct + '%' : c.m == null ? 'sob orçamento' : 'R$ ' + c.m} | ${c.txt ? c.txt : c.pct ? '+' + c.pct + '%' : c.e == null ? 'sob orçamento' : 'R$ ' + c.e}${c.from ? ' (a partir de)' : ''}`).join('\n')}
-ORÇAMENTO ATUAL: ${budget.map(b => b.id + ' x' + b.qty).join(', ') || 'vazio'}
-Responda SEMPRE e SOMENTE com um JSON válido, neste formato:
-{"reply":"resposta em português do Brasil, sem markdown, em 2 a 5 frases: diga o que foi incluído e por quê, cite os valores da tabela atual e, se fizer sentido, sugira um item complementar ou faça a pergunta que falta","add":[{"id":"ID","qty":1}],"remove":["ID"],"set_tier":null,"clear":false,"pdf":false,"client":null}
-"add" e "remove" ficam vazios quando não houver mudança. "remove" retira o item inteiro. "client" é o nome do cliente se ele for citado. "pdf" true só se pedirem para gerar/baixar o PDF.`;
-
-function parseJSON(raw){
-  if (!raw) return null;
-  let s = String(raw).replace(/```(?:json)?/gi, '').trim();
-  const a = s.indexOf('{'), b = s.lastIndexOf('}');
-  if (a < 0 || b < a) return null;
-  try { return JSON.parse(s.slice(a, b + 1)); } catch(e){ return null; }
-}
-
-function withTimeout(ms){ const c = new AbortController(); const t = setTimeout(() => c.abort(), ms); return {signal: c.signal, done: () => clearTimeout(t)}; }
-
-async function askPollinations(userText){
-  const body = {
-    model: 'openai', referrer: 'arkfilms', reasoning_effort: 'low', max_tokens: 3000,
-    response_format: {type: 'json_object'},
-    messages: [{role:'system', content: SYS()}, ...history.slice(-8), {role:'user', content: userText}]
-  };
-  for (let attempt = 0; attempt < 2; attempt++){
-    const to = withTimeout(60000);
-    try {
-      const r = await fetch('https://text.pollinations.ai/openai', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body), signal: to.signal});
-      to.done();
-      if (r.status === 429 && attempt === 0){ await new Promise(res => setTimeout(res, 4000)); continue; }
-      if (r.status === 400 && attempt === 0){ body.reasoning_effort = 'minimal'; body.messages = [body.messages[0], ...body.messages.slice(-3)]; continue; }
-      if (!r.ok){ const t = await r.text().catch(() => ''); throw new Error('HTTP ' + r.status + ' ' + t.slice(0, 300)); }
-      const j = await r.json();
-      onlineOK = true;
-      return j.choices?.[0]?.message?.content || '';
-    } catch(e){ to.done(); if (attempt === 1) throw e; }
-  }
-}
-
-async function askGemini(userText, media){
-  const contents = history.slice(-8).map(h => ({role: h.role === 'assistant' ? 'model' : 'user', parts:[{text: h.content}]}));
-  const parts = [];
-  if (media) parts.push({inline_data: {mime_type: media.mime, data: media.b64}});
-  parts.push({text: userText || (media && media.kind === 'audio' ? 'Transcreva este áudio e monte o orçamento do pedido.' : 'Leia esta imagem (print, bilhete ou anotação) e monte o orçamento do pedido.')});
-  contents.push({role:'user', parts});
-  const body = {systemInstruction: {parts:[{text: SYS()}]}, contents, generationConfig: {responseMimeType: 'application/json', temperature: 0.2}};
-  let lastErr;
-  for (const model of GEMINI_MODELS){
-    const to = withTimeout(60000);
-    try {
-      const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
-        method:'POST', headers:{'Content-Type':'application/json', 'x-goog-api-key': geminiKey}, body: JSON.stringify(body), signal: to.signal});
-      to.done();
-      if (r.status === 400 || r.status === 401 || r.status === 403){
-        const t = await r.text();
-        if (/API key|API_KEY|PERMISSION/i.test(t)) throw Object.assign(new Error('chave'), {key: true});
-      }
-      if (r.status === 404){ lastErr = new Error('modelo'); continue; }
-      if (!r.ok){ lastErr = new Error('HTTP ' + r.status); continue; }
-      const j = await r.json();
-      return (j.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('');
-    } catch(e){ to.done(); if (e.key) throw e; lastErr = e; }
-  }
-  throw lastErr || new Error('Gemini indisponível');
-}
-
-/* ---------------- Modo básico (regras) ---------------- */
-function ruleActions(raw){
-  const t = norm(raw);
-  const has = re => re.test(t);
-  const qn = (re, def = 1) => { const m = t.match(re); return m ? parseInt(m[1]) : def; };
-  const add = [], remove = [];
-  const clear = has(/\b(limpar|zerar|comecar de novo|recomecar|novo orcamento)\b/);
-  const pdf = has(/\b(pdf|imprimir|exportar|baixar)\b/);
-  const summary = has(/\b(total|resumo|quanto)\b/);
-  const evento = has(/casamento|evento|palestra|formatura|festa|corporativ|aniversario|congresso|show/);
-  let set_tier = null;
-  if (has(/assinante|residente|inquilino|condomin|morador|da casa ark/) && !has(/nao (e|eh) (assinante|residente|inquilino)/)) set_tier = 'assinante';
-  if (has(/externo|de fora|convidado|nao (e|eh) (assinante|residente|inquilino)/)) set_tier = 'externo';
-
-  const pk = t.match(/pacote\s*(\d)/);
-  if (pk && +pk[1] >= 1 && +pk[1] <= 6) add.push({id:'p'+pk[1], qty:1});
-  else if (has(/pacote\s*simples/)) add.push({id:'p1', qty:1});
-  else if (has(/essencial/)) add.push({id:'p2', qty:1});
-  else if (has(/pacote\s*medio/)) add.push({id:'p3', qty:1});
-  else if (has(/intermediario/)) add.push({id:'p4', qty:1});
-  else if (has(/avancado/)) add.push({id:'p5', qty:1});
-  else if (has(/pacote\s*completo|cobertura total/)) add.push({id:'p6', qty:1});
-
-  if (has(/teaser/) && !add.length) add.push({id:'s_teaser', qty:1});
-  if (has(/studio|estudio/) && has(/foto/)) add.push({id:'s_studio', qty:1});
-
-  if (has(/casa( da)? ark|na casa|cenario/) && has(/meia|4 ?h/)) add.push({id:'d_casa_4', qty:1});
-  else if (has(/casa( da)? ark|na casa|cenario/) && has(/diaria|dia inteiro|dia completo|interna|8 ?h/)) add.push({id:'d_casa_8', qty:1});
-  else if (has(/\bmeia\b/)) add.push({id:'d_ext_4', qty:1});
-  else if (has(/diaria/)) add.push({id:'d_ext_8', qty:1});
-
-  const cortesQ = qn(/(\d+)\s*(?:x\s*)?(?:reels?|cortes?|videos?|shorts?)/, 1);
-  if (has(/podcast/)){
-    if (has(/corte/)) { add.push({id:'e_podcast', qty:1}); add.push({id:'e_corte', qty:cortesQ}); }
-    else add.push({id:'e_podcast', qty:1});
-  } else if (has(/reels?|stories|tiktok|shorts|vertical|cortes?/)){
-    add.push({id: has(/basica|simples/) ? 'e_reels_b' : 'e_reels', qty:cortesQ});
-  }
-  if (has(/clipe|clip\b|videoclipe/)){
-    if (has(/lancamento|gravar a musica|gravacao da musica|musica e clipe|com a musica|estudio/)) add.push({id: has(/cinema|top|completo|premium/) ? 'clip_full' : 'clip_ess', qty:1});
-    else add.push({id: has(/cinema|top|premium/) ? 'clip_cine' : has(/iniciante|simples|start|barato/) ? 'clip_start' : 'clip_pro', qty:1});
-  } else if (has(/mixagem|masteriza|master\b/)) add.push({id: has(/gravar|gravacao/) ? 'a_faixa' : 'a_mixmaster', qty:1});
-  if (has(/ao vivo|live\b|transmiss/)) add.push({id: has(/dia inteiro|diaria|8 ?h/) ? 'live_8' : 'live_4', qty:1});
-  if (has(/urgen|24 ?h|amanha/)) add.push({id: has(/24 ?h|amanha/) ? 'u_24' : 'u_48', qty:1});
-  if (has(/anuncio|midia paga|trafego pago|outdoor|\btv\b/)) add.push({id:'lic_paga', qty:1});
-  if (has(/plano anual|anual|mensalidade|todo mes/)) add.push({id:'plano', qty:12});
-  else if (has(/banco de horas|pacote de horas|horas de (edicao|producao)/)){
-    const h = qn(/(\d+)\s*h/, 10);
-    add.push({id: h >= 80 ? 'h_80' : h >= 40 ? 'h_40' : h >= 20 ? 'h_20' : 'h_10', qty:1});
-  }
-  if (has(/aftermovie|after movie|melhores momentos/)) add.push({id:'e_after', qty:1});
-  if (has(/cinematic|cinematografic/)) add.push({id:'e_cine', qty:1});
-  if (has(/dinamic/)) add.push({id:'e_dinam', qty:1});
-  if (has(/motion/)) add.push({id:'e_motion', qty:1});
-  if (has(/\bvfx\b|efeitos? especiais/)) add.push({id:'e_vfx', qty:1});
-
-  if (has(/\b(remov\w*|tir\w*|retir\w*|exclu\w*)\b/)){
-    if (add.length){ add.forEach(a => remove.push(a.id)); add.length = 0; }
-    else remove.push('LAST');
-  }
-  return {add, remove, clear, pdf, summary, evento, set_tier, about: has(/quem (e|eh|sao)|sobre a ark|equipe|equipamento/)};
-}
-
-function ruleText(act, ch){
-  if (act.clear) return 'Orçamento limpo. Me conte o novo pedido do cliente.';
-  const parts = [];
-  if (ch.added.length) parts.push('Adicionei: ' + ch.added.join(', ') + '.');
-  if (ch.removed.length) parts.push('Removi: ' + ch.removed.join(', ') + '.');
-  if (parts.length) return parts.join('\n');
-  if (act.set_tier) return `Certo, usando a tabela ${TIERS[act.set_tier].label}. O que o cliente precisa?`;
-  if (act.about) return 'A ARK Films fica na Casa ARK (Av. Anhanguera, 790, Ribeirão Preto), com ambientes da CASACOR 2025 como cenário. A equipe tem diretor e colorista com mais de 18 anos de cinema, técnico de som com mais de 20 anos e um profissional de captação e edição. Filmamos com Blackmagic, FX30 e A7 IV, com lentes cine e áudio profissional.';
-  if (act.summary && budget.length) return 'Itens no orçamento:\n' + budget.map(b => `• ${label(BY[b.id])} x${b.qty}`).join('\n');
-  if (act.pdf && !budget.length) return 'Ainda não há itens no orçamento. Me diga o que o cliente quer.';
-  if (act.evento) return `Para um evento, sugiro começar por um pacote:\n• Pacote 2: teaser + corte para Reels (${BRL0(price(BY.p2))})\n• Pacote 3: trailer + 20 fotos (${BRL0(price(BY.p3))})\n• Pacote 4: cobertura do dia completo (${BRL0(price(BY.p4))})\nQual combina?`;
-  return 'Não identifiquei um item da tabela. Tente: "pacote 3", "diária externa", "3 reels", "edição de podcast", "aftermovie".';
-}
-
-/* Pedido de clipe + música: garante o pacote de Lançamento (a IA gratuita às vezes erra) */
-function fixClip(text, act){
-  const t = norm(text || '');
-  if (!/clipe|clip\b|videoclipe/.test(t) || !/(grav\w* (a |da )?(musica|faixa|cancao)|estudio|mixage|masteriz|musica e (o )?clipe|lancamento)/.test(t)) return false;
-  const adds = act.add || [];
-  const pack = adds.find(x => x.id === 'clip_full' || x.id === 'clip_ess');
-  const dup = x => /^a_(faixa|mix|master|mixmaster)$/.test(x.id) || (pack && /^clip_(start|pro|cine)$/.test(x.id));
-  if (pack){
-    if (!adds.some(dup)) return false;
-    act.add = adds.filter(x => !dup(x));
-    act.fixMsg = `Usei o ${BY[pack.id].name} (${BRL0(price(BY[pack.id]))}), que já inclui gravação no estúdio, mixagem, masterização e o clipe. Não somei a faixa separada para não cobrar duas vezes. Locação fora da Casa ARK ou banda, se precisar, ficam por conta do cliente; indicamos parceiros.`;
-    return true;
-  }
-  const top = adds.some(x => x.id === 'clip_cine') || /cinema|top|premium|completo/.test(t);
-  act.add = adds.filter(x => !/^clip_|^a_(faixa|mix|master|mixmaster)$/.test(x.id));
-  const id = top ? 'clip_full' : 'clip_ess';
-  act.add.push({id, qty:1});
-  act.fixMsg = `Como o pedido inclui a música e o clipe, usei o ${BY[id].name} (${BRL0(price(BY[id]))}). Ele já tem gravação no estúdio, mixagem e masterização, com o master pronto para a distribuidora, e o ${top ? 'Clipe Cinema' : 'Clipe Pro'}. Locação fora da Casa ARK ou banda, se precisar, ficam por conta do cliente; indicamos parceiros.`;
-  return true;
-}
-
-/* ---------------- Aplicar mudanças ---------------- */
-function apply(a){
-  const added = [], removed = [];
-  if (a.set_tier && TIERS[a.set_tier] && a.set_tier !== tier) setTier(a.set_tier, true);
-  if (a.clear) budget = [];
-  if (a.client && !$('orc-client').value.trim()) $('orc-client').value = String(a.client).slice(0, 80);
-  (a.remove || []).forEach(r => {
-    const idx = r === 'LAST' ? budget.length - 1 : budget.findIndex(b => b.id === r);
-    if (idx >= 0 && budget[idx]){ removed.push(label(BY[budget[idx].id])); budget.splice(idx, 1); }
-  });
-  (a.add || []).forEach(x => {
-    if (!x || !BY[x.id]) return;
-    const q = Math.min(BY[x.id].unit === '/km' ? 5000 : 99, Math.max(1, Math.round(+x.qty) || 1));
-    const ex = budget.find(b => b.id === x.id);
-    if (ex) ex.qty += q; else budget.push({id:x.id, qty:q});
-    added.push(label(BY[x.id]) + (q > 1 ? ` (x${q})` : ''));
-  });
-  return {added, removed};
-}
-
-function totals(){
-  let base = 0, pct = 0, pend = false;
-  budget.forEach(b => { const c = BY[b.id], p = price(c); if (c.pct) pct += c.pct * b.qty; else if (p == null) pend = true; else base += p * b.qty; });
-  const sub = base + base * pct / 100;
-  const d = Math.min(100, Math.max(0, parseFloat($('orc-disc').value) || 0));
-  const dv = sub * d / 100;
-  const tx = Math.min(50, Math.max(0, parseFloat($('orc-tax').value) || 0));
-  const tv = (sub - dv) * tx / 100;
-  return {base, sub, dv, d, tx, tv, total: sub - dv + tv, pend};
-}
-const lineVal = (c, qty, t) => c.pct ? t.base * c.pct * qty / 100 : price(c) * qty;
-
-/* ---------------- Chat ---------------- */
-let busy = false;
-async function send(text, opts = {}){
-  text = (text || '').trim();
-  if ((!text && !opts.media) || busy) return;
-  busy = true;
-  addMsg('me', opts.display || text, {img: opts.img});
-
-  const rule = ruleActions(text);
-  let reply = null, act = null;
-  const quick = rule.clear && !rule.add.length;
-
-  if (!quick && (geminiKey || onlineOK !== false || opts.media)){
-    const think = addMsg('bot', opts.media ? (opts.media.kind === 'audio' ? 'Ouvindo o áudio…' : 'Lendo a foto…') : geminiKey ? 'Pensando…' : 'Pensando… (a IA gratuita pode levar até 1 minuto; com a chave Gemini em ⚙ fica mais rápido)');
-    think.classList.add('typing');
-    setBar(35);
-    try {
-      let raw;
-      if (geminiKey) raw = await askGemini(text, opts.media);
-      else raw = await askPollinations(text);
-      const j = parseJSON(raw);
-      if (j){
-        reply = typeof j.reply === 'string' ? j.reply.trim() : null;
-        act = {
-          add: Array.isArray(j.add) ? j.add.filter(x => x && BY[x.id]) : [],
-          remove: Array.isArray(j.remove) ? j.remove.filter(r => BY[r]) : [],
-          set_tier: TIERS[j.set_tier] ? j.set_tier : null,
-          clear: j.clear === true, pdf: j.pdf === true || rule.pdf, client: j.client || null
-        };
-      }
-    } catch(e){
-      console.warn('IA:', e);
-      if (e.key){ addMsg('sys', 'A chave do Gemini foi recusada. Confira em ⚙ ou remova para usar a IA online gratuita.'); }
-      else if (!geminiKey){ onlineOK = false; refreshPill(); addMsg('sys', 'A IA online não respondeu agora. Usei o modo básico.'); setTimeout(() => { onlineOK = null; refreshPill(); }, 60000); }
-      else addMsg('sys', 'O Gemini não respondeu agora. Usei o modo básico.');
-    }
-    think.remove(); setBar(null);
-  }
-  if (!act) act = rule;
-  if (fixClip(text, act)) reply = act.fixMsg;
-  if (reply) CAT.forEach(c => { reply = reply.split(' (' + c.id + ')').join('').split('"' + c.id + '"').join(c.name).replace(new RegExp('\\b' + c.id + '\\b', 'g'), c.name); });
-
-  const ch = apply(act);
-  let msg = reply || ruleText(act, ch);
-  if (reply && (ch.added.length || ch.removed.length))
-    msg += '\n\n✔ ' + [ch.added.length ? 'Adicionado: ' + ch.added.join(', ') : '', ch.removed.length ? 'Removido: ' + ch.removed.join(', ') : ''].filter(Boolean).join(' · ');
-  if (budget.length && (ch.added.length || ch.removed.length || act.set_tier || rule.summary)){
-    const t = totals();
-    msg += `\n\nTotal (${TIERS[tier].short.toLowerCase()}): ${BRL(t.total)}${t.pend ? ' + itens sob orçamento' : ''}`;
-  }
-  addMsg('bot', msg);
-  history.push({role:'user', content: (text || '[mídia enviada]').slice(0, 1500)});
-  history.push({role:'assistant', content: msg.slice(0, 1500)});
-  if (history.length > 14) history = history.slice(-14);
-  render();
-  busy = false;
-  if (act.pdf && budget.length) exportPDF();
-}
-
-$('ai-form').addEventListener('submit', e => {
-  e.preventDefault();
-  const v = $('ai-in').value;
-  $('ai-in').value = '';
-  send(v);
-});
-
-/* ---------------- Configuração da chave ---------------- */
-$('ai-gear').onclick = () => { $('ai-cfg').classList.toggle('open'); $('ai-key').value = geminiKey ? '••••••••' + geminiKey.slice(-4) : ''; };
-$('ai-key-save').onclick = () => {
-  const v = $('ai-key').value.trim();
-  if (!v || v.startsWith('••')) return;
-  geminiKey = v; store.set('ark_gemini_key', v);
-  $('ai-cfg').classList.remove('open'); refreshPill();
-  addMsg('sys', '✔ Gemini ativado neste aparelho. Agora fotos e áudios são lidos pela IA.');
-};
-$('ai-key-del').onclick = () => {
-  geminiKey = ''; store.set('ark_gemini_key', null); $('ai-key').value = '';
-  $('ai-cfg').classList.remove('open'); refreshPill();
-  addMsg('sys', 'Chave removida. Usando a IA online gratuita.');
-};
-
-/* ---------------- Áudio ---------------- */
-const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-let recog = null, mediaRec = null, micStream = null, chunks = [], recording = false;
-function setRec(on){
-  recording = on;
-  const b = $('ai-mic');
-  b.classList.toggle('rec', on);
-  b.textContent = on ? '■' : '🎙️';
-  b.title = on ? 'Parar gravação' : 'Gravar áudio';
-}
-$('ai-mic').onclick = () => {
-  if (recording){ stopMic(); return; }
-  if (geminiKey && window.MediaRecorder) startRec();   // Gemini ouve o áudio direto
-  else if (SR) startSR();                                // reconhecimento de voz do navegador
-  else if (window.MediaRecorder) addMsg('sys', 'Este navegador não transcreve voz sozinho. Use o Chrome/Safari ou ative o Gemini em ⚙.');
-  else addMsg('sys', 'Gravação de áudio indisponível neste navegador. Digite o pedido.');
-};
-function startSR(){
-  recog = new SR();
-  recog.lang = 'pt-BR'; recog.interimResults = true; recog.continuous = true;
-  const prefix = $('ai-in').value ? $('ai-in').value.trim() + ' ' : '';
-  recog.onresult = e => { let t = ''; for (const r of e.results) t += r[0].transcript; $('ai-in').value = prefix + t; };
-  recog.onend = () => {
-    setRec(false);
-    const t = $('ai-in').value.trim();
-    if (t){ $('ai-in').value = ''; send(t, {display: '🎤 ' + t}); }
-  };
-  recog.onerror = e => {
-    setRec(false);
-    if (e.error === 'not-allowed') addMsg('sys', 'Permita o uso do microfone para gravar áudio.');
-    else if (e.error !== 'aborted' && e.error !== 'no-speech') addMsg('sys', 'Não consegui ouvir (' + e.error + '). Tente de novo ou digite.');
-  };
-  try { recog.start(); setRec(true); addMsg('sys', 'Ouvindo… toque em ■ para enviar.'); }
-  catch(e){ setRec(false); addMsg('sys', 'O microfone não está disponível agora.'); }
-}
-async function startRec(){
-  try { micStream = await navigator.mediaDevices.getUserMedia({audio: true}); }
-  catch(e){ addMsg('sys', 'Permita o uso do microfone para gravar áudio.'); return; }
-  chunks = [];
-  mediaRec = new MediaRecorder(micStream);
-  mediaRec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
-  mediaRec.onstop = async () => {
-    micStream.getTracks().forEach(t => t.stop());
-    setRec(false);
-    const mime = (mediaRec.mimeType || 'audio/webm').split(';')[0];
-    const blob = new Blob(chunks, {type: mime});
-    if (blob.size < 2000){ addMsg('sys', 'Áudio muito curto. Tente de novo.'); return; }
-    const typed = $('ai-in').value.trim(); $('ai-in').value = '';
-    send(typed, {display: '🎤 Áudio enviado' + (typed ? ': ' + typed : ''), media: {kind:'audio', mime, b64: await toB64(blob)}});
-  };
-  mediaRec.start(); setRec(true);
-  addMsg('sys', 'Gravando… toque em ■ para enviar.');
-}
-function stopMic(){
-  if (recog) try { recog.stop(); } catch(e){}
-  if (mediaRec && mediaRec.state !== 'inactive') mediaRec.stop();
-}
-function toB64(blob){
-  return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result).split(',')[1]); r.onerror = rej; r.readAsDataURL(blob); });
-}
-
-/* ---------------- Foto ---------------- */
-function shrinkImage(file){
-  return new Promise(res => {
-    const img = new Image();
-    img.onload = () => {
-      const s = Math.min(1, 1600 / Math.max(img.width, img.height));
-      const c = document.createElement('canvas'); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
-      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-      res(c.toDataURL('image/jpeg', 0.85).split(',')[1]);
-    };
-    img.onerror = () => res(null);
-    img.src = URL.createObjectURL(file);
-  });
-}
-function loadScript(src){
-  return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
-}
-async function ocr(file){
-  if (!window.Tesseract) await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js');
-  const w = await Tesseract.createWorker('por');
-  try { const {data} = await w.recognize(file); return data.text || ''; }
-  finally { await w.terminate(); }
-}
-$('ai-photo').onclick = () => $('ai-file').click();
-$('ai-file').onchange = async e => {
-  const f = e.target.files[0];
-  e.target.value = '';
-  if (!f || busy) return;
-  const typed = $('ai-in').value.trim();
-  $('ai-in').value = '';
-  const url = URL.createObjectURL(f);
-  if (geminiKey){
-    const b64 = await shrinkImage(f);
-    if (b64){ send(typed, {display: typed || '📷 Pedido na foto', img: url, media: {kind:'image', mime:'image/jpeg', b64}}); return; }
-  }
-  const work = addMsg('bot', 'Lendo o texto da foto…');
-  work.classList.add('typing');
-  let text = '';
-  try { text = await ocr(f); } catch(err){ console.warn(err); }
-  work.remove();
-  if (!text.trim()){
-    addMsg('me', typed || '📷 Foto enviada', {img: url});
-    addMsg('bot', 'Não encontrei texto legível nessa foto. Tente uma foto mais nítida (print de conversa funciona bem) ou descreva o pedido.');
-    return;
-  }
-  const clean = text.replace(/\n{2,}/g, '\n').trim();
-  send(((typed ? typed + '\n' : '') + 'Texto lido da foto:\n' + clean).slice(0, 1500), {display: typed || '📷 Pedido na foto', img: url});
-};
-
-/* ---------------- Painel de orçamento ---------------- */
-function render(){
-  const rows = $('orc-rows');
-  rows.innerHTML = '';
-  const T = totals();
-  if (!budget.length) rows.innerHTML = '<div class="orc-empty">Nenhum item ainda. Mande o pedido no chat (texto, áudio ou foto) ou escolha abaixo.</div>';
-  budget.forEach((b, i) => {
-    const c = BY[b.id], p = price(c);
-    const r = document.createElement('div');
-    r.className = 'orc-row';
-    r.innerHTML = `<span class="nm"></span><button type="button" data-a="-" data-i="${i}" aria-label="Diminuir">−</button><span class="qt">${b.qty}</span><button type="button" data-a="+" data-i="${i}" aria-label="Aumentar">+</button><span class="pr"></span><button type="button" data-a="x" data-i="${i}" title="Remover" aria-label="Remover">×</button>`;
-    r.querySelector('.nm').textContent = label(c);
-    r.querySelector('.pr').textContent = c.txt ? 'cliente paga' : c.pct ? BRL(lineVal(c, b.qty, T)) : p == null ? 'sob orç.' : BRL(p * b.qty);
-    rows.appendChild(r);
-  });
-  const t = totals();
-  $('orc-count').textContent = budget.length ? `${budget.length} ite${budget.length > 1 ? 'ns' : 'm'}` : '';
-  $('orc-sub').textContent = BRL(t.sub);
-  $('orc-desc').textContent = '− ' + BRL(t.dv);
-  $('orc-taxv').textContent = '+ ' + BRL(t.tv);
-  $('orc-taxrow').style.display = t.tx ? '' : 'none';
-  $('orc-total').textContent = BRL(t.total) + (t.pend ? ' + sob orç.' : '');
-}
-$('orc-rows').addEventListener('click', e => {
-  const btn = e.target.closest('button[data-a]');
-  if (!btn) return;
-  const i = +btn.dataset.i, a = btn.dataset.a;
-  if (a === '+') budget[i].qty++;
-  if (a === '-') { budget[i].qty--; if (budget[i].qty < 1) budget.splice(i, 1); }
-  if (a === 'x') budget.splice(i, 1);
-  render();
-});
-$('orc-select').addEventListener('change', e => {
-  if (!e.target.value) return;
-  apply({add:[{id:e.target.value, qty:1}]});
-  e.target.value = '';
-  render();
-});
-$('orc-disc').addEventListener('input', render);
-$('orc-tax').addEventListener('input', () => { store.set('ark_tax', $('orc-tax').value || null); render(); });
-$('orc-tax').value = store.get('ark_tax') || '';
-$('orc-clear').onclick = () => { budget = []; render(); addMsg('bot', 'Orçamento limpo.'); };
-
-/* ---------------- PDF ---------------- */
-function buildPDF(){
-  const t = totals();
-  const today = new Date();
-  const validade = new Date(Date.now() + 7 * 864e5);
-  const client = $('orc-client').value.trim();
-  const rows = budget.map(b => {
-    const c = BY[b.id], p = price(c);
-    return `<tr><td>${esc(label(c))}</td><td style="text-align:center">${b.qty}</td><td style="text-align:right">${c.txt ? esc(c.txt) : c.pct ? '+' + c.pct + '%' : p == null ? 'Sob orçamento' : BRL(p) + (c.unit === '/mês' ? '/mês' : '')}</td><td style="text-align:right">${c.txt || (p == null && !c.pct) ? '—' : BRL(lineVal(c, b.qty, t))}</td></tr>`;
-  }).join('');
-  return `
-  <div class="pq-head">
-    <div><div class="pq-brand">ARK Films</div><div class="pq-sub">Filmagem, fotografia, som e pós-produção · Casa ARK</div></div>
-    <div class="pq-meta"><b>Orçamento</b><br>Data: ${today.toLocaleDateString('pt-BR')}<br>Válido até: ${validade.toLocaleDateString('pt-BR')}<br>Tabela: ${TIERS[tier].label}</div>
-  </div>
-  <div class="pq-title">Proposta de serviços</div>
-  <div class="pq-client">Cliente: <b>${esc(client || '—')}</b></div>
-  <table>
-    <thead><tr><th>Item</th><th style="text-align:center">Qtd.</th><th style="text-align:right">Unitário</th><th style="text-align:right">Valor</th></tr></thead>
-    <tbody>${rows}</tbody>
-  </table>
-  <div class="pq-tot">
-    <div><span>Subtotal</span><span>${BRL(t.sub)}</span></div>
-    ${t.d ? `<div><span>Desconto (${t.d}%)</span><span>− ${BRL(t.dv)}</span></div>` : ''}
-    ${t.tx ? `<div><span>Impostos / NF (${t.tx}%)</span><span>+ ${BRL(t.tv)}</span></div>` : ''}
-    <div class="big"><span>Total</span><span>${BRL(t.total)}${t.pend ? ' + sob orçamento' : ''}</span></div>
-  </div>
-  <div class="pq-notes">
-    <h4>Condições</h4>
-    <ul>
-      <li>Meia diária = até 4 horas de captação; diária completa = 8 horas + 1 hora de almoço.</li>
-      <li>Mídias brutas ficam na nuvem por 6 meses. Recomendamos salvar em nuvem própria.</li>
-      <li>Prazo de entrega dos materiais editados: até 7 dias úteis após a gravação.</li>
-      ${tier === 'externo' ? '<li>Reserva da data com 50% de sinal e o restante na entrega.</li>' : '<li>Valores exclusivos para Residentes ARK (inquilinos e condôminos da Casa ARK).</li>'}
-      <li>Deslocamento incluso em Ribeirão Preto. Fora da cidade, o tempo de viagem é cobrado como hora técnica ou diária, e as despesas de viagem (combustível, pedágios, hospedagem e alimentação) ficam por conta do cliente.</li>
-      <li>Hora extra além da diária contratada é cobrada como hora técnica. 2 rodadas de ajuste inclusas por vídeo.</li>
-      <li>Locações fora da Casa ARK, banda, músicos, figurantes, figurino e maquiagem são contratados pelo cliente; a ARK indica parceiros.</li>
-      <li>Cancelamento com mais de 7 dias: o sinal vira crédito por 90 dias. Com menos de 7 dias, o sinal não é devolvido.</li>
-      <li>O preço cobre uso orgânico em redes sociais e site. Mídia paga (anúncios, TV, outdoor) exige licença adicional.</li>
-      <li>Itens "sob orçamento" são cotados à parte. Valores sujeitos a confirmação na contratação.</li>
-    </ul>
-  </div>
-  <div class="pq-foot">ARK Films · Av. Anhanguera, 790 · Alto da Boa Vista · Ribeirão Preto/SP</div>`;
-}
-function exportPDF(){
-  if (!budget.length){ addMsg('bot', 'Adicione pelo menos um item antes de gerar o PDF.'); return; }
-  $('orc-print').innerHTML = buildPDF();
-  const old = document.title;
-  const cli = $('orc-client').value.trim();
-  document.title = 'Orcamento-ARK' + (cli ? '-' + cli.replace(/\s+/g, '-') : '');
-  window.print();
-  setTimeout(() => { document.title = old; }, 800);
-}
-$('orc-pdf').onclick = exportPDF;
-
-/* ---------------- Início ---------------- */
 setTier(tier, true);
-refreshPill();
-addMsg('bot', 'Olá! Sou o assistente de orçamentos da ARK. Me mande o pedido do cliente por texto, 🎙️ áudio ou 📷 foto (print de conversa, bilhete ou anotação) que eu monto o orçamento.\n\nDiga se o cliente é Residente ARK (inquilino ou condômino da casa) ou Convidado ARK, e onde será a gravação. A tabela também pode ser trocada no topo da página.');
 })();
 </script>
 </body>
